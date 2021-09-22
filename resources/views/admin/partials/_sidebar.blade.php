@@ -1,7 +1,7 @@
 @php
-    $prefix = Request::route()->getPrefix();
-    $route = Route::current()->getName();
-    //dd($route);
+$prefix = Request::route()->getPrefix();
+$route = Route::current()->getName();
+//dd($route);
 @endphp
 
 <aside class="main-sidebar">
@@ -22,7 +22,7 @@
 
         <!-- sidebar menu-->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="{{ ($route == 'admin.dashboard') ? 'active' : '' }}"> 
+            <li class="{{ $route == 'admin.dashboard' ? 'active' : '' }}">
                 <a href="{{ route('admin.dashboard') }}">
                     <i data-feather="pie-chart"></i>
                     <span>Dashboard</span>
@@ -38,23 +38,31 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == 'admin.brands') ? 'active' : '' }}">
+                    <li class="{{ $route == 'admin.brands' ? 'active' : '' }}">
                         <a href="{{ route('admin.brands') }}"><i class="ti-more"></i>All Brands</a>
                     </li>
                 </ul>
             </li>
 
-            <li class="treeview">
+            <li class="treeview {{ ($prefix == '/category' or $route == 'admin.categories') ? 'active' : '' }}">
                 <a href="#">
-                    <i data-feather="mail"></i> <span>Mailbox</span>
+                    <i data-feather="mail"></i> <span>Categories</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="mailbox_inbox.html"><i class="ti-more"></i>Inbox</a></li>
-                    <li><a href="mailbox_compose.html"><i class="ti-more"></i>Compose</a></li>
-                    <li><a href="mailbox_read_mail.html"><i class="ti-more"></i>Read</a></li>
+                    <li class="{{ $route == 'admin.categories' ? 'active' : '' }}">
+                        <a href="{{ route('admin.categories') }}"><i class="ti-more"></i>All Categories</a>
+                    </li>
+                    <li class="{{ $route == 'admin.subcategories' ? 'active' : '' }}">
+                        <a href="{{ route('admin.subcategories') }}"><i class="ti-more"></i>
+                            All Sub Categories</a>
+                    </li>
+                    <li class="{{ $route == 'admin.subsubcategories' ? 'active' : '' }}">
+                        <a href="{{ route('admin.subsubcategories') }}"><i class="ti-more"></i>
+                            All Sub->SubCategories</a>
+                    </li>
                 </ul>
             </li>
 
