@@ -5,21 +5,33 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Backend\AdminProfileController;
+use App\Http\Controllers\Backend\BrandController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::prefix('admin')->middleware(['auth:sanctum,admin', 'verified'])->group(function () {
-    Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+    // Indexes
+    Route::get('/brands', [BrandController::class, 'index'])->name('admin.brands');
+    // End Of Indexes
+    Route::get('/logout', [AdminController::class, 'destroy'])->name('admin.logout');
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/change/password', [AdminProfileController::class, 'change_password'])->name('admin.change.password');
     Route::post('/update/password', [AdminProfileController::class, 'update_password'])->name('update.change.password');
-    
+
     Route::prefix('profile')->group(function () {
         Route::get('/', [AdminProfileController::class, 'index'])->name('admin.profile');
         Route::get('/edit', [AdminProfileController::class, 'edit'])->name('admin.profile.edit');
         Route::post('/update', [AdminProfileController::class, 'update'])->name('admin.profile.update');
+    });
+
+    Route::prefix('brand')->group(function () {
+        Route::post('/create', [BrandController::class, 'create'])->name('admin.brand.create');
+        Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('admin.brand.edit');
+        Route::post('/update/{id}', [BrandController::class, 'update'])->name('admin.brand.update');
+        Route::get('/delete/{id}', [BrandController::class, 'destroy'])->name('admin.brand.delete');
     });
 });
 
@@ -28,10 +40,10 @@ Route::middleware('admin:admin')->prefix('admin')->group(function () {
     Route::post('/login', [AdminController::class, 'store'])->name('admin.login');
 });
 
-Route::prefix('admin')->group(function () {
-    Route::get('/login', [AdminController::class, 'loginForm']);
-    Route::post('/login', [AdminController::class, 'store'])->name('admin.login');
-});
+// Route::prefix('admin')->group(function () {
+//     Route::get('/login', [AdminController::class, 'loginForm']);
+//     Route::post('/login', [AdminController::class, 'store'])->name('admin.login');
+// });
 
 Route::middleware(['auth:sanctum,web', 'verified'])->group(function () {
     Route::get('/dashboard', [IndexController::class, 'dashboard'])->name('dashboard');
@@ -44,10 +56,7 @@ Route::middleware(['auth:sanctum,web', 'verified'])->group(function () {
     });
 });
 
-
 Route::redirect('/web/dashboard', '/dashboard', 301);
 
-/////CHANGE PASSWORD
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('/logout', [IndexController::class, 'log_out'])->name('user.logout');
-    

@@ -45,7 +45,7 @@ class IndexController extends Controller
 
         if ($request->file('profile_photo_path')) {
             $image = $request->file('profile_photo_path');
-            @unlink('upload/user_images/'.$user->profile_photo_path);
+            @unlink('upload/user_images/' . $user->profile_photo_path);
             $image_name = date('YmdHi') . $image->getClientOriginalName();
             $image->move('upload/user_images', $image_name);
             $user['profile_photo_path'] = $image_name;
@@ -68,13 +68,11 @@ class IndexController extends Controller
     public function update_password(UserPasswordRequest $request)
     {
         $user = User::findOrFail(Auth::id());
-        if (Hash::check($request->current_password, $user->password)) {            
+        if (Hash::check($request->current_password, $user->password)) {
             $user->password = Hash::make($request->password);
             $user->save();
             return redirect()->route('dashboard');
         }
-        else{
-            return redirect()->back();
-        }
+        return redirect()->back();
     }
 }

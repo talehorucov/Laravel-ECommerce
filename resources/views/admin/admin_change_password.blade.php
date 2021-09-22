@@ -22,7 +22,7 @@
                                                 <input type="password" id="current_password" name="current_password"
                                                     class="form-control" required>
                                                 @error('current_password')
-                                                    <span class="invalid-feedback" role="alert">
+                                                    <span class="text-danger" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
@@ -34,7 +34,7 @@
                                                 <input type="password" id="password" name="password" class="form-control"
                                                     required>
                                                 @error('password')
-                                                    <span class="invalid-feedback" role="alert">
+                                                    <span class="text-danger" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
@@ -46,7 +46,7 @@
                                                 <input type="password" id="password_confirmation"
                                                     name="password_confirmation" class="form-control" required>
                                                 @error('password_confirmation')
-                                                    <span class="invalid-feedback" role="alert">
+                                                    <span class="text-danger" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror

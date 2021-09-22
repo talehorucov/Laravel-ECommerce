@@ -14,8 +14,8 @@ class AdminProfileController extends Controller
 {
     public function index()
     {
-        $adminData = Admin::find(2);
-        return view('admin.admin_profile', compact('adminData'));
+        $admin = Admin::findOrFail(1);
+        return view('admin.admin_profile', compact('admin'));
     }
 
     public function edit()
