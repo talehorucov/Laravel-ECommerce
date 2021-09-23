@@ -7,6 +7,7 @@ use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SubCategoryController;
 
 Route::get('/', function () {
@@ -15,11 +16,10 @@ Route::get('/', function () {
 
 
 Route::prefix('admin')->middleware(['auth:sanctum,admin', 'verified'])->group(function () {
-
-    // Indexes
+// Indexes
     Route::get('/brands', [BrandController::class, 'index'])->name('admin.brands');
     Route::get('/categories', [CategoryController::class, 'index'])->name('admin.categories');
-    // End Of Indexes
+// End Of Indexes
 
     Route::get('/logout', [AdminController::class, 'destroy'])->name('admin.logout');
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -32,6 +32,7 @@ Route::prefix('admin')->middleware(['auth:sanctum,admin', 'verified'])->group(fu
         Route::post('/update', [AdminProfileController::class, 'update'])->name('admin.profile.update');
     });
 
+    //------------------------Admin Brand ------------------------
     Route::prefix('brand')->group(function () {
         Route::post('/create', [BrandController::class, 'create'])->name('admin.brand.create');
         Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('admin.brand.edit');
@@ -39,12 +40,14 @@ Route::prefix('admin')->middleware(['auth:sanctum,admin', 'verified'])->group(fu
         Route::get('/delete/{id}', [BrandController::class, 'destroy'])->name('admin.brand.delete');
     });
 
+    //------------------------Admin Category ------------------------
     Route::prefix('category')->group(function () {
         Route::post('/create', [CategoryController::class, 'create'])->name('admin.category.create');
         Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
         Route::post('/update/{id}', [CategoryController::class, 'update'])->name('admin.category.update');
         Route::get('/delete/{id}', [CategoryController::class, 'destroy'])->name('admin.category.delete');
 
+        //------------------------Admin SubCategory ------------------------
         Route::prefix('sub')->group(function () {
             Route::get('/', [SubCategoryController::class, 'index'])->name('admin.subcategories');
             Route::post('/create', [SubCategoryController::class, 'create'])->name('admin.subcategory.create');
@@ -52,6 +55,7 @@ Route::prefix('admin')->middleware(['auth:sanctum,admin', 'verified'])->group(fu
             Route::post('/update/{id}', [SubCategoryController::class, 'update'])->name('admin.subcategory.update');
             Route::get('/delete/{id}', [SubCategoryController::class, 'destroy'])->name('admin.subcategory.delete');
 
+            //------------------------Admin Sub->SubCategory ------------------------
             Route::prefix('sub')->group(function () {
                 Route::get('/', [SubCategoryController::class, 'sub_index'])->name('admin.subsubcategories');
                 Route::get('/ajax/{category_id}', [SubCategoryController::class, 'get_subcategory']);
@@ -61,6 +65,11 @@ Route::prefix('admin')->middleware(['auth:sanctum,admin', 'verified'])->group(fu
                 Route::get('/delete/{id}', [SubCategoryController::class, 'sub_destroy'])->name('admin.subsubcategory.delete');
             });
         });
+    });
+
+    //------------------------Admin Product ------------------------
+    Route::prefix('product')->group(function () {
+        Route::post('/add', [ProductController::class, 'add'])->name('admin.product.add');
     });
 });
 

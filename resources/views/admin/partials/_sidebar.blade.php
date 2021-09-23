@@ -66,20 +66,19 @@ $route = Route::current()->getName();
                 </ul>
             </li>
 
-            <li class="treeview">
+            <li class="treeview {{ ($prefix == '/product' or $route == 'admin.categories') ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="file"></i>
-                    <span>Pages</span>
+                    <span>Products</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="profile.html"><i class="ti-more"></i>Profile</a></li>
-                    <li><a href="invoice.html"><i class="ti-more"></i>Invoice</a></li>
-                    <li><a href="gallery.html"><i class="ti-more"></i>Gallery</a></li>
-                    <li><a href="faq.html"><i class="ti-more"></i>FAQs</a></li>
-                    <li><a href="timeline.html"><i class="ti-more"></i>Timeline</a></li>
+                    <li class="{{ $route == 'admin.product.add' ? 'active' : '' }}">
+                        <a href="{{ route('admin.product.add') }}"><i class="ti-more"></i>Add Product</a>
+                    </li>
+                    <li><a href="invoice.html"><i class="ti-more"></i>Manage Products</a></li>
                 </ul>
             </li>
 

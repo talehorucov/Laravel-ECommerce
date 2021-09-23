@@ -63,7 +63,8 @@
                                             <select name="category_id" class="form-control">
                                                 <option value="" disabled selected>Select Category</option>
                                                 @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->name_eng }}</option>
+                                                    <option value="{{ $category->id }}">{{ $category->name_eng }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -95,7 +96,7 @@
                                                 </span>
                                             @enderror
                                         </div>
-                                    </div>                                    
+                                    </div>
                                     <div class="text-xs-right">
                                         <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Add New">
                                     </div>

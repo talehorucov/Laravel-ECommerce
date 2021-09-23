@@ -10,13 +10,16 @@ class CreateSubSubCategoriesTable extends Migration
     {
         Schema::create('sub_sub_categories', function (Blueprint $table) {
             $table->id();
-            $table->integer('category_id');
-            $table->integer('subcategory_id');
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('subcategory_id');
             $table->string('name_eng');
             $table->string('name_aze');
             $table->string('slug_eng');
             $table->string('slug_aze');
             $table->timestamps();
+            
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('subcategory_id')->references('id')->on('sub_categories');
         });
     }
     
