@@ -144,4 +144,13 @@ class SubCategoryController extends Controller
         );
         return redirect()->back()->with($notification);
     }
+
+    public function get_subsubcategory($subcategory_id)
+    {
+        $subsubcat = SubSubCategory::where('subcategory_id',$subcategory_id)->orderBy('name_eng')->get();
+        if ($subsubcat) {
+            return json_encode($subsubcat);
+        }
+        return redirect()->back();
+    }
 }

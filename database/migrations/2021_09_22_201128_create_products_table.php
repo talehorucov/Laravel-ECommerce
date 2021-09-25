@@ -30,8 +30,8 @@ class CreateProductsTable extends Migration
             $table->string('discount_price')->nullable();
             $table->string('short_desc_eng');
             $table->string('short_desc_aze');
-            $table->string('long_desc_eng');
-            $table->string('long_desc_aze');
+            $table->text('long_desc_eng');
+            $table->text('long_desc_aze');
             $table->string('thumbnail');
             $table->integer('hot_deals')->nullable();
             $table->integer('featured')->nullable();
@@ -41,10 +41,10 @@ class CreateProductsTable extends Migration
             $table->timestamps();
 
 
-            $table->foreign('brand_id')->references('id')->on('brands');
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('subcategory_id')->references('id')->on('sub_categories');
-            $table->foreign('subsubcategory_id')->references('id')->on('sub_sub_categories');
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('subcategory_id')->references('id')->on('sub_categories')->onDelete('cascade');
+            $table->foreign('subsubcategory_id')->references('id')->on('sub_sub_categories')->onDelete('cascade');
         });
     }
 

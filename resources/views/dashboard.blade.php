@@ -23,7 +23,7 @@
                         <h3 class="text-center">
                             <span class="text-center">Hi...</span>
                             <strong>{{ Auth()->user()->name }}</strong>
-                            Welcome To AsanAl.Az
+                            Welcome To SmartBuy.Az
                         </h3>
                     </div>
                 </div>

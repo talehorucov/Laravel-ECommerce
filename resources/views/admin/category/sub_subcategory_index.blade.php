@@ -18,11 +18,11 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Category</th>
-                                            <th class="text-center">SubCategory</th>
-                                            <th class="text-center">Name Eng</th>
-                                            <th class="text-center">Name Aze</th>
-                                            <th width=25% class="text-center">Action</th>
+                                            <th width=18% class="text-center">Category</th>
+                                            <th width=18% class="text-center">SubCategory</th>
+                                            <th width=18% class="text-center">Name Eng</th>
+                                            <th width=18% class="text-center">Name Aze</th>
+                                            <th width=28% class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -32,7 +32,7 @@
                                                 <td> {{ $subsubcategory['subcategory']['name_eng'] }}</td>
                                                 <td><span>{{ $subsubcategory->name_eng }}</span></td>
                                                 <td><span>{{ $subsubcategory->name_aze }}</span></td>
-                                                <td class="text-center">
+                                                <td width=30% class="text-center">
                                                     <a href="{{ route('admin.subsubcategory.edit', $subsubcategory->id) }}"
                                                         title="Edit Sub->SubCategory" class="btn btn-primary"><i
                                                             class="fa fa-pencil"></i></a>
@@ -82,8 +82,7 @@
                                         <div class="controls">
                                             <select name="subcategory_id" class="form-control">
                                                 <option value="" disabled selected>Select SubCategory</option>
-                                               
-                                            </select>
+                                             </select>
                                         </div>
                                         @error('subcategory_id')
                                             <span class="text-danger" role="alert">
@@ -95,7 +94,7 @@
                                     <div class="form-group">
                                         <h5>Sub->SubCategory Name Eng<span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" id="name_eng" name="name_eng" class="form-control">
+                                            <input type="text" id="name_eng" name="name_eng" class="form-control" value="{{ old('name_eng') }}">
                                             @error('name_eng')
                                                 <span class="text-danger" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -106,7 +105,7 @@
                                     <div class="form-group">
                                         <h5>Sub->SubCategory Name Aze<span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" id="name_aze" name="name_aze" class="form-control">
+                                            <input type="text" id="name_aze" name="name_aze" class="form-control" value="{{ old('name_aze') }}">
                                             @error('name_aze')
                                                 <span class="text-danger" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -137,7 +136,7 @@
                 var category_id = $(this).val();
                 if (category_id) {
                     $.ajax({
-                        url: "{{ url('/admin/category/sub/sub/ajax') }}/"+category_id,
+                        url: "{{ url('/admin/category/sub/ajax') }}/"+category_id,
                         type: "GET",
                         dataType: "json",
                         success: function(data) {
@@ -153,7 +152,7 @@
                 else {
                     alert('Error');
                 }
-            });
+            });            
         });
     </script>
 

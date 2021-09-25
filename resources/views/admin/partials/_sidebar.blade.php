@@ -10,11 +10,11 @@ $route = Route::current()->getName();
 
         <div class="user-profile">
             <div class="ulogo">
-                <a href="index.html">
+                <a href="{{ route('admin.dashboard') }}">
                     <!-- logo for regular state and mobile devices -->
                     <div class="d-flex align-items-center justify-content-center">
                         <img src="{{ asset('backend/images/logo-dark.png') }}" alt="">
-                        <h3><b>AsanAl.Az</b></h3>
+                        <h3><b>Smart Buy</b></h3>
                     </div>
                 </a>
             </div>
@@ -66,7 +66,7 @@ $route = Route::current()->getName();
                 </ul>
             </li>
 
-            <li class="treeview {{ ($prefix == '/product' or $route == 'admin.categories') ? 'active' : '' }}">
+            <li class="treeview {{ ($prefix == '/product' or $route == 'admin.products') ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="file"></i>
                     <span>Products</span>
@@ -75,10 +75,12 @@ $route = Route::current()->getName();
                     </span>
                 </a>
                 <ul class="treeview-menu">
+                    <li class="{{ $route == 'admin.product.index' ? 'active' : '' }}">
+                        <a href="{{ route('admin.product.index') }}"><i class="ti-more"></i>Products</a>
+                    </li>
                     <li class="{{ $route == 'admin.product.add' ? 'active' : '' }}">
                         <a href="{{ route('admin.product.add') }}"><i class="ti-more"></i>Add Product</a>
                     </li>
-                    <li><a href="invoice.html"><i class="ti-more"></i>Manage Products</a></li>
                 </ul>
             </li>
 

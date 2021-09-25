@@ -44,7 +44,7 @@
                                                 @foreach ($subcategories as $subcategory)
                                                     <option
                                                         {{ $subcategory->id == $subsubcategory->subcategory_id ? 'selected' : '' }}
-                                                        value="{{ $category->id }}">{{ $subcategory->name_eng }}
+                                                        value="{{ $subcategory->id }}">{{ $subcategory->name_eng }}
                                                     </option>
                                                 @endforeach
                                             </select>

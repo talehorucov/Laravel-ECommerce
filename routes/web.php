@@ -51,6 +51,7 @@ Route::prefix('admin')->middleware(['auth:sanctum,admin', 'verified'])->group(fu
         Route::prefix('sub')->group(function () {
             Route::get('/', [SubCategoryController::class, 'index'])->name('admin.subcategories');
             Route::post('/create', [SubCategoryController::class, 'create'])->name('admin.subcategory.create');
+            Route::get('/ajax/{category_id}', [SubCategoryController::class, 'get_subcategory']);
             Route::get('/edit/{id}', [SubCategoryController::class, 'edit'])->name('admin.subcategory.edit');
             Route::post('/update/{id}', [SubCategoryController::class, 'update'])->name('admin.subcategory.update');
             Route::get('/delete/{id}', [SubCategoryController::class, 'destroy'])->name('admin.subcategory.delete');
@@ -58,7 +59,7 @@ Route::prefix('admin')->middleware(['auth:sanctum,admin', 'verified'])->group(fu
             //------------------------Admin Sub->SubCategory ------------------------
             Route::prefix('sub')->group(function () {
                 Route::get('/', [SubCategoryController::class, 'sub_index'])->name('admin.subsubcategories');
-                Route::get('/ajax/{category_id}', [SubCategoryController::class, 'get_subcategory']);
+                Route::get('/ajax/{subcategory_id}', [SubCategoryController::class, 'get_subsubcategory']);
                 Route::post('/create', [SubCategoryController::class, 'sub_create'])->name('admin.subsubcategory.create');
                 Route::get('/edit/{id}', [SubCategoryController::class, 'sub_edit'])->name('admin.subsubcategory.edit');
                 Route::post('/update/{id}', [SubCategoryController::class, 'sub_update'])->name('admin.subsubcategory.update');
@@ -69,7 +70,11 @@ Route::prefix('admin')->middleware(['auth:sanctum,admin', 'verified'])->group(fu
 
     //------------------------Admin Product ------------------------
     Route::prefix('product')->group(function () {
-        Route::post('/add', [ProductController::class, 'add'])->name('admin.product.add');
+        Route::get('/', [ProductController::class, 'index'])->name('admin.product.index');
+        Route::get('/add', [ProductController::class, 'add'])->name('admin.product.add');
+        Route::get('/edit/{product}', [ProductController::class, 'edit'])->name('admin.product.edit');
+        Route::post('/update/{product}', [ProductController::class, 'update'])->name('admin.product.update');
+        Route::post('/create', [ProductController::class, 'create'])->name('admin.product.create');
     });
 });
 

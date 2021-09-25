@@ -5,9 +5,9 @@
                 <a class="nav-link" href="javascript:void(0)">FAQ</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">www.asanal.az</a>
+                <a class="nav-link" href="#">www.smartbuy.az</a>
             </li>
         </ul>
     </div>
-    &copy; 2020 <a href="#">AsanAl.Az</a>. All Rights Reserved.
+    &copy; 2020 <a href="#">SmartBuy.Az</a>. All Rights Reserved.
 </footer>
