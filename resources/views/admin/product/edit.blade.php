@@ -17,7 +17,7 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col">
-                            <form method="POST" action="{{ route('admin.product.update',$product->id) }}"
+                            <form method="POST" action="{{ route('admin.product.update', $product->id) }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
@@ -338,8 +338,8 @@
                                                     <h5>Long Description Eng <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <textarea name="long_desc_eng" id="editor1" rows="10" cols="80">
-                                                                {{ $product->long_desc_eng }}
-                                                            </textarea>
+                                                                                                                                                {{ $product->long_desc_eng }}
+                                                                                                                                            </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -349,8 +349,8 @@
                                                     <h5>Long Description Aze <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <textarea name="long_desc_aze" id="editor2" rows="10" cols="80">
-                                                                {{ $product->long_desc_aze }}
-                                                            </textarea>
+                                                                                                                                                {{ $product->long_desc_aze }}
+                                                                                                                                            </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -408,6 +408,94 @@
 
         </section>
         <!-- /.content -->
+
+        <!-- Multiple Image Section -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box bt-3 border-info">
+                        <div class="box-header">
+                            <h4 class="box-title">Multiple Image <strong>Update</strong></h4>
+                        </div>
+
+                        <form method="post" action="{{ route('admin.product.images.update') }}"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <div class="row row-sm">
+                                @foreach ($multi_images as $image)
+                                    <div class="col-md-3" style="margin-left: 25px; margin-top:20px">
+                                        <div class="card">
+                                            <img class="card-img-top" src="{{ asset($image->name) }}"
+                                                style="width: 280px; height:180px;object-fit: fill;">
+                                            <div class="card-body">
+                                                <h5 class="card-title">
+                                                    <a href="{{ route('admin.product.image.delete', $image->id) }}"
+                                                        class="btn btn-danger delete" title="Delete Image">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </h5>
+                                                <p class="card-text">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">Change Image <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="file" class="form-cotrol"
+                                                        name="multi_img[{{ $image->id }}]">
+                                                </div>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="text-xs-right" style="margin-left: 25px;">
+                                <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update Images">
+                            </div><br>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box bt-3 border-info">
+                        <div class="box-header">
+                            <h4 class="box-title">Thumbnail Image <strong>Update</strong></h4>
+                        </div>
+
+                        <form method="post" action="{{ route('admin.product.thumbnail.update', $product->id) }}"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="old_image" value="{{ $product->thumbnail }}">
+                            <div class="row row-sm" style="margin-left: 5px; margin-top:20px">
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <img class="card-img-top" src="{{ asset($product->thumbnail) }}"
+                                            style="width: 280px; height:180px;object-fit: fill;">
+                                        <div class="card-body">
+                                            <p class="card-text">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Change Thumbnail <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="file" name="thumbnail" class="form-control"
+                                                    onchange="mainThumbURL(this)">
+                                                <img src="" id="mainThumb">
+                                            </div>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-xs-right" style="margin-left: 25px;">
+                                <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update Thumbnail">
+                            </div><br>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
     <script>

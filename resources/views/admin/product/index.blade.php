@@ -21,23 +21,55 @@
                                             <th class="text-center">Product Name Eng</th>
                                             <th class="text-center">Product Name Aze</th>
                                             <th class="text-center">Quantity</th>
+                                            <th class="text-center">Price</th>
+                                            <th class="text-center">Discount</th>
+                                            <th class="text-center">Status</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($products as $product)
                                             <tr>
-                                                <td><img src="{{ asset($product->thumbnail) }}" style="width: 60px; height:50px"></td>
+                                                <td><img src="{{ asset($product->thumbnail) }}"
+                                                        style="width: 60px; height:50px"></td>
                                                 <td><span style="font-size: 15px">{{ $product->name_eng }}</span></td>
                                                 <td><span style="font-size: 15px">{{ $product->name_aze }}</span></td>
                                                 <td><span style="font-size: 15px">{{ $product->quantity }}</span></td>
-                                                <td class="text-center">
+                                                <td><span style="font-size: 15px">{{ $product->selling_price }}$</span>
+                                                </td>
+                                                <td>
+                                                    @if ($product->discount_price == null)
+                                                        <span class="badge badge-pill badge-danger">InActive</span>
+                                                    @else
+                                                        <span class="badge badge-pill badge-danger">{{ $product->discount_percent }}</span>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if ($product->status == 1)
+                                                        <span class="badge badge-pill badge-success">Active</span>
+                                                    @else
+                                                        <span class="badge badge-pill badge-danger">InActive</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-center" style="width: 215px">
+                                                    <a href="{{ route('admin.product.info', $product->slug_eng) }}"
+                                                        title="Product Detail" class="btn btn-info"><i
+                                                            class="fas fa-info-circle"></i></a>
                                                     <a href="{{ route('admin.product.edit', $product->id) }}"
                                                         title="Edit Product" class="btn btn-primary"><i
                                                             class="fa fa-pencil"></i></a>
-                                                    <a href="{{ route('admin.category.delete', $product->id) }}"
-                                                        title="Delete Category" class="btn btn-danger delete"><i
+                                                    <a href="{{ route('admin.product.delete', $product->id) }}"
+                                                        title="Delete Product" class="btn btn-danger delete"><i
                                                             class="fa fa-trash"></i></a>
+                                                    @if ($product->status == 1)
+                                                        <a href="{{ route('admin.product.inactive', $product->id) }}"
+                                                            title="Do InActive" class="btn btn-warning"><i
+                                                                class="fa fa-arrow-down"></i></a>
+                                                    @else
+                                                        <a href="{{ route('admin.product.active', $product->id) }}"
+                                                            title="Do Active" class="btn btn-success"><i
+                                                                class="fa fa-arrow-up"></i></a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
