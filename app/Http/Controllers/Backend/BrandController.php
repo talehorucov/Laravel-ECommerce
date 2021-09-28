@@ -62,7 +62,7 @@ class BrandController extends Controller
             'message' => 'Brand Updated Successfully',
             'alert-type' => 'info'
         );
-        return redirect()->route('admin.brands')->with($notification);
+        return redirect()->route('admin.brand.index')->with($notification);
     }
 
     public function destroy($id)
@@ -75,6 +75,6 @@ class BrandController extends Controller
             'message' => 'Brand Deleted Successfully',
             'alert-type' => 'success'
         );
-        return redirect()->route('admin.brands')->with($notification);
+        return redirect()->route('admin.brand.index')->with($notification);
     }
 }

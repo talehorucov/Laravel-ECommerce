@@ -8,14 +8,17 @@ use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 
 
 Route::prefix('admin')->middleware(['auth:sanctum,admin', 'verified'])->group(function () {
 
 // Indexes
-    Route::get('/brands', [BrandController::class, 'index'])->name('admin.brands');
-    Route::get('/categories', [CategoryController::class, 'index'])->name('admin.categories');
+    Route::get('/brands', [BrandController::class, 'index'])->name('admin.brand.index');
+    Route::get('/categories', [CategoryController::class, 'index'])->name('admin.category.index');
+    Route::get('/products', [ProductController::class, 'index'])->name('admin.product.index');
+    Route::get('/sliders', [SliderController::class, 'index'])->name('admin.slider.index');
 // End Of Indexes
 
 
@@ -74,7 +77,6 @@ Route::prefix('admin')->middleware(['auth:sanctum,admin', 'verified'])->group(fu
 
     //------------------------Admin Product ------------------------
     Route::prefix('product')->group(function () {
-        Route::get('/', [ProductController::class, 'index'])->name('admin.product.index');
         Route::get('/add', [ProductController::class, 'add'])->name('admin.product.add');
         Route::get('/edit/{product}', [ProductController::class, 'edit'])->name('admin.product.edit');
         Route::get('/delete/{product}', [ProductController::class, 'delete'])->name('admin.product.delete');
@@ -86,6 +88,16 @@ Route::prefix('admin')->middleware(['auth:sanctum,admin', 'verified'])->group(fu
         Route::get('/images/delete/{multi_images}', [ProductController::class, 'delete_images'])->name('admin.product.image.delete');
         Route::get('/active/{product}', [ProductController::class, 'product_active'])->name('admin.product.active');
         Route::get('/inactive/{product}', [ProductController::class, 'product_inactive'])->name('admin.product.inactive');
+    });
+
+
+     //------------------------Admin Slider ------------------------
+     Route::prefix('slider')->group(function () {
+        // Route::get('/ajax/{subcategory_id}', [SubCategoryController::class, 'get_subsubcategory']);
+        // Route::post('/create', [SubCategoryController::class, 'sub_create'])->name('admin.subsubcategory.create');
+        // Route::get('/edit/{id}', [SubCategoryController::class, 'sub_edit'])->name('admin.subsubcategory.edit');
+        // Route::post('/update/{id}', [SubCategoryController::class, 'sub_update'])->name('admin.subsubcategory.update');
+        // Route::get('/delete/{id}', [SubCategoryController::class, 'sub_destroy'])->name('admin.subsubcategory.delete');
     });
 });
 

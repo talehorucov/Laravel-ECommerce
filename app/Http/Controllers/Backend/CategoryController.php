@@ -49,7 +49,7 @@ class CategoryController extends Controller
             'message' => 'Category Updated Successfully',
             'alert-type' => 'info'
         );
-        return redirect()->route('admin.categories')->with($notification);
+        return redirect()->route('admin.category.index')->with($notification);
     }
 
     public function destroy($id)

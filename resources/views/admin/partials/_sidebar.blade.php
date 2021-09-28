@@ -1,7 +1,7 @@
 @php
 $prefix = Request::route()->getPrefix();
 $route = Route::current()->getName();
-//dd($route);
+//dd($prefix);
 @endphp
 
 <aside class="main-sidebar">
@@ -29,7 +29,7 @@ $route = Route::current()->getName();
                 </a>
             </li>
 
-            <li class="treeview {{ ($prefix == '/brand' or $route == 'admin.brands') ? 'active' : '' }}">
+            <li class="treeview {{ ($prefix == 'admin/brand' or $route == 'admin.brand.index') ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="message-circle"></i>
                     <span>Brands</span>
@@ -38,13 +38,13 @@ $route = Route::current()->getName();
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ $route == 'admin.brands' ? 'active' : '' }}">
-                        <a href="{{ route('admin.brands') }}"><i class="ti-more"></i>All Brands</a>
+                    <li class="{{ $route == 'admin.brand.index' ? 'active' : '' }}">
+                        <a href="{{ route('admin.brand.index') }}"><i class="ti-more"></i>Manage Brands</a>
                     </li>
                 </ul>
             </li>
 
-            <li class="treeview {{ ($prefix == '/category' or $route == 'admin.categories') ? 'active' : '' }}">
+            <li class="treeview {{ ($prefix == 'admin/category' or $route == 'admin.category.index') ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="mail"></i> <span>Categories</span>
                     <span class="pull-right-container">
@@ -52,8 +52,8 @@ $route = Route::current()->getName();
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ $route == 'admin.categories' ? 'active' : '' }}">
-                        <a href="{{ route('admin.categories') }}"><i class="ti-more"></i>All Categories</a>
+                    <li class="{{ $route == 'admin.category.index' ? 'active' : '' }}">
+                        <a href="{{ route('admin.category.index') }}"><i class="ti-more"></i>Manage Categories</a>
                     </li>
                     <li class="{{ $route == 'admin.subcategories' ? 'active' : '' }}">
                         <a href="{{ route('admin.subcategories') }}"><i class="ti-more"></i>
@@ -66,7 +66,7 @@ $route = Route::current()->getName();
                 </ul>
             </li>
 
-            <li class="treeview {{ ($prefix == '/product' or $route == 'admin.products') ? 'active' : '' }}">
+            <li class="treeview {{ ($prefix == 'admin/product' or $route == 'admin.product.index') ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="file"></i>
                     <span>Products</span>
@@ -76,10 +76,25 @@ $route = Route::current()->getName();
                 </a>
                 <ul class="treeview-menu">
                     <li class="{{ $route == 'admin.product.index' ? 'active' : '' }}">
-                        <a href="{{ route('admin.product.index') }}"><i class="ti-more"></i>Products</a>
+                        <a href="{{ route('admin.product.index') }}"><i class="ti-more"></i>Manage Products</a>
                     </li>
                     <li class="{{ $route == 'admin.product.add' ? 'active' : '' }}">
                         <a href="{{ route('admin.product.add') }}"><i class="ti-more"></i>Add Product</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="treeview {{ ($prefix == 'admin/slider' or $route == 'admin.sliders') ? 'active' : '' }}">
+                <a href="#">
+                    <i data-feather="file"></i>
+                    <span>Sliders</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ $route == 'admin.slider.index' ? 'active' : '' }}">
+                        <a href="{{ route('admin.slider.index') }}"><i class="ti-more"></i>Manage Sliders</a>
                     </li>
                 </ul>
             </li>
