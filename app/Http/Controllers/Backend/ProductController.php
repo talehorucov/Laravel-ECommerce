@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 use App\Http\Requests\AdminProductCreateRequest;
 use App\Http\Requests\AdminProductUpdateRequest;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -161,14 +162,15 @@ class ProductController extends Controller
 
     public function delete(Product $product)
     {
-        unlink($product->thumbnail);
-        $product->delete();
-
         $images = MultiProductImg::where('product_id',$product->id)->get();
+
         foreach ($images as $image) {
-            unlink($image->name);
+            File::delete($image->name);
             $image->delete();
         }
+
+        File::delete($product->thumbnail);
+        $product->delete();
 
         $notification = array(
             'message' => 'Product Deleted Successfully',

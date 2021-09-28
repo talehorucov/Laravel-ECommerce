@@ -12,14 +12,14 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 
 
-Route::prefix('admin')->middleware(['auth:sanctum,admin', 'verified'])->group(function () {
+Route::prefix('admin')->middleware(['auth:admin', 'verified'])->group(function () {
 
-// Indexes
+    // Indexes
     Route::get('/brands', [BrandController::class, 'index'])->name('admin.brand.index');
     Route::get('/categories', [CategoryController::class, 'index'])->name('admin.category.index');
     Route::get('/products', [ProductController::class, 'index'])->name('admin.product.index');
     Route::get('/sliders', [SliderController::class, 'index'])->name('admin.slider.index');
-// End Of Indexes
+    // End Of Indexes
 
 
     Route::get('/logout', [AdminController::class, 'destroy'])->name('admin.logout');
@@ -91,13 +91,14 @@ Route::prefix('admin')->middleware(['auth:sanctum,admin', 'verified'])->group(fu
     });
 
 
-     //------------------------Admin Slider ------------------------
-     Route::prefix('slider')->group(function () {
-        // Route::get('/ajax/{subcategory_id}', [SubCategoryController::class, 'get_subsubcategory']);
-        // Route::post('/create', [SubCategoryController::class, 'sub_create'])->name('admin.subsubcategory.create');
-        // Route::get('/edit/{id}', [SubCategoryController::class, 'sub_edit'])->name('admin.subsubcategory.edit');
-        // Route::post('/update/{id}', [SubCategoryController::class, 'sub_update'])->name('admin.subsubcategory.update');
-        // Route::get('/delete/{id}', [SubCategoryController::class, 'sub_destroy'])->name('admin.subsubcategory.delete');
+    //------------------------Admin Slider ------------------------
+    Route::prefix('slider')->group(function () {
+        Route::post('/create', [SliderController::class, 'create'])->name('admin.slider.create');
+        Route::get('/edit/{slider}', [SliderController::class, 'edit'])->name('admin.slider.edit');
+        Route::post('/update/{slider}', [SliderController::class, 'update'])->name('admin.slider.update');
+        Route::get('/delete/{slider}', [SliderController::class, 'delete'])->name('admin.slider.delete');
+        Route::get('/active/{slider}', [SliderController::class, 'slider_active'])->name('admin.slider.active');
+        Route::get('/inactive/{slider}', [SliderController::class, 'slider_inactive'])->name('admin.slider.inactive');
     });
 });
 
@@ -109,6 +110,7 @@ Route::middleware('admin:admin')->prefix('admin')->group(function () {
 
 
 Route::middleware(['auth:sanctum,web', 'verified'])->group(function () {
+    
     Route::get('/dashboard', [IndexController::class, 'dashboard'])->name('dashboard');
 
     Route::prefix('user')->group(function () {
