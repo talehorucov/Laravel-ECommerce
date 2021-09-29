@@ -37,7 +37,7 @@
                                                     <h5>Category Name <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <select name="category_id" class="form-control">
-                                                            <option selected disabled>{{ $product->category->name_eng }}
+                                                            <option selected disabled>{{ $product->category->name }}
                                                             </option>
                                                         </select>
                                                     </div>
@@ -50,7 +50,7 @@
                                                     <div class="controls">
                                                         <select name="subcategory_id" class="form-control">
                                                             <option selected disabled>
-                                                                {{ $product->subcategory->name_eng }}</option>
+                                                                {{ $product->subcategory->name }}</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -64,7 +64,7 @@
                                                     <div class="controls">
                                                         <select name="subsubcategory_id" class="form-control">
                                                             <option selected disabled>
-                                                                {{ $product->subsubcategory->name_eng }}
+                                                                {{ $product->subsubcategory->name }}
                                                             </option>
                                                         </select>
                                                     </div>
@@ -73,27 +73,14 @@
 
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <h5>Product Name Eng <span class="text-danger">*</span></h5>
+                                                    <h5>Product Name <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="name_eng" class="form-control"
-                                                            value="{{ $product->name_eng }}" disabled>
+                                                        <input type="text" name="name" class="form-control"
+                                                            value="{{ $product->name }}" disabled>
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <h5>Product Name Aze <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <input type="text" name="name_aze" class="form-control"
-                                                            value="{{ $product->name_aze }}" disabled>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <h5>Product Code <span class="text-danger">*</span></h5>
@@ -104,8 +91,10 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
 
-                                            <div class="col-md-3">
+                                        <div class="row">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <h5>Quantity <span class="text-danger">*</span></h5>
                                                     <div class="input-group"> <span class="input-group-addon">$</span>
@@ -115,7 +104,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <h5>Selling Price <span class="text-danger">*</span></h5>
                                                     <div class="input-group"> <span class="input-group-addon">$</span>
@@ -125,7 +114,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <h5>Discount Price <span class="text-danger">*</span></h5>
                                                     <div class="input-group"> <span class="input-group-addon">$</span>
@@ -142,118 +131,54 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <h5>Product Tags Eng <span class="text-danger">*</span></h5>
+                                                    <h5>Product Tags <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="tags_eng"
-                                                            value="{{ $product->tags_eng }}" data-role="tagsinput"
-                                                            class="form-control" disabled>
+                                                        <input type="text" name="tags" value="{{ $product->tags }}"
+                                                            data-role="tagsinput" class="form-control" disabled>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <h5>Product Tags Aze <span class="text-danger">*</span></h5>
+                                                    <h5>Product Size <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="tags_aze"
-                                                            value="{{ $product->tags_aze }}" data-role="tagsinput"
-                                                            class="form-control" disabled>
+                                                        <input type="text" name="size" value="{{ $product->size }}"
+                                                            data-role="tagsinput" class="form-control" disabled>
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <h5>Product Size Eng <span class="text-danger">*</span></h5>
+                                                    <h5>Product Color <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="size_eng"
-                                                            value="{{ $product->size_eng }}" data-role="tagsinput"
-                                                            class="form-control" disabled>
+                                                        <input type="text" name="color" value="{{ $product->color }}"
+                                                            data-role="tagsinput" class="form-control" disabled>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <h5>Product Size Aze <span class="text-danger">*</span></h5>
+                                                    <h5>Short Description <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="size_aze"
-                                                            value="{{ $product->size_aze }}" data-role="tagsinput"
-                                                            class="form-control" disabled>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <h5>Product Color Eng <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <input type="text" name="color_eng"
-                                                            value="{{ $product->color_eng }}" data-role="tagsinput"
-                                                            class="form-control" disabled>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <h5>Product Color Aze <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <input type="text" name="color_aze"
-                                                            value="{{ $product->color_aze }}" data-role="tagsinput"
-                                                            class="form-control" disabled>
+                                                        <textarea name="short_desc" class="form-control"
+                                                            placeholder="Short Description"
+                                                            disabled>{{ $product->short_desc }}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <h5>Short Description Eng <span class="text-danger">*</span></h5>
+                                                    <h5>Long Description <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <textarea name="short_desc_eng" class="form-control"
-                                                            placeholder="Short Description Eng"
-                                                            disabled>{{ $product->short_desc_eng }}</textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <h5>Short Description Aze <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <textarea name="short_desc_aze" class="form-control"
-                                                            placeholder="Short Description Aze"
-                                                            disabled>{{ $product->short_desc_aze }}</textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <h5>Long Description Eng <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <textarea name="long_desc_eng" id="editor1" rows="10" cols="80"
-                                                            disabled>
-                                                                              {{ $product->long_desc_eng }}
-                                                                            </textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <h5>Long Description Aze <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <textarea name="long_desc_aze" id="editor2" rows="10" cols="80"
-                                                            disabled>
-                                                                              {{ $product->long_desc_aze }}
-                                                                            </textarea>
+                                                        <textarea name="long_desc" id="editor1" rows="10" cols="80"
+                                                            disabled>{{ $product->long_desc }}</textarea>
                                                     </div>
                                                 </div>
                                             </div>

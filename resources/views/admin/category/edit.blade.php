@@ -17,21 +17,10 @@
                                 <form method="POST" action="{{ route('admin.category.update',$category->id) }}">
                                     @csrf
                                     <div class="form-group">
-                                        <h5>Category Name Eng<span class="text-danger">*</span></h5>
+                                        <h5>Category Name<span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" id="name_eng" name="name_eng" class="form-control" value="{{ $category->name_eng }}">
-                                            @error('name_eng')
-                                                <span class="text-danger" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h5>Category Name Aze<span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" id="name_aze" name="name_aze" class="form-control" value="{{ $category->name_aze }}">
-                                            @error('name_aze')
+                                            <input type="text" id="name" name="name" class="form-control" value="{{ $category->name }}">
+                                            @error('name')
                                                 <span class="text-danger" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>

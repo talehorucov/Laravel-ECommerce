@@ -23,21 +23,16 @@ class SubSubCategory extends Model
     protected $fillable = [
         'category_id',
         'subcategory_id',
-        'name_eng',
-        'name_aze',
-        'slug_eng',
-        'slug_aze',
+        'name',
+        'slug',
     ];
 
     public function sluggable(): array
     {
         return [
-            'slug_eng' => [
-                'source' => 'name_eng'
-            ],
-            'slug_aze' => [
-                'source' => 'name_aze'
-            ],
+            'slug' => [
+                'source' => 'name'
+            ]
         ];
     }
 }

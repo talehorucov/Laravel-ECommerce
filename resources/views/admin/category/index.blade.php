@@ -17,9 +17,8 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th width=20px class="text-center">Icon</th>
-                                            <th width=130px class="text-center">Category Name Eng</th>
-                                            <th width=130px class="text-center">Category Name Aze</th>
+                                            <th class="text-center">Icon</th>
+                                            <th class="text-center">Category Name</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
@@ -27,10 +26,9 @@
                                         @foreach ($categories as $category)
                                             <tr>
                                                 <td class="text-center"><span style="font-size: 30px"><i class="{{ $category->icon }}"></i></span></td>
-                                                <td><span style="font-size: 15px">{{ $category->name_eng }}</span></td>
-                                                <td><span style="font-size: 15px">{{ $category->name_aze }}</span></td>                                                
+                                                <td><span style="font-size: 15px">{{ $category->name }}</span></td>                                           
                                                 <td class="text-center">
-                                                    <a href="{{ route('admin.category.edit', $category->id) }}"
+                                                    <a href="{{ route('admin.category.edit', $category->slug) }}"
                                                         title="Edit Category" class="btn btn-primary"><i
                                                             class="fa fa-pencil"></i></a>
                                                     <a href="{{ route('admin.category.delete', $category->id) }}"
@@ -58,21 +56,10 @@
                                 <form method="POST" action="{{ route('admin.category.create') }}">
                                     @csrf
                                     <div class="form-group">
-                                        <h5>Category Name Eng<span class="text-danger">*</span></h5>
+                                        <h5>Category Name<span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" id="name_eng" name="name_eng" class="form-control">
-                                            @error('name_eng')
-                                                <span class="text-danger" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h5>Category Name Aze<span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" id="name_aze" name="name_aze" class="form-control">
-                                            @error('name_aze')
+                                            <input type="text" id="name" name="name" class="form-control">
+                                            @error('name')
                                                 <span class="text-danger" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>

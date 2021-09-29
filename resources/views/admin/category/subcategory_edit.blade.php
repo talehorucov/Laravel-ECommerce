@@ -24,7 +24,7 @@
                                                 @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}"
                                                         {{ $category->id == $subcategory->category_id ? 'selected' : '' }}>
-                                                        {{ $category->name_eng }}</option>
+                                                        {{ $category->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -36,23 +36,11 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <h5>SubCategory Name Eng<span class="text-danger">*</span></h5>
+                                        <h5>SubCategory Name <span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" id="name_eng" name="name_eng" class="form-control"
-                                                value="{{ $subcategory->name_eng }}">
-                                            @error('name_eng')
-                                                <span class="text-danger" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <h5>SubCategory Name Aze<span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" id="name_aze" name="name_aze" class="form-control"
-                                                value="{{ $subcategory->name_aze }}">
-                                            @error('name_aze')
+                                            <input type="text" id="name" name="name" class="form-control"
+                                                value="{{ $subcategory->name }}">
+                                            @error('name')
                                                 <span class="text-danger" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>

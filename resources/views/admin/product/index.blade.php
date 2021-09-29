@@ -18,8 +18,7 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center">Image</th>
-                                            <th class="text-center">Product Name Eng</th>
-                                            <th class="text-center">Product Name Aze</th>
+                                            <th class="text-center">Product Name</th>
                                             <th class="text-center">Quantity</th>
                                             <th class="text-center">Price</th>
                                             <th class="text-center">Discount</th>
@@ -32,14 +31,13 @@
                                             <tr>
                                                 <td><img src="{{ asset($product->thumbnail) }}"
                                                         style="width: 60px; height:50px"></td>
-                                                <td><span style="font-size: 15px">{{ $product->name_eng }}</span></td>
-                                                <td><span style="font-size: 15px">{{ $product->name_aze }}</span></td>
+                                                <td><span style="font-size: 15px">{{ $product->name }}</span></td>
                                                 <td><span style="font-size: 15px">{{ $product->quantity }}</span></td>
                                                 <td><span style="font-size: 15px">{{ $product->selling_price }}$</span>
                                                 </td>
                                                 <td>
                                                     @if ($product->discount_price == null)
-                                                        <span class="badge badge-pill badge-danger">InActive</span>
+                                                        <span class="badge badge-pill badge-danger">Endirim Yoxdur</span>
                                                     @else
                                                         <span class="badge badge-pill badge-danger">{{ $product->discount_percent }}</span>
                                                     @endif
@@ -52,7 +50,7 @@
                                                     @endif
                                                 </td>
                                                 <td class="text-center" style="width: 215px">
-                                                    <a href="{{ route('admin.product.info', $product->slug_eng) }}"
+                                                    <a href="{{ route('admin.product.info', $product->slug) }}"
                                                         title="Product Detail" class="btn btn-info"><i
                                                             class="fas fa-info-circle"></i></a>
                                                     <a href="{{ route('admin.product.edit', $product->id) }}"

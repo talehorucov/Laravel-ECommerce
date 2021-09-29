@@ -17,20 +17,18 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th width=20% class="text-center">Category</th>
-                                            <th width=29% class="text-center">SubCategory Name Eng</th>
-                                            <th width=29% class="text-center">SubCategory Name Aze</th>
-                                            <th width=22% class="text-center">Action</th>
+                                            <th class="text-center">Category</th>
+                                            <th class="text-center">SubCategory Name</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($subcategories as $subcategory)
                                             <tr>
-                                                <td> {{ $subcategory['category']['name_eng'] }}</td>
-                                                <td><span>{{ $subcategory->name_eng }}</span></td>
-                                                <td><span>{{ $subcategory->name_aze }}</span></td>
+                                                <td> {{ $subcategory['category']['name'] }}</td>
+                                                <td><span>{{ $subcategory->name }}</span></td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('admin.subcategory.edit', $subcategory->id) }}"
+                                                    <a href="{{ route('admin.subcategory.edit', $subcategory->slug) }}"
                                                         title="Edit SubCategory" class="btn btn-primary"><i
                                                             class="fa fa-pencil"></i></a>
                                                     <a href="{{ route('admin.subcategory.delete', $subcategory->id) }}"
@@ -63,7 +61,7 @@
                                             <select name="category_id" class="form-control">
                                                 <option value="" disabled selected>Select Category</option>
                                                 @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->name_eng }}
+                                                    <option value="{{ $category->id }}">{{ $category->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -76,27 +74,17 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <h5>SubCategory Name Eng<span class="text-danger">*</span></h5>
+                                        <h5>SubCategory Name<span class="text-danger">*</span></h5>
                                         <div class="controls">
-                                            <input type="text" id="name_eng" name="name_eng" class="form-control">
-                                            @error('name_eng')
+                                            <input type="text" id="name" name="name" class="form-control">
+                                            @error('name')
                                                 <span class="text-danger" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <h5>SubCategory Name Aze<span class="text-danger">*</span></h5>
-                                        <div class="controls">
-                                            <input type="text" id="name_aze" name="name_aze" class="form-control">
-                                            @error('name_aze')
-                                                <span class="text-danger" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
+                                    
                                     <div class="text-xs-right">
                                         <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Add New">
                                     </div>

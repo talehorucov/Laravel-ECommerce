@@ -16,7 +16,7 @@ class SubCategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::orderBy('name_eng')->get();
+        $categories = Category::orderBy('name')->get();
         $subcategories = SubCategory::latest()->get();
         return view('admin.category.subcategory_index',compact('subcategories','categories'));
     }
@@ -25,8 +25,7 @@ class SubCategoryController extends Controller
     {
         Category::findOrFail($request->category_id);
         $subcategory = new SubCategory();
-        $subcategory->name_eng = $request->name_eng;
-        $subcategory->name_aze = $request->name_aze;
+        $subcategory->name = $request->name;
         $subcategory->category_id = $request->category_id;
         $subcategory->save();
 
@@ -37,19 +36,17 @@ class SubCategoryController extends Controller
         return redirect()->route('admin.subcategories')->with($notification);
     }
 
-    public function edit($id)
+    public function edit($slug)
     {        
-        $subcategory = SubCategory::findOrFail($id);
-        $categories = Category::orderBy('name_eng')->get();
+        $subcategory = SubCategory::whereSlug($slug)->first();
+        $categories = Category::orderBy('name')->get();
         return view('admin.category.subcategory_edit',compact('subcategory', 'categories'));
     }
 
-    public function update(AdminSubCategoryUpdateRequest $request, $id)
+    public function update(AdminSubCategoryUpdateRequest $request, SubCategory $subcategory)
     {
         Category::findOrFail($request->category_id);
-        $subcategory = SubCategory::findOrFail($id);
-        $subcategory->name_eng = $request->name_eng;
-        $subcategory->name_aze = $request->name_aze;
+        $subcategory->name = $request->name;
         $subcategory->category_id = $request->category_id;
         $subcategory->save();
 
@@ -60,9 +57,9 @@ class SubCategoryController extends Controller
         return redirect()->route('admin.subcategories')->with($notification);
     }
 
-    public function destroy($id)
+    public function destroy(SubCategory $subcategory)
     {
-        SubCategory::findOrFail($id)->delete();
+        $subcategory->delete();
 
         $notification = array(
             'message' => 'SubCategory Deleted Successfully',
@@ -75,15 +72,15 @@ class SubCategoryController extends Controller
 
     public function sub_index()
     {
-        $categories = Category::orderBy('name_eng')->get();
-        $subcategories = SubCategory::orderBy('name_eng')->get();
+        $categories = Category::orderBy('name')->get();
+        $subcategories = SubCategory::orderBy('name')->get();
         $subsubcategories = SubSubCategory::latest()->get();
         return view('admin.category.sub_subcategory_index',compact('categories','subcategories','subsubcategories'));
     }
 
     public function get_subcategory($category_id)
     {
-        $subcat = SubCategory::where('category_id',$category_id)->orderBy('name_eng')->get();
+        $subcat = SubCategory::where('category_id',$category_id)->orderBy('name')->get();
         if ($subcat) {
             return json_encode($subcat);
         }
@@ -95,8 +92,7 @@ class SubCategoryController extends Controller
         Category::findOrFail($request->category_id);
         SubCategory::findOrFail($request->subcategory_id);
         $subsubcategory = new SubSubCategory();
-        $subsubcategory->name_eng = $request->name_eng;
-        $subsubcategory->name_aze = $request->name_aze;
+        $subsubcategory->name = $request->name;
         $subsubcategory->category_id = $request->category_id;
         $subsubcategory->subcategory_id = $request->subcategory_id;
         $subsubcategory->save();
@@ -108,21 +104,19 @@ class SubCategoryController extends Controller
         return redirect()->route('admin.subsubcategories')->with($notification);
     }
 
-    public function sub_edit($id)
+    public function sub_edit($slug)
     {        
-        $subsubcategory = SubSubCategory::findOrFail($id);
-        $categories = Category::orderBy('name_eng')->get();
-        $subcategories = SubCategory::orderBy('name_eng')->get();
+        $subsubcategory = SubSubCategory::whereSlug($slug)->first();
+        $categories = Category::orderBy('name')->get();
+        $subcategories = SubCategory::orderBy('name')->get();
         return view('admin.category.sub_subcategory_edit',compact('subsubcategory','subcategories', 'categories'));
     }
 
-    public function sub_update(AdminSubSubCategoryUpdateRequest $request ,$id)
+    public function sub_update(AdminSubSubCategoryUpdateRequest $request ,SubSubCategory $subsubcategory)
     {        
         Category::findOrFail($request->category_id);
         SubCategory::findOrFail($request->subcategory_id);
-        $subsubcategory = SubSubCategory::findOrFail($id);
-        $subsubcategory->name_eng = $request->name_eng;
-        $subsubcategory->name_aze = $request->name_aze;
+        $subsubcategory->name = $request->name;
         $subsubcategory->category_id = $request->category_id;
         $subsubcategory->subcategory_id = $request->subcategory_id;
         $subsubcategory->save();
@@ -134,9 +128,9 @@ class SubCategoryController extends Controller
         return redirect()->route('admin.subsubcategories')->with($notification);
     }
 
-    public function sub_destroy($id)
+    public function sub_destroy(SubSubCategory $subsubcategory)
     {
-        SubSubCategory::findOrFail($id)->delete();
+        $subsubcategory->delete();
 
         $notification = array(
             'message' => 'Sub->SubCategory Deleted Successfully',
@@ -147,7 +141,7 @@ class SubCategoryController extends Controller
 
     public function get_subsubcategory($subcategory_id)
     {
-        $subsubcat = SubSubCategory::where('subcategory_id',$subcategory_id)->orderBy('name_eng')->get();
+        $subsubcat = SubSubCategory::where('subcategory_id',$subcategory_id)->orderBy('name')->get();
         if ($subsubcat) {
             return json_encode($subsubcat);
         }

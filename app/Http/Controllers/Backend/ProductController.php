@@ -20,7 +20,7 @@ class ProductController extends Controller
 {
     public function add()
     {
-        $categories = Category::orderBy('name_eng')->get();
+        $categories = Category::orderBy('name')->get();
         $brands = Brand::orderBy('name')->get();
         return view('admin.product.add', compact('categories', 'brands'));
     }
@@ -48,22 +48,16 @@ class ProductController extends Controller
         $product->category_id = $request->category_id;
         $product->subcategory_id = $request->subcategory_id;
         $product->subsubcategory_id = $request->subsubcategory_id;
-        $product->name_eng = $request->name_eng;
-        $product->name_aze = $request->name_aze;
+        $product->name = $request->name;
         $product->code = $request->code;
         $product->quantity = $request->quantity;
-        $product->tags_eng = $request->tags_eng;
-        $product->tags_aze = $request->tags_aze;
-        $product->size_eng = $request->size_eng;
-        $product->size_aze = $request->size_aze;
-        $product->color_eng = $request->color_eng;
-        $product->color_aze = $request->color_aze;
+        $product->tags = $request->tags;
+        $product->size = $request->size;
+        $product->color = $request->color;
         $product->selling_price = $request->selling_price;
         $product->discount_price = $request->discount_price;
-        $product->short_desc_eng = $request->short_desc_eng;
-        $product->short_desc_aze = $request->short_desc_aze;
-        $product->long_desc_eng = $request->long_desc_eng;
-        $product->long_desc_aze = $request->long_desc_aze;
+        $product->short_desc = $request->short_desc;
+        $product->long_desc = $request->long_desc;
         $product->thumbnail = $image_url;
         $product->hot_deals = $request->hot_deals;
         $product->featured = $request->featured;
@@ -104,16 +98,16 @@ class ProductController extends Controller
 
         $multi_images = MultiProductImg::where('product_id', $product->id)->get();
         $brands = Brand::orderBy('name')->get();
-        $categories = Category::orderBy('name_eng')->get();
-        $subcategories = SubCategory::orderBy('name_eng')->get();
-        $subsubcategories = SubSubCategory::orderBy('name_eng')->get();
+        $categories = Category::orderBy('name')->get();
+        $subcategories = SubCategory::orderBy('name')->get();
+        $subsubcategories = SubSubCategory::orderBy('name')->get();
 
         return view('admin.product.edit', compact('product', 'brands', 'categories', 'subcategories', 'subsubcategories', 'multi_images'));
     }
 
     public function detail($slug)
     {
-        $product = Product::where('slug_eng', $slug)->with('brand', 'category', 'subcategory', 'subsubcategory', 'multiProductImg')->first();
+        $product = Product::where('slug', $slug)->with('brand', 'category', 'subcategory', 'subsubcategory', 'multiProductImg')->first();
         return view('admin.product.detail', compact('product'));
     }
 
@@ -128,22 +122,16 @@ class ProductController extends Controller
         $product->category_id = $request->category_id;
         $product->subcategory_id = $request->subcategory_id;
         $product->subsubcategory_id = $request->subsubcategory_id;
-        $product->name_eng = $request->name_eng;
-        $product->name_aze = $request->name_aze;
+        $product->name = $request->name;
         $product->code = $request->code;
         $product->quantity = $request->quantity;
-        $product->tags_eng = $request->tags_eng;
-        $product->tags_aze = $request->tags_aze;
-        $product->size_eng = $request->size_eng;
-        $product->size_aze = $request->size_aze;
-        $product->color_eng = $request->color_eng;
-        $product->color_aze = $request->color_aze;
+        $product->tags = $request->tags;
+        $product->size = $request->size;
+        $product->color = $request->color;
         $product->selling_price = $request->selling_price;
         $product->discount_price = $request->discount_price;
-        $product->short_desc_eng = $request->short_desc_eng;
-        $product->short_desc_aze = $request->short_desc_aze;
-        $product->long_desc_eng = $request->long_desc_eng;
-        $product->long_desc_aze = $request->long_desc_aze;
+        $product->short_desc = $request->short_desc;
+        $product->long_desc = $request->long_desc;
         // $product->thumbnail = $image_url;
         $product->hot_deals = $request->hot_deals;
         $product->featured = $request->featured;
@@ -151,7 +139,6 @@ class ProductController extends Controller
         $product->special_deal = $request->special_deal;
         $product->status = 1;
         $product->save();
-        $product_id = $product->id;
 
         $notification = array(
             'message' => 'Product Updated Successfully',

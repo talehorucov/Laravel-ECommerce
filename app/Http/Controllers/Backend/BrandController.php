@@ -36,15 +36,14 @@ class BrandController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function edit($id)
+    public function edit($slug)
     {
-        $brand = Brand::findOrFail($id);
+        $brand = Brand::where('slug',$slug)->first();
         return view('admin.brand.edit', compact('brand'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Brand $brand)
     {
-        $brand = Brand::findOrFail($id);
         if ($request->image) {
             $image = $request->file('image');
             $image_name = $request->name . '.' . $image->getClientOriginalExtension();
@@ -60,14 +59,13 @@ class BrandController extends Controller
 
         $notification = array(
             'message' => 'Brand Updated Successfully',
-            'alert-type' => 'info'
+            'alert-type' => 'success'
         );
         return redirect()->route('admin.brand.index')->with($notification);
     }
 
-    public function destroy($id)
+    public function destroy(Brand $brand)
     {
-        $brand = Brand::findOrFail($id);
         unlink($brand->image);
         $brand->delete();
 

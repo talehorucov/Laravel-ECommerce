@@ -19,8 +19,7 @@ class CategoryController extends Controller
     public function create(AdminCategoryCreateRequest $request)
     {
         $category = new Category();
-        $category->name_eng = $request->name_eng;
-        $category->name_aze = $request->name_aze;
+        $category->name = $request->name;
         $category->icon = $request->icon;
         $category->save();
 
@@ -31,17 +30,15 @@ class CategoryController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function edit($id)
+    public function edit($slug)
     {
-        $category = Category::findOrFail($id);
+        $category = Category::whereSlug($slug)->first();
         return view('admin.category.edit', compact('category'));
     }
 
-    public function update(AdminCategoryUpdateRequest $request, $id)
+    public function update(AdminCategoryUpdateRequest $request, Category $category)
     {
-        $category = Category::findOrFail($id);
-        $category->name_eng = $request->name_eng;
-        $category->name_aze = $request->name_aze;
+        $category->name = $request->name;
         $category->icon = $request->icon;
         $category->save();
 
@@ -52,9 +49,9 @@ class CategoryController extends Controller
         return redirect()->route('admin.category.index')->with($notification);
     }
 
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        Category::findOrFail($id)->delete();
+        $category->delete();
 
         $notification = array(
             'message' => 'Category Deleted Successfully',

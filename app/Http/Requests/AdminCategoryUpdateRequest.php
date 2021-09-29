@@ -14,8 +14,7 @@ class AdminCategoryUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name_eng' => 'required|min:2|max:35',
-            'name_aze' => 'required|min:2|max:35',
+            'name' => 'required|min:2|max:35',
             'icon' => 'required|min:5|max:70'
         ];
     }
@@ -23,10 +22,8 @@ class AdminCategoryUpdateRequest extends FormRequest
     public function messages()
     {
         return [
-            'name_eng.required' => 'Input English Name of the Category.',
-            'name_eng.min' => 'English Name of the Category must be at least 6 characters.',
-            'name_aze.required' => 'Input Azerbaijani Name of the Category.',
-            'name_aze.min' => 'Azerbaijani Name of the Category must be at least 6 characters.',
+            'name.required' => 'Input English Name of the Category.',
+            'name.min' => 'English Name of the Category must be at least 6 characters.'
         ];
     }
 }

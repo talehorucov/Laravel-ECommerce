@@ -29,7 +29,7 @@
                                                 <td class="text-center"><img src="{{ asset($brand->image) }}" alt="image"
                                                         style="width: 80px; height:45px"></td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('admin.brand.edit',$brand->id) }}" title="Edit Brand" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                                                    <a href="{{ route('admin.brand.edit',$brand->slug) }}" title="Edit Brand" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                                                     <a href="{{ route('admin.brand.delete',$brand->id) }}" title="Delete Brand" class="btn btn-danger delete"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>

@@ -53,7 +53,7 @@
                                                             @foreach ($categories as $category)
                                                                 <option value="{{ $category->id }}"
                                                                     {{ $category->id == $product->category_id ? 'selected' : '' }}>
-                                                                    {{ $category->name_eng }}</option>
+                                                                    {{ $category->name }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -74,7 +74,7 @@
                                                             @foreach ($subcategories as $subcategory)
                                                                 <option value="{{ $subcategory->id }}"
                                                                     {{ $subcategory->id == $product->subcategory_id ? 'selected' : '' }}>
-                                                                    {{ $subcategory->name_eng }}</option>
+                                                                    {{ $subcategory->name }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -98,7 +98,7 @@
                                                             @foreach ($subsubcategories as $subsubcategory)
                                                                 <option value="{{ $subsubcategory->id }}"
                                                                     {{ $subsubcategory->id == $product->subsubcategory_id ? 'selected' : '' }}>
-                                                                    {{ $subsubcategory->name_eng }}</option>
+                                                                    {{ $subsubcategory->name }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -112,37 +112,19 @@
 
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <h5>Product Name Eng <span class="text-danger">*</span></h5>
+                                                    <h5>Product Name <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="name_eng" class="form-control" required
-                                                            value="{{ $product->name_eng }}">
+                                                        <input type="text" name="name" class="form-control" required
+                                                            value="{{ $product->name }}">
                                                     </div>
-                                                    @error('name_eng')
+                                                    @error('name')
                                                         <span class="text-danger" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
                                                 </div>
                                             </div>
-
                                             <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <h5>Product Name Aze <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <input type="text" name="name_aze" class="form-control" required
-                                                            value="{{ $product->name_aze }}">
-                                                    </div>
-                                                    @error('name_aze')
-                                                        <span class="text-danger" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     <div class="form-group">
                                                         <h5>Product Code <span class="text-danger">*</span></h5>
@@ -158,8 +140,10 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
 
-                                            <div class="col-md-3">
+                                        <div class="row">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <h5>Quantity <span class="text-danger">*</span></h5>
                                                     <div class="input-group"> <span class="input-group-addon">$</span>
@@ -175,7 +159,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <h5>Selling Price <span class="text-danger">*</span></h5>
                                                     <div class="input-group"> <span class="input-group-addon">$</span>
@@ -191,7 +175,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="form-group">
                                                     <h5>Discount Price <span class="text-danger">*</span></h5>
                                                     <div class="input-group"> <span class="input-group-addon">$</span>
@@ -213,13 +197,13 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <h5>Product Tags Eng <span class="text-danger">*</span></h5>
+                                                    <h5>Product Tags <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="tags_eng"
-                                                            value="{{ $product->tags_eng }}" data-role="tagsinput"
+                                                        <input type="text" name="tags"
+                                                            value="{{ $product->tags }}" data-role="tagsinput"
                                                             class="form-control" required>
                                                     </div>
-                                                    @error('tags_eng')
+                                                    @error('tags')
                                                         <span class="text-danger" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -229,79 +213,28 @@
 
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <h5>Product Tags Aze <span class="text-danger">*</span></h5>
+                                                    <h5>Product Size <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="tags_aze"
-                                                            value="{{ $product->tags_aze }}" data-role="tagsinput"
-                                                            class="form-control" required>
-                                                    </div>
-                                                    @error('tags_aze')
-                                                        <span class="text-danger" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <h5>Product Size Eng <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <input type="text" name="size_eng"
-                                                            value="{{ $product->size_eng }}" data-role="tagsinput"
+                                                        <input type="text" name="size"
+                                                            value="{{ $product->size }}" data-role="tagsinput"
                                                             class="form-control">
                                                     </div>
-                                                    @error('size_eng')
+                                                    @error('size')
                                                         <span class="text-danger" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <h5>Product Size Aze <span class="text-danger">*</span></h5>
+                                                    <h5>Product Color <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="size_aze"
-                                                            value="{{ $product->size_aze }}" data-role="tagsinput"
-                                                            class="form-control">
-                                                    </div>
-                                                    @error('size_aze')
-                                                        <span class="text-danger" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <h5>Product Color Eng <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <input type="text" name="color_eng"
-                                                            value="{{ $product->color_eng }}" data-role="tagsinput"
+                                                        <input type="text" name="color"
+                                                            value="{{ $product->color }}" data-role="tagsinput"
                                                             class="form-control" required>
                                                     </div>
-                                                    @error('color_eng')
-                                                        <span class="text-danger" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <h5>Product Color Aze <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <input type="text" name="color_aze"
-                                                            value="{{ $product->color_aze }}" data-role="tagsinput"
-                                                            class="form-control" required>
-                                                    </div>
-                                                    @error('color_aze')
+                                                    @error('color')
                                                         <span class="text-danger" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -311,46 +244,25 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <h5>Short Description Eng <span class="text-danger">*</span></h5>
+                                                    <h5>Short Description <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <textarea name="short_desc_eng" class="form-control" required
-                                                            placeholder="Short Description Eng">{{ $product->short_desc_eng }}</textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <h5>Short Description Aze <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <textarea name="short_desc_aze" class="form-control" required
-                                                            placeholder="Short Description Aze">{{ $product->short_desc_aze }}</textarea>
+                                                        <textarea name="short_desc" class="form-control" required
+                                                            placeholder="Short Description">{{ $product->short_desc }}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <h5>Long Description Eng <span class="text-danger">*</span></h5>
+                                                    <h5>Long Description <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <textarea name="long_desc_eng" id="editor1" rows="10" cols="80">
-                                                                                                                                                {{ $product->long_desc_eng }}
-                                                                                                                                            </textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <h5>Long Description Aze <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <textarea name="long_desc_aze" id="editor2" rows="10" cols="80">
-                                                                                                                                                {{ $product->long_desc_aze }}
-                                                                                                                                            </textarea>
+                                                        <textarea name="long_desc" id="editor1" rows="10" cols="80">
+                                                            {{ $product->long_desc }}
+                                                        </textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -513,7 +425,7 @@
                             $.each(data, function(key, value) {
                                 $('select[name="subcategory_id"]').append(
                                     '<option value="' + value.id +
-                                    '">' + value.name_eng + '</option>');
+                                    '">' + value.name + '</option>');
                             });
                         },
                     });
@@ -535,7 +447,7 @@
                             $.each(data, function(key, value) {
                                 $('select[name="subsubcategory_id"]').append(
                                     '<option value="' + value.id +
-                                    '">' + value.name_eng + '</option>');
+                                    '">' + value.name + '</option>');
                             });
                         },
                     });

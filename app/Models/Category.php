@@ -13,22 +13,17 @@ class Category extends Model
     use Sluggable;
 
     protected $fillable = [
-        'name_eng',
-        'name_aze',
-        'slug_eng',
-        'slug_aze',
+        'name',
+        'slug',
         'icon'
     ];
 
     public function sluggable(): array
     {
         return [
-            'slug_eng' => [
-                'source' => 'name_eng'
-            ],
-            'slug_aze' => [
-                'source' => 'name_aze'
-            ],
+            'slug' => [
+                'source' => 'name'
+            ]
         ];
     }
 }
