@@ -32,7 +32,7 @@ class CategoryController extends Controller
 
     public function edit($slug)
     {
-        $category = Category::whereSlug($slug)->first();
+        $category = Category::whereSlug($slug)->firstOrFail();
         return view('admin.category.edit', compact('category'));
     }
 

@@ -35,7 +35,7 @@
                                                 <td><span style="font-size: 15px">{{ $product->quantity }}</span></td>
                                                 <td><span style="font-size: 15px">{{ $product->selling_price }}$</span>
                                                 </td>
-                                                <td>
+                                                <td class="text-center" >
                                                     @if ($product->discount_price == null)
                                                         <span class="badge badge-pill badge-danger">Endirim Yoxdur</span>
                                                     @else
@@ -52,7 +52,7 @@
                                                 <td class="text-center" style="width: 215px">
                                                     <a href="{{ route('admin.product.info', $product->slug) }}"
                                                         title="Product Detail" class="btn btn-info"><i
-                                                            class="fas fa-info-circle"></i></a>
+                                                            class="fa fa-question"></i></a>
                                                     <a href="{{ route('admin.product.edit', $product->id) }}"
                                                         title="Edit Product" class="btn btn-primary"><i
                                                             class="fa fa-pencil"></i></a>

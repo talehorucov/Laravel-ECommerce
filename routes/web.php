@@ -10,7 +10,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
-
+use App\Http\Controllers\Frontend\HomeController;
 
 Route::prefix('admin')->middleware(['auth:admin', 'verified'])->group(function () {
 
@@ -121,9 +121,13 @@ Route::middleware(['auth:sanctum,web', 'verified'])->group(function () {
     });
 });
 
+Route::prefix('product')->group(function () {
+    Route::get('detail/{slug}',[HomeController::class,'product_detail'])->name('user.product.detail');
+});
+
 
 Route::redirect('/web/dashboard', '/dashboard', 301);
 
 
-Route::get('/', [IndexController::class, 'index'])->name('index');
+Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/logout', [IndexController::class, 'log_out'])->name('user.logout');

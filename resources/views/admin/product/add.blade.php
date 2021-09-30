@@ -27,8 +27,8 @@
                                                 <div class="form-group">
                                                     <h5>Brand Select <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <select name="brand_id" class="form-control" required>
-                                                            <option value="" disabled selected>Select Brand</option>
+                                                        <select name="brand_id" class="form-control">
+                                                            <option value="null" selected>Select Brand</option>
                                                             @foreach ($brands as $brand)
                                                                 <option value="{{ $brand->id }}">
                                                                     {{ $brand->name }}</option>
@@ -168,7 +168,7 @@
                                                     <h5>Discount Price <span class="text-danger">*</span></h5>
                                                     <div class="input-group"> <span class="input-group-addon">$</span>
                                                         <input type="number" name="discount_price" class="form-control"
-                                                            min="0">
+                                                            min="1">
                                                         <span class="input-group-addon">.00</span>
                                                     </div>
 
@@ -183,7 +183,7 @@
 
                                         <div class="row">
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <h5>Main Thumbnail <span class="text-danger">*</span></h5>
                                                     <div class="controls">
@@ -199,7 +199,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <h5>Multiple Images <span class="text-danger">*</span></h5>
                                                     <div class="controls">
@@ -214,6 +214,9 @@
                                                     <div class="row" id="preview_img"></div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        
+                                        <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
                                                     <h5>Product Tags <span class="text-danger">*</span></h5>
@@ -227,25 +230,7 @@
                                                         </span>
                                                     @enderror
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <h5>Product Size <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <input type="text" name="size" value="Small, Medium, Large"
-                                                            data-role="tagsinput" class="form-control">
-                                                    </div>
-                                                    @error('size')
-                                                        <span class="text-danger" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
+                                            </div>                                            
                                             
                                             <div class="col-md-4">
                                                 <div class="form-group">
@@ -283,7 +268,7 @@
                                                 <div class="form-group">
                                                     <h5>Short Description <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <textarea name="short_desc" class="form-control" required
+                                                        <textarea name="short_desc" class="form-control"
                                                             placeholder="Short Description"></textarea>
                                                     </div>
                                                 </div>
@@ -427,7 +412,7 @@
                             var fRead = new FileReader(); //new filereader
                             fRead.onload = (function(file) { //trigger function on successful read
                                 return function(e) {
-                                    var img = $('<img/>').addClass('thumb').attr('src',
+                                    var img = $('<img/>').addClass('thumb mr-5').attr('src',
                                             e.target.result).width(80)
                                         .height(80); //create image element 
                                     $('#preview_img').append(

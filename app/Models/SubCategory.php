@@ -10,6 +10,8 @@ class SubCategory extends Model
 {
     use HasFactory;
     use Sluggable;
+    // protected $primaryKey = 'id';
+    protected $table = "subcategories";
 
     public function category()
     {
@@ -29,5 +31,10 @@ class SubCategory extends Model
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function subsubcategories()
+    {
+        return $this->hasMany(SubSubCategory::class,'subcategory_id','id');
     }
 }

@@ -107,7 +107,7 @@ class ProductController extends Controller
 
     public function detail($slug)
     {
-        $product = Product::where('slug', $slug)->with('brand', 'category', 'subcategory', 'subsubcategory', 'multiProductImg')->first();
+        $product = Product::whereSlug($slug)->with('brand', 'category', 'subcategory', 'subsubcategory', 'multiProductImg')->firstOrFail();
         return view('admin.product.detail', compact('product'));
     }
 
@@ -178,7 +178,7 @@ class ProductController extends Controller
             Image::make($img)->resize(917, 1000)->save('upload/products/images/' . $make_name);
             $uploadPath = 'upload/products/images/' . $make_name;
 
-            MultiProductImg::where('id', $id)->update([
+            MultiProductImg::whereId($id)->update([
                 'name' => $uploadPath,
                 'updated_at' => Carbon::now(),
 

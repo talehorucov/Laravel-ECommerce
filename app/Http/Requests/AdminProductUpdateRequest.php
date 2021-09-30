@@ -14,7 +14,6 @@ class AdminProductUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'brand_id' => 'required',
             'category_id' => 'required',
             'subcategory_id' => 'required',
             'subsubcategory_id' => 'required',
@@ -24,8 +23,6 @@ class AdminProductUpdateRequest extends FormRequest
             'tags' => 'required|max:255',
             'color' => 'required|max:255',
             'selling_price' => 'required|max:255',
-            'short_desc' => 'required|max:255',
-            'long_desc' => 'required|max:5000',
             'thumbnail' => 'max:255',
             'hot_deals' => 'numeric',
             'featured' => 'numeric',

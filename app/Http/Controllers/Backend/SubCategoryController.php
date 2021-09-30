@@ -38,7 +38,7 @@ class SubCategoryController extends Controller
 
     public function edit($slug)
     {        
-        $subcategory = SubCategory::whereSlug($slug)->first();
+        $subcategory = SubCategory::whereSlug($slug)->firstOrFail();
         $categories = Category::orderBy('name')->get();
         return view('admin.category.subcategory_edit',compact('subcategory', 'categories'));
     }
@@ -106,7 +106,7 @@ class SubCategoryController extends Controller
 
     public function sub_edit($slug)
     {        
-        $subsubcategory = SubSubCategory::whereSlug($slug)->first();
+        $subsubcategory = SubSubCategory::whereSlug($slug)->firstOrFail();
         $categories = Category::orderBy('name')->get();
         $subcategories = SubCategory::orderBy('name')->get();
         return view('admin.category.sub_subcategory_edit',compact('subsubcategory','subcategories', 'categories'));

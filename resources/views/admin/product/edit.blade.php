@@ -27,8 +27,8 @@
                                                 <div class="form-group">
                                                     <h5>Brand Select <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <select name="brand_id" class="form-control" required>
-                                                            <option value="" disabled selected>Select Brand</option>
+                                                        <select name="brand_id" class="form-control">
+                                                            <option value="" selected>Select Brand</option>
                                                             @foreach ($brands as $brand)
                                                                 <option value="{{ $brand->id }}"
                                                                     {{ $brand->id == $product->brand_id ? 'selected' : '' }}>
@@ -180,7 +180,7 @@
                                                     <h5>Discount Price <span class="text-danger">*</span></h5>
                                                     <div class="input-group"> <span class="input-group-addon">$</span>
                                                         <input type="number" name="discount_price" class="form-control"
-                                                            min="0"
+                                                            min="1"
                                                             value="{{ $product->discount_price == null ? 0 : $product->discount_price }}">
                                                         <span class="input-group-addon">.00</span>
                                                     </div>

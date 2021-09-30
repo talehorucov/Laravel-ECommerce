@@ -38,7 +38,7 @@ class BrandController extends Controller
 
     public function edit($slug)
     {
-        $brand = Brand::where('slug',$slug)->first();
+        $brand = Brand::whereSlug($slug)->firstOrFail();
         return view('admin.brand.edit', compact('brand'));
     }
 

@@ -10,6 +10,7 @@ class SubSubCategory extends Model
 {
     use HasFactory;
     use Sluggable;
+    protected $table = "subsubcategories";
 
     public function category()
     {
@@ -20,6 +21,7 @@ class SubSubCategory extends Model
     {
         return $this->belongsTo(SubCategory::class);
     }
+    
     protected $fillable = [
         'category_id',
         'subcategory_id',

@@ -10,7 +10,7 @@ class Product extends Model
 {
     use HasFactory;
     use Sluggable;
-    protected $guarded = [];    
+    protected $guarded = [];
     protected $appends = ['discount_percent'];
 
     public function sluggable(): array
@@ -26,22 +26,22 @@ class Product extends Model
     {
         return $this->belongsTo(Brand::class);
     }
-    
+
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
-    
+
     public function subcategory()
     {
         return $this->belongsTo(SubCategory::class);
     }
-    
+
     public function subsubcategory()
     {
         return $this->belongsTo(SubSubCategory::class);
     }
-       
+
     public function multiProductImg()
     {
         return $this->hasMany(MultiProductImg::class);
@@ -49,6 +49,8 @@ class Product extends Model
 
     public function getDiscountPercentAttribute()
     {
-        return round($this->discount_price / $this->selling_price * 100).'%';
+        if ($this->discount_price != 0 or $this->discount_price != NULL) {
+            return round( 100 - $this->discount_price / $this->selling_price * 100) . '%';
+        }
     }
 }
