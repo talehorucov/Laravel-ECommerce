@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SubCategory extends Model
 {
     use HasFactory;
     use Sluggable;
-    // protected $primaryKey = 'id';
+    use SoftDeletes;
+    
     protected $table = "subcategories";
 
     public function category()

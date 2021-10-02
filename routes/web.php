@@ -121,10 +121,8 @@ Route::middleware(['auth:sanctum,web', 'verified'])->group(function () {
     });
 });
 
-Route::prefix('product')->group(function () {
-    Route::get('detail/{slug}',[HomeController::class,'product_detail'])->name('user.product.detail');
-});
-
+    Route::get('/product/detail/{slug}',[HomeController::class,'product_detail'])->name('user.product.detail');
+    Route::get('/tags/{tag}',[HomeController::class,'tags'])->name('user.tags');
 
 Route::redirect('/web/dashboard', '/dashboard', 301);
 
