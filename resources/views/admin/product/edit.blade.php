@@ -130,7 +130,7 @@
                                                         <h5>Product Code <span class="text-danger">*</span></h5>
                                                         <div class="controls">
                                                             <input type="text" name="code" class="form-control" required
-                                                                value="{{ $product->code }}">
+                                                                value="{{ $product->code }}" disabled>
                                                         </div>
                                                         @error('code')
                                                             <span class="text-danger" role="alert">
@@ -180,7 +180,6 @@
                                                     <h5>Discount Price <span class="text-danger">*</span></h5>
                                                     <div class="input-group"> <span class="input-group-addon">$</span>
                                                         <input type="number" name="discount_price" class="form-control"
-                                                            min="1"
                                                             value="{{ $product->discount_price == null ? 0 : $product->discount_price }}">
                                                         <span class="input-group-addon">.00</span>
                                                     </div>
@@ -197,49 +196,70 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <h5>Product Tags <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <input type="text" name="tags"
-                                                            value="{{ $product->tags }}" data-role="tagsinput"
-                                                            class="form-control" required>
-                                                    </div>
-                                                    @error('tags')
-                                                        <span class="text-danger" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+                                                    <label>Ölçü</label>
+                                                    <select name="sizes[]" class="form-control select2" multiple
+                                                        data-placeholder=" Ölçü Seçin" style="width: 100%;">
+                                                        @foreach ($sizes as $size)
+                                                            <option value="{{ $size->id }}" 
+                                                                @foreach ($product->sizes as $product_size)
+                                                                    {{ in_array($size->id,$product->sizes->pluck('id')->toArray(),)
+                                                                    ? 'selected': null }}
+                                                                @endforeach>
+                                                                {{ $size->name }}
+                                                             </option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
+                                                @error('sizes')
+                                                    <span class="text-danger" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
 
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <h5>Product Size <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <input type="text" name="size"
-                                                            value="{{ $product->size }}" data-role="tagsinput"
-                                                            class="form-control">
-                                                    </div>
-                                                    @error('size')
-                                                        <span class="text-danger" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+                                                    <label>Rəng</label>
+                                                    <select name="colors[]" class="form-control select2" multiple
+                                                        data-placeholder=" Rəng Seçin" style="width: 100%;">
+                                                        @foreach ($colors as $color)
+                                                            <option value="{{ $color->id }}" 
+                                                                @foreach ($product->colors as $product_color)
+                                                                    {{ in_array($color->id,$product->colors->pluck('id')->toArray(),)
+                                                                    ? 'selected': null }}
+                                                                @endforeach>
+                                                                {{ $color->name }}
+                                                             </option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
+                                                @error('colors')
+                                                    <span class="text-danger" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <h5>Product Color <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <input type="text" name="color"
-                                                            value="{{ $product->color }}" data-role="tagsinput"
-                                                            class="form-control" required>
-                                                    </div>
-                                                    @error('color')
-                                                        <span class="text-danger" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+                                                    <label>Təq</label>
+                                                    <select name="tags[]" class="form-control select2" multiple
+                                                        data-placeholder=" Təq Seçin" style="width: 100%;">
+                                                        @foreach ($tags as $tag)
+                                                            <option value="{{ $tag->id }}" 
+                                                                @foreach ($product->tags as $product_tag)
+                                                                    {{ in_array($tag->id,$product->tags->pluck('id')->toArray(),)
+                                                                    ? 'selected': null }}
+                                                                @endforeach>
+                                                                {{ $tag->name }}
+                                                             </option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
+                                                @error('tags')
+                                                    <span class="text-danger" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
 
@@ -261,8 +281,8 @@
                                                     <h5>Long Description <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <textarea name="long_desc" id="editor1" rows="10" cols="80">
-                                                            {{ $product->long_desc }}
-                                                        </textarea>
+                                                                                                {{ $product->long_desc }}
+                                                                                            </textarea>
                                                     </div>
                                                 </div>
                                             </div>

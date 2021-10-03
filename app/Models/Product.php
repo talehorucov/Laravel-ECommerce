@@ -45,6 +45,21 @@ class Product extends Model
         return $this->belongsTo(SubSubCategory::class);
     }
 
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class);
+    }  
+    
+    public function colors()
+    {
+        return $this->belongsToMany(Color::class);
+    }  
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }  
+
     public function multiProductImg()
     {
         return $this->hasMany(MultiProductImg::class);

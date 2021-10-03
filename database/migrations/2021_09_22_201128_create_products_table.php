@@ -16,10 +16,10 @@ class CreateProductsTable extends Migration
             $table->unsignedBigInteger('subsubcategory_id');
             $table->string('name');
             $table->string('slug');
-            $table->string('code');
-            $table->integer('quantity');
-            $table->string('selling_price');
-            $table->string('discount_price')->nullable();
+            $table->string('code')->default('000000001');
+            $table->float('quantity');
+            $table->float('selling_price');
+            $table->float('discount_price')->nullable();
             $table->string('short_desc')->nullable();
             $table->text('long_desc')->nullable();
             $table->string('thumbnail');

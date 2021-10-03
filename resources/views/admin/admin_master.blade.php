@@ -10,13 +10,13 @@
     <link rel="icon" href="{{ asset('backend/images/favicon.ico') }}">
     
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/font-awesome.css') }}">  
+    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">  
 
     <title>SmartBuy.Az Admin - Dashboard</title>
 
     <!-- Vendors Style-->
     <link rel="stylesheet" href="{{ asset('backend/css/vendors_css.css') }}">
-
+	  
     <!-- Style-->
     <link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/skin_color.css') }}">
@@ -46,11 +46,11 @@
         <div class="control-sidebar-bg"></div>
 
     </div>
-    <!-- ./wrapper -->
-
 
     <!-- Vendor JS -->
     <script src="{{ asset('backend/js/vendors.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor_components/select2/dist/js/select2.full.js') }}"></script>
+    <script src="{{ asset('backend/js/pages/advanced-form-element.js') }}"></script>
     <script src="{{ asset('assets/icons/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('assets/vendor_components/easypiechart/dist/jquery.easypiechart.js') }}"></script>
     <script src="{{ asset('assets/vendor_components/apexcharts-bundle/irregular-data-series.js') }}"></script>

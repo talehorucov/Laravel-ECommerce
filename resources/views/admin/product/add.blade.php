@@ -102,7 +102,8 @@
                                                 <div class="form-group">
                                                     <h5>Product Name <span class="text-danger">*</span></h5>
                                                     <div class="controls">
-                                                        <input type="text" name="name" class="form-control" required>
+                                                        <input type="text" name="name" class="form-control"
+                                                            value="{{ old('name') }}" required>
                                                     </div>
                                                     @error('name')
                                                         <span class="text-danger" role="alert">
@@ -113,29 +114,10 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <div class="form-group">
-                                                        <h5>Product Code <span class="text-danger">*</span></h5>
-                                                        <div class="controls">
-                                                            <input type="text" name="code" class="form-control" required>
-                                                        </div>
-                                                        @error('code')
-                                                            <span class="text-danger" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-
-                                            <div class="col-md-4">
-                                                <div class="form-group">
                                                     <h5>Quantity <span class="text-danger">*</span></h5>
                                                     <div class="input-group"> <span class="input-group-addon">$</span>
                                                         <input type="number" name="quantity" class="form-control" min="0"
-                                                            required>
+                                                            value="{{ old('quantity') }}" required>
                                                         <span class="input-group-addon">.00</span>
                                                     </div>
 
@@ -146,13 +128,15 @@
                                                     @enderror
                                                 </div>
                                             </div>
+                                        </div>
 
-                                            <div class="col-md-4">
+                                        <div class="row">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <h5>Selling Price <span class="text-danger">*</span></h5>
-                                                    <div class="input-group"> <span class="input-group-addon">$</span>
+                                                    <div class="input-group"> <span class="input-group-addon">Manat</span>
                                                         <input type="number" name="selling_price" class="form-control"
-                                                            min="0" required>
+                                                            value="{{ old('selling_price') }}" min="0" required>
                                                         <span class="input-group-addon">.00</span>
                                                     </div>
 
@@ -163,12 +147,12 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <h5>Discount Price <span class="text-danger">*</span></h5>
                                                     <div class="input-group"> <span class="input-group-addon">$</span>
                                                         <input type="number" name="discount_price" class="form-control"
-                                                            min="1">
+                                                            value="{{ old('discount_price') }}" min="1">
                                                         <span class="input-group-addon">.00</span>
                                                     </div>
 
@@ -215,61 +199,69 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <h5>Product Tags <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <input type="text" name="tags" value="Lorem, Ipsum, Amet"
-                                                            data-role="tagsinput" class="form-control" required>
-                                                    </div>
-                                                    @error('tags')
-                                                        <span class="text-danger" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>                                            
-                                            
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <h5>Product Size <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <input type="text" name="size" value="Kiçik, Orta, Böyük"
-                                                            data-role="tagsinput" class="form-control">
-                                                    </div>
-                                                    @error('size')
-                                                        <span class="text-danger" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <h5>Product Color <span class="text-danger">*</span></h5>
-                                                    <div class="controls">
-                                                        <input type="text" name="color" value=" Qara, Ağ, Qırmızı"
-                                                            data-role="tagsinput" class="form-control" required>
-                                                    </div>
-                                                    @error('color')
-                                                        <span class="text-danger" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
 
                                         <div class="row">
-                                            
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Ölçü</label>
+                                                    <select name="sizes[]" class="form-control select2" multiple
+                                                        data-placeholder=" Ölçü Seçin" style="width: 100%;">
+                                                        @foreach ($sizes as $size)
+                                                            <option value="{{ $size->id }}">
+                                                                {{ $size->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                @error('size_id')
+                                                    <span class="text-danger" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Rəng</label>
+                                                    <select name="colors[]" class="form-control select2" multiple
+                                                        data-placeholder=" Rəng Seçin" style="width: 100%;">
+                                                        @foreach ($colors as $color)
+                                                            <option value="{{ $color->id }}">{{ $color->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                @error('color_id')
+                                                    <span class="text-danger" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label>Təq</label>
+                                                    <select name="tags[]" class="form-control select2" multiple
+                                                        data-placeholder=" Təq Seçin" style="width: 100%;">
+                                                        @foreach ($tags as $tag)
+                                                            <option value="{{ $tag->id }}">
+                                                                {{ $tag->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                @error('tag_id')
+                                                    <span class="text-danger" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <h5>Short Description <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <textarea name="short_desc" class="form-control"
-                                                            placeholder="Short Description"></textarea>
+                                                            placeholder="Short Description">{{ old('discount_price') }}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -281,7 +273,7 @@
                                                     <h5>Long Description <span class="text-danger">*</span></h5>
                                                     <div class="controls">
                                                         <textarea name="long_desc" id="editor2" rows="10" cols="80">
-                                                        </textarea>
+                                                        {{ old('discount_price') }}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -412,7 +404,8 @@
                             var fRead = new FileReader(); //new filereader
                             fRead.onload = (function(file) { //trigger function on successful read
                                 return function(e) {
-                                    var img = $('<img/>').addClass('thumb mr-5').attr('src',
+                                    var img = $('<img/>').addClass('thumb mr-5').attr(
+                                            'src',
                                             e.target.result).width(80)
                                         .height(80); //create image element 
                                     $('#preview_img').append(

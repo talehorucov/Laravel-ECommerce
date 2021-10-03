@@ -14,6 +14,10 @@ use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 use App\Http\Requests\AdminProductCreateRequest;
 use App\Http\Requests\AdminProductUpdateRequest;
+use App\Models\Color;
+use App\Models\ProductTag;
+use App\Models\Size;
+use App\Models\Tag;
 use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
@@ -22,7 +26,10 @@ class ProductController extends Controller
     {
         $categories = Category::orderBy('name')->get();
         $brands = Brand::orderBy('name')->get();
-        return view('admin.product.add', compact('categories', 'brands'));
+        $sizes = Size::orderBy('name')->get();
+        $colors = Color::orderBy('name')->get();
+        $tags = Tag::orderBy('name')->get();
+        return view('admin.product.add', compact('categories', 'brands', 'sizes', 'colors', 'tags'));
     }
 
     public function index()
@@ -38,6 +45,8 @@ class ProductController extends Controller
         SubCategory::findOrFail($request->subcategory_id);
         SubSubCategory::findOrFail($request->subsubcategory_id);
 
+        $old = Product::orderByDesc('id')->first();
+
         $image = $request->file('thumbnail');
         $image_name = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
         Image::make($image)->resize(917, 1000)->save('upload/products/thumbnail/' . $image_name);
@@ -49,11 +58,8 @@ class ProductController extends Controller
         $product->subcategory_id = $request->subcategory_id;
         $product->subsubcategory_id = $request->subsubcategory_id;
         $product->name = $request->name;
-        $product->code = $request->code;
+        $product->code = (string)($old->code + 1);
         $product->quantity = $request->quantity;
-        $product->tags = $request->tags;
-        $product->size = $request->size;
-        $product->color = $request->color;
         $product->selling_price = $request->selling_price;
         $product->discount_price = $request->discount_price;
         $product->short_desc = $request->short_desc;
@@ -67,6 +73,17 @@ class ProductController extends Controller
         $product->save();
         $product_id = $product->id;
 
+        // $product = Product::whereId($product_id);
+        
+        // foreach ($request->tags as $tag) {
+        //     $product_tag = new ProductTag();
+        //     $product_tag->protuct_id = $product_id;
+        //     $product_tag->tag_id = $tag->id;
+        //     $product_tag->save();
+        // }
+        $product->tags()->attach($request->tags);
+        $product->colors()->attach($request->colors);
+        $product->sizes()->attach($request->sizes);
 
         ///////////////// Multi Images Create ////////////////////
 
@@ -91,18 +108,22 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
+        $product = Product::with('colors','sizes','tags')->whereId($product->id)->first();
         Brand::findOrFail($product->brand_id);
         Category::findOrFail($product->category_id);
         SubCategory::findOrFail($product->subcategory_id);
         SubSubCategory::findOrFail($product->subcategory_id);
 
+        $colors = Color::orderBy('name')->get();
+        $sizes = Size::orderBy('name')->get();
+        $tags = Tag::orderBy('name')->get();
         $multi_images = MultiProductImg::where('product_id', $product->id)->get();
         $brands = Brand::orderBy('name')->get();
         $categories = Category::orderBy('name')->get();
         $subcategories = SubCategory::orderBy('name')->get();
         $subsubcategories = SubSubCategory::orderBy('name')->get();
 
-        return view('admin.product.edit', compact('product', 'brands', 'categories', 'subcategories', 'subsubcategories', 'multi_images'));
+        return view('admin.product.edit', compact('product','brands','categories','subcategories','subsubcategories','multi_images','colors','sizes','tags'));
     }
 
     public function detail($slug)
@@ -123,22 +144,21 @@ class ProductController extends Controller
         $product->subcategory_id = $request->subcategory_id;
         $product->subsubcategory_id = $request->subsubcategory_id;
         $product->name = $request->name;
-        $product->code = $request->code;
         $product->quantity = $request->quantity;
-        $product->tags = $request->tags;
-        $product->size = $request->size;
-        $product->color = $request->color;
         $product->selling_price = $request->selling_price;
         $product->discount_price = $request->discount_price;
         $product->short_desc = $request->short_desc;
         $product->long_desc = $request->long_desc;
-        // $product->thumbnail = $image_url;
         $product->hot_deals = $request->hot_deals;
         $product->featured = $request->featured;
         $product->special_offer = $request->special_offer;
         $product->special_deal = $request->special_deal;
         $product->status = 1;
         $product->save();
+
+        $product->tags()->sync($request->tags);
+        $product->colors()->sync($request->colors);
+        $product->sizes()->sync($request->sizes);
 
         $notification = array(
             'message' => 'Product Updated Successfully',

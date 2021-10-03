@@ -22,16 +22,16 @@ $route = Route::current()->getName();
 
         <!-- sidebar menu-->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="{{ $route == 'admin.dashboard' ? 'active' : '' }}">
+            <li class="{{ $route == 'admin.dashboard' ? 'active white' : '' }}">
                 <a href="{{ route('admin.dashboard') }}">
-                    <i data-feather="pie-chart"></i>
+                    <i style="font-size: 20px" class="fas fa-chart-pie-alt"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
             <li class="treeview {{ ($prefix == 'admin/brand' or $route == 'admin.brand.index') ? 'active' : '' }}">
                 <a href="#">
-                    <i data-feather="message-circle"></i>
+                    <i style="font-size: 20px" class="fas fa-blog"></i>
                     <span>Brands</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
@@ -46,7 +46,8 @@ $route = Route::current()->getName();
 
             <li class="treeview {{ ($prefix == 'admin/category' or $route == 'admin.category.index') ? 'active' : '' }}">
                 <a href="#">
-                    <i data-feather="mail"></i> <span>Categories</span>
+                    <i style="font-size: 20px" class="fas fa-align-left"></i>
+                    <span>Categories</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
@@ -66,9 +67,54 @@ $route = Route::current()->getName();
                 </ul>
             </li>
 
+            <li class="treeview {{ ($prefix == 'admin/color' or $route == 'admin.color.index') ? 'active' : '' }}">
+                <a href="#">
+                    <i style="font-size:20px" class="fas fa-palette"></i>
+                    <span>Colors</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ $route == 'admin.color.index' ? 'active' : '' }}">
+                        <a href="{{ route('admin.color.index') }}"><i class="ti-more"></i>Manage Colors</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="treeview {{ ($prefix == 'admin/size' or $route == 'admin.size.index') ? 'active' : '' }}">
+                <a href="#">
+                    <i style="font-size:20px" class="fas fa-compress-alt"></i>
+                    <span>Sizes</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ $route == 'admin.size.index' ? 'active' : '' }}">
+                        <a href="{{ route('admin.size.index') }}"><i class="ti-more"></i>Manage Sizes</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="treeview {{ ($prefix == 'admin/tag' or $route == 'admin.tag.index') ? 'active' : '' }}">
+                <a href="#">
+                    <i style="font-size:18px" class="fas fa-tags"></i>
+                    <span>Tags</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ $route == 'admin.tag.index' ? 'active' : '' }}">
+                        <a href="{{ route('admin.tag.index') }}"><i class="ti-more"></i>Manage Tags</a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="treeview {{ ($prefix == 'admin/product' or $route == 'admin.product.index') ? 'active' : '' }}">
                 <a href="#">
-                    <i data-feather="file"></i>
+                    <i style="font-size:20px" class="fas fa-box-alt"></i>
                     <span>Products</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
@@ -86,7 +132,7 @@ $route = Route::current()->getName();
 
             <li class="treeview {{ ($prefix == 'admin/slider' or $route == 'admin.sliders') ? 'active' : '' }}">
                 <a href="#">
-                    <i data-feather="file"></i>
+                    <i style="font-size: 20px" class="fas fa-images"></i>
                     <span>Sliders</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>

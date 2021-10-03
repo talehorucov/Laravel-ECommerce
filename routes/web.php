@@ -7,9 +7,12 @@ use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ColorController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\SizeController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\TagController;
 use App\Http\Controllers\Frontend\HomeController;
 
 Route::prefix('admin')->middleware(['auth:admin', 'verified'])->group(function () {
@@ -17,6 +20,9 @@ Route::prefix('admin')->middleware(['auth:admin', 'verified'])->group(function (
     // Indexes
     Route::get('/brands', [BrandController::class, 'index'])->name('admin.brand.index');
     Route::get('/categories', [CategoryController::class, 'index'])->name('admin.category.index');
+    Route::get('/colors', [ColorController::class, 'index'])->name('admin.color.index');
+    Route::get('/sizes', [SizeController::class, 'index'])->name('admin.size.index');
+    Route::get('/tags', [TagController::class, 'index'])->name('admin.tag.index');
     Route::get('/products', [ProductController::class, 'index'])->name('admin.product.index');
     Route::get('/sliders', [SliderController::class, 'index'])->name('admin.slider.index');
     // End Of Indexes
@@ -75,6 +81,33 @@ Route::prefix('admin')->middleware(['auth:admin', 'verified'])->group(function (
     });
 
 
+    //------------------------Admin Color ------------------------
+    Route::prefix('color')->group(function () {
+        Route::post('/create', [ColorController::class, 'create'])->name('admin.color.create');
+        Route::get('/edit/{color}', [ColorController::class, 'edit'])->name('admin.color.edit');
+        Route::post('/update/{color}', [ColorController::class, 'update'])->name('admin.color.update');
+        Route::get('/delete/{color}', [ColorController::class, 'destroy'])->name('admin.color.delete');
+    });
+
+
+    //------------------------Admin Size ------------------------
+    Route::prefix('size')->group(function () {
+        Route::post('/create', [SizeController::class, 'create'])->name('admin.size.create');
+        Route::get('/edit/{size}', [SizeController::class, 'edit'])->name('admin.size.edit');
+        Route::post('/update/{size}', [SizeController::class, 'update'])->name('admin.size.update');
+        Route::get('/delete/{size}', [SizeController::class, 'destroy'])->name('admin.size.delete');
+    });
+
+
+    //------------------------Admin Tag ------------------------
+    Route::prefix('tag')->group(function () {
+        Route::post('/create', [TagController::class, 'create'])->name('admin.tag.create');
+        Route::get('/edit/{tag}', [TagController::class, 'edit'])->name('admin.tag.edit');
+        Route::post('/update/{tag}', [TagController::class, 'update'])->name('admin.tag.update');
+        Route::get('/delete/{tag}', [TagController::class, 'destroy'])->name('admin.tag.delete');
+    });
+
+
     //------------------------Admin Product ------------------------
     Route::prefix('product')->group(function () {
         Route::get('/add', [ProductController::class, 'add'])->name('admin.product.add');
@@ -110,7 +143,7 @@ Route::middleware('admin:admin')->prefix('admin')->group(function () {
 
 
 Route::middleware(['auth:sanctum,web', 'verified'])->group(function () {
-    
+
     Route::get('/dashboard', [IndexController::class, 'dashboard'])->name('dashboard');
 
     Route::prefix('user')->group(function () {
@@ -121,8 +154,8 @@ Route::middleware(['auth:sanctum,web', 'verified'])->group(function () {
     });
 });
 
-    Route::get('/product/detail/{slug}',[HomeController::class,'product_detail'])->name('user.product.detail');
-    Route::get('/tags/{tag}',[HomeController::class,'tags'])->name('user.tags');
+Route::get('/product/detail/{slug}', [HomeController::class, 'product_detail'])->name('user.product.detail');
+Route::get('/tags/{tag}', [HomeController::class, 'tags'])->name('user.tags');
 
 Route::redirect('/web/dashboard', '/dashboard', 301);
 

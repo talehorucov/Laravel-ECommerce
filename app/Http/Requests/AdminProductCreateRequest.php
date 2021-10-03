@@ -18,17 +18,17 @@ class AdminProductCreateRequest extends FormRequest
             'subcategory_id' => 'required',
             'subsubcategory_id' => 'required',
             'name' => 'required|min:2|max:255',
-            'code' => 'required|min:2|max:255',
             'quantity' => 'required|max:255',
-            'tags' => 'required|max:255',
-            'color' => 'required|max:255',
+            'tag.*' => 'exists:tags,id',
+            'color.*' => 'exists:colors,id',
+            'size.*' => 'exists:sizes,id',
             'selling_price' => 'required|max:255',
-            'thumbnail' => 'required|max:255',
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,svg|max:3072',
+            'multi_img.*' => 'required|image|mimes:jpeg,png,jpg,svg|max:3072',
             'hot_deals' => 'numeric',
             'featured' => 'numeric',
             'special_offer' => 'numeric',
             'special_deal' => 'numeric',
-            'status' => 'numeric',
         ];
     }
 }
