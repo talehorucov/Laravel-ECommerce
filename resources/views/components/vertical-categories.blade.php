@@ -19,7 +19,6 @@
                                                 <li><a href="{{ route('user.subsubcategory',$subsubcategory->slug) }}">{{ $subsubcategory->name }}</a></li>
                                             </ul>
                                         @endforeach
-
                                     </div>
                                 @endforeach
 

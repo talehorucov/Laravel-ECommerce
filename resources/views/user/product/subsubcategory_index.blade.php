@@ -1,7 +1,7 @@
 @extends('user.main_master')
 @section('content')
 @section('title')
-    Məhsul Təqləri
+    {{ $subsubcategory->name }} Alt Kateqoriyasının Məhsulları
 @endsection
 
 
@@ -10,7 +10,7 @@
         <div class="breadcrumb-inner">
             <ul class="list-inline list-unstyled">
                 <li><a href="#">Ana Səhifə</a></li>
-                <li class='active'>{{ $tag }}</li>
+                <li class='active'>{{ $subsubcategory->name }}</li>
             </ul>
         </div>
         <!-- /.breadcrumb-inner -->
@@ -48,7 +48,11 @@
                                                 <div class="accordion-inner">
                                                     @foreach ($category->subcategories as $subcategory)
                                                         <ul>
-                                                            <li><a href="#">{{ $subcategory->name }}</a></li>
+                                                            <li><a
+                                                                    href="{{ route('user.subcategory', $subcategory->slug) }}">
+                                                                    {{ $subcategory->name }}
+                                                                </a>
+                                                            </li>
                                                         </ul>
                                                     @endforeach
                                                 </div>
@@ -139,7 +143,7 @@
                         <!-- /.sidebar-widget -->
                         <!-- ============================================== COMPARE: END ============================================== -->
                         <!-- ============================================== PRODUCT TAGS ============================================== -->
-                        
+
                         <!-- /.sidebar-widget -->
                         <!----------- Testimonials------------->
                         @include('user.common.testmomials')
@@ -261,7 +265,8 @@
                                                     <div class="product-image">
                                                         <div class="image"> <a
                                                                 href="{{ route('user.product.detail', $product->slug) }}"><img
-                                                                    src="{{ asset($product->thumbnail) }}" alt=""></a>
+                                                                    src="{{ asset($product->thumbnail) }}"
+                                                                    alt=""></a>
                                                         </div>
                                                         <!-- /.image -->
                                                         @if ($product->discount_price == null or $product->discount_price == 0)

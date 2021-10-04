@@ -6,11 +6,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="description" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="">
     <meta name="keywords" content="MediaCenter, Template, eCommerce">
     <meta name="robots" content="all">
     <title>@yield('title')</title>
     <!-- Bootstrap Core CSS -->
+
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css') }}">
 
     <!-- Customizable CSS -->
@@ -23,8 +25,8 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap-select.min.css') }}">
 
     <!-- Icons/Glyphs -->
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/font-awesome.css') }}">    
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/font-awesome.css') }}">
 
 
     <!-- Fonts -->
@@ -37,7 +39,7 @@
 
 <body class="cnt-home">
     <!-- ============================================== HEADER ============================================== -->
-   @include('user.partials._header')
+    @include('user.partials._header')
 
     <!-- ============================================== HEADER : END ============================================== -->
     @yield('content')
@@ -65,6 +67,7 @@
     <script src="{{ asset('frontend/assets/js/wow.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/scripts.js') }}"></script>
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script>
@@ -88,6 +91,15 @@
             break;
             }
         @endif
+    </script>
+
+    @include('user.modals.add_to_cart_modal')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        })
     </script>
 </body>
 

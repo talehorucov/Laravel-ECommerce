@@ -179,15 +179,15 @@
                                                         <div class="row">
                                                             @foreach ($category->subcategories as $subcategory)
                                                                 <div class="col-xs-12 col-sm-6 col-md-2 col-menu">
-                                                                    <h2 class="title">
-                                                                        {{ $subcategory->name }}
-                                                                    </h2>
+                                                                    <a href="{{ route('user.subcategory',$subcategory->slug) }}">
+                                                                        <h2 class="title">{{ $subcategory->name }}</h2>
+                                                                    </a>
                                                                     <ul class="links">
                                                                         @if ($subcategory->subsubcategories->count())
                                                                             @foreach ($subcategory->subsubcategories as $subsubcategory)
                                                                                 <li>
                                                                                     <a
-                                                                                        href="#">{{ $subsubcategory->name }}</a>
+                                                                                        href="{{ route('user.subsubcategory',$subsubcategory->slug) }}">{{ $subsubcategory->name }}</a>
                                                                                 </li>
                                                                             @endforeach
                                                                         @endif

@@ -12,6 +12,6 @@ class Color extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Product::class);
     }  
 }

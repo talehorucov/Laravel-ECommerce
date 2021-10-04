@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\SizeController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\TagController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 
 Route::prefix('admin')->middleware(['auth:admin', 'verified'])->group(function () {
@@ -156,6 +157,10 @@ Route::middleware(['auth:sanctum,web', 'verified'])->group(function () {
 
 Route::get('/product/detail/{slug}', [HomeController::class, 'product_detail'])->name('user.product.detail');
 Route::get('/tags/{tag}', [HomeController::class, 'tags'])->name('user.tags');
+Route::get('/subcategory/{slug}/products',[HomeController::class, 'subcategory'])->name('user.subcategory');
+Route::get('/sub/subcategory/{slug}/products',[HomeController::class, 'subsubcategory'])->name('user.subsubcategory');
+Route::get('/product/view/modal/{id}',[HomeController::class, 'ajax_product_modal'])->name('ajax.product.modal');
+Route::post('/product/addtocart/{id}',[CartController::class, 'AddToCart'])->name('addtocart');
 
 Route::redirect('/web/dashboard', '/dashboard', 301);
 
