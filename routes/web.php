@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\TagController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\WishListController;
 
 Route::prefix('admin')->middleware(['auth:admin', 'verified'])->group(function () {
 
@@ -153,14 +154,25 @@ Route::middleware(['auth:sanctum,web', 'verified'])->group(function () {
         Route::get('/change/password', [IndexController::class, 'change_password'])->name('change.password');
         Route::post('/update/password', [IndexController::class, 'update_password'])->name('update.password');
     });
+
+
+    Route::prefix('wishlist')->group(function () {
+        Route::get('/', [WishListController::class, 'index'])->name('user.wishlist');
+        Route::post('/product/add/{id}', [WishListController::class, 'Add'])->name('add.wishlist');
+        Route::get('/remove/{id}', [WishListController::class, 'remove'])->name('user.wishlist.remove');
+    });
 });
 
 Route::get('/product/detail/{slug}', [HomeController::class, 'product_detail'])->name('user.product.detail');
 Route::get('/tags/{tag}', [HomeController::class, 'tags'])->name('user.tags');
-Route::get('/subcategory/{slug}/products',[HomeController::class, 'subcategory'])->name('user.subcategory');
-Route::get('/sub/subcategory/{slug}/products',[HomeController::class, 'subsubcategory'])->name('user.subsubcategory');
-Route::get('/product/view/modal/{id}',[HomeController::class, 'ajax_product_modal'])->name('ajax.product.modal');
-Route::post('/product/addtocart/{id}',[CartController::class, 'AddToCart'])->name('addtocart');
+Route::get('/subcategory/{slug}/products', [HomeController::class, 'subcategory'])->name('user.subcategory');
+Route::get('/sub/subcategory/{slug}/products', [HomeController::class, 'subsubcategory'])->name('user.subsubcategory');
+Route::get('/product/view/modal/{id}', [HomeController::class, 'ajax_product_modal'])->name('ajax.product.modal');
+Route::get('/mycart', [CartController::class, 'index'])->name('mycart');
+Route::get('/product/addtocart/{id}', [CartController::class, 'AddToCart'])->name('addtocart');
+Route::get('/product/mini/cart', [CartController::class, 'AddMiniCart'])->name('add.miniCart');
+Route::get('/product/mini/cart/remove/{rowId}', [CartController::class, 'RemoveMiniCart'])->name('remove.miniCart');
+Route::get('/cart.remove/{id}', [CartController::class, 'Remove'])->name('user.cart.remove');
 
 Route::redirect('/web/dashboard', '/dashboard', 301);
 

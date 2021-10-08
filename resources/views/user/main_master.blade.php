@@ -49,6 +49,7 @@
     @include('user.partials._footer')
     <!-- ============================================================= FOOTER : END============================================================= -->
 
+    @include('user.modals.add_to_cart_modal')
     <!-- For demo purposes – can be removed on production -->
 
     <!-- For demo purposes – can be removed on production : End -->
@@ -62,7 +63,7 @@
     <script src="{{ asset('frontend/assets/js/jquery.easing-1.3.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/bootstrap-slider.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/jquery.rateit.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('frontend/assets/js/lightbox.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/lightbox.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/wow.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/scripts.js') }}"></script>
@@ -93,13 +94,155 @@
         @endif
     </script>
 
-    @include('user.modals.add_to_cart_modal')
     <script>
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         })
+    </script>
+
+    {{-- Add To Cart --}}
+    <script>
+        function addToCart() {
+            var id = $('#product_id').val();
+            var url = '{{ route('addtocart', ':id') }}';
+            url = url.replace(':id', id);
+
+            var color = $('#color option:selected').val();
+            var size = $('#size option:selected').val();
+            var quantity = $('#quantity').val();
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                data: {
+                    id: id,
+                    color: color,
+                    size: size,
+                    quantity: quantity
+                },
+                url: url,
+                success: function(data) {
+                    miniCart()
+                    $('#productModal').modal('hide');
+
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: data.success,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+        }
+    </script>
+
+    {{-- Mini Cart --}}
+    <script>
+        function miniCart() {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "{{ route('add.miniCart') }}",
+                success: function(response) {
+                    $('span[id="cart_quantity"]').text(response.cart_count);
+                    $('span[id="cart_subtotal"]').text(response.cart_total);
+                    var mini_cart = '';
+
+                    $.each(response.carts, function(key, value) {
+                        mini_cart += `<div class="cart-item product-summary">
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <div class="image"> <a href="detail.html">
+                                                    <img src="/${value.options.image}"
+                                                        alt=""></a> </div>
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <h3 class="name"><a href="index.php?page-detail">${value.name}</a></h3>
+                                            <div class="price">${value.price} Azn * ${value.qty} </div>
+                                        </div>
+                                        <div class="col-xs-1 action"> <button type="submit" id="${value.rowId}"
+                                            onclick="miniCartRemove(this.id)"><i class="fa fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <hr>`
+
+                    })
+                    $('#mini_cart').html(mini_cart);
+                }
+            })
+        }
+        miniCart();
+    </script>
+
+    <script>
+        function miniCartRemove(rowId) {
+            var url = '{{ route('remove.miniCart', ':rowId') }}';
+            url = url.replace(':rowId', rowId);
+
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: url,
+                success: function(data) {
+                    miniCart();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: data.success,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+        }
+    </script>
+
+    <script>
+        function addToWishList(id) {
+            var url = '{{ route('add.wishlist', ':id') }}';
+            url = url.replace(':id', id);
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: url,
+                success: function(data) {
+                    if (data.success) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: data.success,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                    else if (data.danger) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: data.danger,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    } 
+                    else {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: data.error,
+                            showConfirmButton: false,
+                            footer: '<a href="{{ route('login') }}"><h5>Daxil Ol</h5></a>',
+                            timer: 1500
+                        })
+                    }
+                }
+            })
+        }
     </script>
 </body>
 

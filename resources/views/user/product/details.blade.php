@@ -24,8 +24,6 @@
                         <img src="{{ asset('/frontend/assets/images/banners/LHS-banner.jpg') }}" alt="Image">
                     </div>
 
-
-
                     <!-- ============================================== HOT DEALS ============================================== -->
                     <x-hot-deals />
                     <!-- ============================================== HOT DEALS: END ============================================== -->
@@ -93,12 +91,19 @@
             </div><!-- /.sidebar -->
             <div class='col-md-9'>
                 <div class="detail-block">
-                    <div class="row  wow fadeInUp">
+                    <div class="row wow fadeInUp">
 
                         <div class="col-xs-12 col-sm-6 col-md-5 gallery-holder">
                             <div class="product-item-holder size-big single-product-gallery small-gallery">
 
                                 <div id="owl-single-product">
+                                    <div class="single-product-gallery-item" id="slide0">
+                                        <a data-lightbox="image-1" data-title="Gallery"
+                                            href="{{ asset($product->thumbnail) }}">
+                                            <img class="img-responsive" alt="" src="{{ asset($product->thumbnail) }}"
+                                                data-echo="{{ asset($product->thumbnail) }}" />
+                                        </a>
+                                    </div>
                                     @foreach ($product->multiProductImg as $image)
                                         <div class="single-product-gallery-item" id="slide{{ $image->id }}">
                                             <a data-lightbox="image-1" data-title="Gallery"
@@ -114,6 +119,14 @@
                                 <div class="single-product-gallery-thumbs gallery-thumbs">
 
                                     <div id="owl-single-product-thumbnails">
+                                        <div class="item">
+                                            <a class="horizontal-thumb active" data-target="#owl-single-product"
+                                                data-slide="1" href="#slide0">
+                                                <img class="img-responsive" width="85" alt=""
+                                                    src="{{ asset($product->thumbnail) }}"
+                                                    data-echo="{{ asset($product->thumbnail) }}" />
+                                            </a>
+                                        </div>
                                         @foreach ($product->multiProductImg as $image)
                                             <div class="item">
                                                 <a class="horizontal-thumb active" data-target="#owl-single-product"
@@ -173,13 +186,11 @@
                                         <div class="col-sm-6">
                                             <div class="price-box">
                                                 @if ($product->discount_price == null or $product->discount_price == 0)
-                                                    <span
-                                                        class="price">{{ $product->selling_price }}</span>
+                                                    <span class="price">{{ $product->selling_price }}</span>
                                                 @else
                                                     <span
                                                         class="price">{{ $product->discount_price }}</span>
-                                                    <span
-                                                        class="price-strike">{{ $product->selling_price }}</span>
+                                                    <span class="price-strike">{{ $product->selling_price }}</span>
                                                 @endif
                                             </div>
                                         </div>
@@ -208,7 +219,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label class="info-title control-label">Rənglər <span>*</span></label>
-                                            <select class="form-control unicase-form-control selectpicker">
+                                            <select id="color" class="form-control unicase-form-control selectpicker">
                                                 <option selected disabled class="text-center">---Rəng Seçin---
                                                 </option>
                                                 @foreach ($product->colors as $color)
@@ -218,15 +229,16 @@
                                             </select>
                                         </div>
                                     </div>
-                                    @if ($product->sizes)
+                                    @if ($product->sizes->count() > 0)
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label class="info-title control-label">Ölçü <span>*</span></label>
-                                                <select class="form-control unicase-form-control selectpicker">
+                                                <select id="size" class="form-control unicase-form-control selectpicker">
                                                     <option selected disabled class="text-center">---Ölçü Seçin---
                                                     </option>
                                                     @foreach ($product->sizes as $size)
-                                                        <option class="text-center" value="{{ ucwords($size->id) }}">
+                                                        <option class="text-center"
+                                                            value="{{ ucwords($size->id) }}">
                                                             {{ $size->name }}
                                                         </option>
                                                     @endforeach
@@ -242,28 +254,21 @@
                                     <div class="row">
 
                                         <div class="col-sm-2">
-                                            <span class="label">Qty :</span>
+                                            <label style="margin-top: 10px" for="quantity">Miqdar</label>
                                         </div>
 
                                         <div class="col-sm-2">
                                             <div class="cart-quantity">
                                                 <div class="quant-input">
-                                                    <div class="arrows">
-                                                        <div class="arrow plus gradient"><span
-                                                                class="ir"><i
-                                                                    class="icon fa fa-sort-asc"></i></span></div>
-                                                        <div class="arrow minus gradient"><span
-                                                                class="ir"><i
-                                                                    class="icon fa fa-sort-desc"></i></span></div>
-                                                    </div>
-                                                    <input type="text" value="1">
+                                                    <input style="border: 1px solid #000" type="number" id="quantity" name="quantity" min="1" max="{{ $product->quantity }}">
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-7">
-                                            <a href="#" class="btn btn-primary"><i
-                                                    class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
+                                        <input type="hidden" id="product_id" value="{{ $product->id }}">
+                                        <div class="col-sm-6">
+                                            <button type="submit" onclick="addToCart()" style="float: right" class="btn btn-primary"><i
+                                                    class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
                                         </div>
 
 

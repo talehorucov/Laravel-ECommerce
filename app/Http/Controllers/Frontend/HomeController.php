@@ -63,8 +63,8 @@ class HomeController extends Controller
     
     public function ajax_product_modal($id)
     {
-        $product = Product::whereid($id)->with('multiProductImg','colors','sizes','category','brand')->firstOrFail();
-
+        $product = Product::with('multiProductImg','colors','sizes','category','brand')->findOrFail($id);
+        
         return response()->json(array(
             'product' => $product
         ));

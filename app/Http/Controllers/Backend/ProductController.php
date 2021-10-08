@@ -73,7 +73,7 @@ class ProductController extends Controller
         $product->save();
         $product_id = $product->id;
 
-        // $product = Product::whereId($product_id);
+        // $product = Product::findOrFail($product_id);
         
         // foreach ($request->tags as $tag) {
         //     $product_tag = new ProductTag();
@@ -108,7 +108,7 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        $product = Product::with('colors','sizes','tags')->whereId($product->id)->first();
+        $product = Product::with('colors','sizes','tags')->findOrFail($product->id)->first();
         Brand::findOrFail($product->brand_id);
         Category::findOrFail($product->category_id);
         SubCategory::findOrFail($product->subcategory_id);
@@ -198,7 +198,7 @@ class ProductController extends Controller
             Image::make($img)->resize(917, 1000)->save('upload/products/images/' . $make_name);
             $uploadPath = 'upload/products/images/' . $make_name;
 
-            MultiProductImg::whereId($id)->update([
+            MultiProductImg::findOrFail($id)->update([
                 'name' => $uploadPath,
                 'updated_at' => Carbon::now(),
 

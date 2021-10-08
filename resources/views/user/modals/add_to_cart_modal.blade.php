@@ -48,7 +48,7 @@
 
                         <div class="form-group">
                             <label for="quantity">Miqdar</label><br>
-                            <input class="form-control" type="number" id="quantity" name="quantity" min="1">
+                            <input class="form-control" value="1" type="number" id="quantity" name="quantity" min="1">
                         </div>
                         <button type="submit" class="btn btn-primary btn-block" onclick="addToCart()">Səbətə Əlavə
                             Et</button>
@@ -58,7 +58,9 @@
         </div>
     </div>
 </div>
+
 <script>
+    
     function productCart(id) {
         var url = '{{ route('ajax.product.modal', ':id') }}';
         url = url.replace(':id', id);
@@ -97,7 +99,7 @@
 
                 $('select[name="colors"]').empty();
                 $.each(data.product.colors, function(key, value) {
-                    $('select[name="colors"]').append('<option value="' + value.id + '">' + value
+                    $('select[name="colors"]').append('<option value="' + value.name + '">' + value
                         .name + '</option>')
                 })
 
@@ -106,7 +108,7 @@
                     $('#sizeArea').hide();
                 } else {
                     $.each(data.product.sizes, function(key, value) {
-                        $('select[name="sizes"]').append('<option value="' + value.id + '">' + value
+                        $('select[name="sizes"]').append('<option value="' + value.name + '">' + value
                             .name + '</option>')
                     })
                 }
@@ -115,37 +117,4 @@
         })
     }
 
-    function addToCart() {
-        var id = $('#product_id').val();
-
-        var url = '{{ route('addtocart', ':id') }}';
-        url = url.replace(':id', id);
-
-        var color = $('#color option:selected').val();
-        var size = $('#size option:selected').val();
-        var quantity = $('#quantity').val();
-
-        $.ajax({
-            type: "POST",
-            dataType: "json",
-            data: {
-                id: id,
-                color: color,
-                size: size,
-                quantity: quantity
-            },
-            url: url,
-            success: function(data) {
-                $('#productModal').modal('hide');
-
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: data.success,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }
-        })
-    }
 </script>

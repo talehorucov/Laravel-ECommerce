@@ -20,7 +20,7 @@
                     <div class="col-md-6 col-sm-6 sign-in">
                         <h4 class="">Sign in</h4>
                     <p class="">Hello, Welcome to your account.</p>
-                                                    <div class="     social-sign-in outer-top-xs">
+                                                                <div class="        social-sign-in outer-top-xs">
                             <a href="#" class="facebook-sign-in"><i class="fa fa-facebook"></i> Sign In with
                                 Facebook</a>
                             <a href="#" class="twitter-sign-in"><i class="fa fa-twitter"></i> Sign In with Twitter</a>
@@ -44,6 +44,11 @@
                             <a href="{{ route('password.request') }}" class="forgot-password pull-right">Forgot your
                                 Password?</a>
                         </div>
+                        @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                         <button type="submit" class="btn-upper btn btn-primary checkout-page-button">Login</button>
                     </form>
                 </div>
