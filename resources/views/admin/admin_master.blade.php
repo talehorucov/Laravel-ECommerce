@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="az">
 
 <head>
     <meta charset="utf-8">
@@ -110,19 +110,19 @@
                 })
 
                 swalWithBootstrapButtons.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    title: 'Əminsən ?',
+                    text: "Sildikən sonra geri qaytarılamaz",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Yes, delete it!',
-                    cancelButtonText: 'No, cancel!',
+                    confirmButtonText: 'Bəli, Sil!',
+                    cancelButtonText: 'Xeyr, Silmə!',
                     reverseButtons: true
                 }).then((result) => {
                     if (result.isConfirmed) {
                         window.location.href = link;
                         swalWithBootstrapButtons.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
+                            'Silindi!',
+                            'Uğurla Silindi',
                             'success'
                         )
                     } else if (
@@ -130,8 +130,8 @@
                         result.dismiss === Swal.DismissReason.cancel
                     ) {
                         swalWithBootstrapButtons.fire(
-                            'Cancelled',
-                            'Your imaginary file is safe :)',
+                            'Ləğv Edildi!',
+                            'Məlumatlar Güvəndədir! ;)',
                             'error'
                         )
                     }

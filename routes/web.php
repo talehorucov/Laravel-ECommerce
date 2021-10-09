@@ -7,7 +7,9 @@ use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\CityController;
 use App\Http\Controllers\Backend\ColorController;
+use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SizeController;
 use App\Http\Controllers\Backend\SliderController;
@@ -27,6 +29,9 @@ Route::prefix('admin')->middleware(['auth:admin', 'verified'])->group(function (
     Route::get('/tags', [TagController::class, 'index'])->name('admin.tag.index');
     Route::get('/products', [ProductController::class, 'index'])->name('admin.product.index');
     Route::get('/sliders', [SliderController::class, 'index'])->name('admin.slider.index');
+    Route::get('/coupons', [CouponController::class, 'index'])->name('admin.coupon.index');
+    Route::get('/shipping/cities', [CityController::class, 'index'])->name('admin.city.index');
+    // Route::get('/coupons', [CouponController::class, 'index'])->name('admin.coupon.index');
     // End Of Indexes
 
 
@@ -134,6 +139,25 @@ Route::prefix('admin')->middleware(['auth:admin', 'verified'])->group(function (
         Route::get('/delete/{slider}', [SliderController::class, 'delete'])->name('admin.slider.delete');
         Route::get('/active/{slider}', [SliderController::class, 'slider_active'])->name('admin.slider.active');
         Route::get('/inactive/{slider}', [SliderController::class, 'slider_inactive'])->name('admin.slider.inactive');
+    });
+
+
+    //------------------------Admin Coupon ------------------------
+    Route::prefix('coupon')->group(function () {
+        Route::post('/create', [CouponController::class, 'create'])->name('admin.coupon.create');
+        Route::get('/edit/{coupon}', [CouponController::class, 'edit'])->name('admin.coupon.edit');
+        Route::post('/update/{coupon}', [CouponController::class, 'update'])->name('admin.coupon.update');
+        Route::get('/delete/{coupon}', [CouponController::class, 'delete'])->name('admin.coupon.delete');
+        Route::get('/active/{coupon}', [CouponController::class, 'coupon_active'])->name('admin.coupon.active');
+        Route::get('/inactive/{coupon}', [CouponController::class, 'coupon_inactive'])->name('admin.coupon.inactive');
+    });
+
+
+    //------------------------Admin Shipping ------------------------
+    Route::prefix('shipping')->group(function () {
+        Route::prefix('division')->group(function () {
+        
+        });
     });
 });
 
