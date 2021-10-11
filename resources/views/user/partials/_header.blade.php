@@ -53,7 +53,7 @@ $categories = App\Models\Category::with('subcategories.subsubcategories')
                 <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
                     <!-- ============================================================= LOGO ============================================================= -->
                     <div class="logo"> <a href="/">
-                            <img src="{{ asset('frontend/assets/images/logo.png') }}" alt="logo">
+                            <img style="margin-bottom: 10px" src="{{ asset('backend/images/logo-light.png') }}" alt="logo"> <span style="font-size: 22px; color:#732bef;font-weight:900;">MART BUY</span> 
                         </a> </div>
                     <!-- /.logo -->
                     <!-- ============================================================= LOGO : END ============================================================= -->

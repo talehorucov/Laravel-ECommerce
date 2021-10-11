@@ -57,16 +57,16 @@
     <!-- JavaScripts placed at the end of the document so the pages load faster -->
     <script src="{{ asset('frontend/assets/js/jquery-1.11.1.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/js/bootstrap-hover-dropdown.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/js/echo.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/js/jquery.easing-1.3.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/js/bootstrap-slider.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/js/jquery.rateit.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/js/lightbox.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/js/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/js/wow.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/js/scripts.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/bootstrap-hover-dropdown.min.js') }}"></script> <!-- safe -->
+    <script src="{{ asset('frontend/assets/js/owl.carousel.min.js') }}"></script> <!-- safe -->
+    <script src="{{ asset('frontend/assets/js/echo.min.js') }}"></script> <!-- safe -->
+    <script src="{{ asset('frontend/assets/js/jquery.easing-1.3.min.js') }}"></script> <!-- safe -->
+    <script src="{{ asset('frontend/assets/js/bootstrap-slider.min.js') }}"></script> <!-- safe -->
+    <script src="{{ asset('frontend/assets/js/jquery.rateit.min.js') }}"></script> <!-- safe -->
+    <script src="{{ asset('frontend/assets/js/lightbox.min.js') }}"></script> <!-- safe -->
+    <script src="{{ asset('frontend/assets/js/bootstrap-select.min.js') }}"></script> <!-- safe -->
+    <script src="{{ asset('frontend/assets/js/wow.min.js') }}"></script> <!-- safe -->
+    <script src="{{ asset('frontend/assets/js/scripts.js') }}"></script> <!-- safe -->
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -111,8 +111,7 @@
 
             var color = $('#color option:selected').val();
             var size = $('#size option:selected').val();
-            var quantity = $('#quantity').val();
-
+            var quantity = $('#product_quantity').val();
             $.ajax({
                 type: "GET",
                 dataType: "json",

@@ -3,6 +3,7 @@
 use Database\Factories\AdminFactory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\AddressController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
@@ -31,7 +32,7 @@ Route::prefix('admin')->middleware(['auth:admin', 'verified'])->group(function (
     Route::get('/sliders', [SliderController::class, 'index'])->name('admin.slider.index');
     Route::get('/coupons', [CouponController::class, 'index'])->name('admin.coupon.index');
     Route::get('/shipping/cities', [CityController::class, 'index'])->name('admin.city.index');
-    // Route::get('/coupons', [CouponController::class, 'index'])->name('admin.coupon.index');
+    Route::get('/shipping/addresses', [AddressController::class, 'index'])->name('admin.address.index');
     // End Of Indexes
 
 
@@ -155,8 +156,21 @@ Route::prefix('admin')->middleware(['auth:admin', 'verified'])->group(function (
 
     //------------------------Admin Shipping ------------------------
     Route::prefix('shipping')->group(function () {
-        Route::prefix('division')->group(function () {
-        
+
+        //------------------------Admin Shipping City------------------------
+        Route::prefix('city')->group(function () {
+            Route::post('/create', [CityController::class, 'create'])->name('admin.city.create');
+            Route::get('/edit/{city}', [CityController::class, 'edit'])->name('admin.city.edit');
+            Route::post('/update/{city}', [CityController::class, 'update'])->name('admin.city.update');
+            Route::get('/delete/{city}', [CityController::class, 'delete'])->name('admin.city.delete');
+        });
+
+        //------------------------Admin Shipping Address------------------------
+        Route::prefix('address')->group(function () {
+            Route::post('/create', [AddressController::class, 'create'])->name('admin.address.create');
+            Route::get('/edit/{address}', [AddressController::class, 'edit'])->name('admin.address.edit');
+            Route::post('/update/{address}', [AddressController::class, 'update'])->name('admin.address.update');
+            Route::get('/delete/{address}', [AddressController::class, 'delete'])->name('admin.address.delete');
         });
     });
 });
@@ -196,7 +210,10 @@ Route::get('/mycart', [CartController::class, 'index'])->name('mycart');
 Route::get('/product/addtocart/{id}', [CartController::class, 'AddToCart'])->name('addtocart');
 Route::get('/product/mini/cart', [CartController::class, 'AddMiniCart'])->name('add.miniCart');
 Route::get('/product/mini/cart/remove/{rowId}', [CartController::class, 'RemoveMiniCart'])->name('remove.miniCart');
-Route::get('/cart.remove/{id}', [CartController::class, 'Remove'])->name('user.cart.remove');
+Route::get('/cart/remove/{id}', [CartController::class, 'Remove'])->name('user.cart.remove');
+Route::get('/cart/apply/coupon', [CartController::class, 'Apply_Coupon'])->name('apply.coupon');
+Route::get('/cart/coupon/calculate', [CartController::class, 'Coupon_Calculate'])->name('apply.coupon.calculate');
+Route::get('/cart/coupon/remove', [CartController::class, 'Coupon_Remove'])->name('coupon.remove');
 
 Route::redirect('/web/dashboard', '/dashboard', 301);
 

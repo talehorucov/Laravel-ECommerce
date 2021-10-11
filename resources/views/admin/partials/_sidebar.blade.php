@@ -7,7 +7,6 @@ $route = Route::current()->getName();
 <aside class="main-sidebar">
     <!-- sidebar-->
     <section class="sidebar">
-
         <div class="user-profile">
             <div class="ulogo">
                 <a href="{{ route('admin.dashboard') }}">
@@ -44,7 +43,8 @@ $route = Route::current()->getName();
                 </ul>
             </li>
 
-            <li class="treeview {{ ($prefix == 'admin/category' or $route == 'admin.category.index') ? 'active' : '' }}">
+            <li
+                class="treeview {{ ($prefix == 'admin/category' or $route == 'admin.category.index') ? 'active' : '' }}">
                 <a href="#">
                     <i style="font-size: 20px" class="fas fa-align-left"></i>
                     <span>Kateqoriyalar</span>
@@ -112,7 +112,8 @@ $route = Route::current()->getName();
                 </ul>
             </li>
 
-            <li class="treeview {{ ($prefix == 'admin/product' or $route == 'admin.product.index') ? 'active' : '' }}">
+            <li
+                class="treeview {{ ($prefix == 'admin/product' or $route == 'admin.product.index') ? 'active' : '' }}">
                 <a href="#">
                     <i style="font-size:20px" class="fas fa-box-alt"></i>
                     <span>Məhsullar</span>
@@ -125,7 +126,8 @@ $route = Route::current()->getName();
                         <a href="{{ route('admin.product.index') }}"><i class="ti-more"></i>Məhsullar</a>
                     </li>
                     <li class="{{ $route == 'admin.product.add' ? 'active' : '' }}">
-                        <a href="{{ route('admin.product.add') }}"><i class="ti-more"></i>Məhsul Əlavə Et</a>
+                        <a href="{{ route('admin.product.add') }}"><i class="ti-more"></i>Məhsul Əlavə
+                            Et</a>
                     </li>
                 </ul>
             </li>
@@ -160,7 +162,7 @@ $route = Route::current()->getName();
                 </ul>
             </li>
 
-            <li class="treeview {{ ($prefix == 'admin/shipping') ? 'active' : '' }}">
+            <li class="treeview {{ $prefix == 'admin/shipping' ? 'active' : '' }}">
                 <a href="#">
                     <i style="font-size: 20px" class="fas fa-shipping-fast"></i>
                     <span>Çatdırılma</span>
@@ -172,8 +174,8 @@ $route = Route::current()->getName();
                     <li class="{{ $route == 'admin.city.index' ? 'active' : '' }}">
                         <a href="{{ route('admin.city.index') }}"><i class="ti-more"></i>Şəhər</a>
                     </li>
-                    <li class="{{ $route == 'admin.coupon.index' ? 'active' : '' }}">
-                        <a href="{{ route('admin.coupon.index') }}"><i class="ti-more"></i>Ünvan</a>
+                    <li class="{{ $route == 'admin.address.index' ? 'active' : '' }}">
+                        <a href="{{ route('admin.address.index') }}"><i class="ti-more"></i>Ünvan</a>
                     </li>
                 </ul>
             </li>

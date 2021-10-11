@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Requests\UserPasswordRequest;
-use App\Models\Category;
 
 class IndexController extends Controller
 {
@@ -23,6 +24,7 @@ class IndexController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        Cart::destroy();
         return redirect()->route('login');
     }
 

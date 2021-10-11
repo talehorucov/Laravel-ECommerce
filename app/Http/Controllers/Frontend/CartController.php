@@ -7,6 +7,7 @@ use App\Models\ShoppingCart;
 use Illuminate\Http\Request;
 use App\Http\Requests\CartRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Coupon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -89,5 +90,40 @@ class CartController extends Controller
     {
         Cart::remove($id);
         return response()->json(['success'=>'Məhsul Səbətdən Silindi']);
+    }
+
+    public function Apply_Coupon(Request $request)
+    {
+        $coupon = Coupon::where('name',$request->name)->where('status',1)->first();
+        if ($coupon) {
+            Session::put('coupon',[
+                'name' => $coupon->name,
+                'discount' => $coupon->discount,
+                'discount_amount' => round(Cart::total() * $coupon->discount/100),
+                'total_amount' => round(Cart::total() - Cart::total() * $coupon->discount/100),
+            ]);
+            return response()->json(['success'=>'Kupon Əlavə Edildi']);
+        }
+        return response()->json(['error'=>'Invalid']);
+    }
+
+    public function Coupon_Calculate()
+    {
+        if (Session::has('coupon')) {
+            return response()->json(array(
+                'subtotal' => Cart::total(),
+                'name' => session()->get('coupon')['name'],
+                'discount' => session()->get('coupon')['discount'],
+                'discount_amount' => session()->get('coupon')['discount_amount'],
+                'total_amount' => session()->get('coupon')['total_amount'],
+            ));
+        }
+        return response()->json(array('total' => Cart::total()));
+    }
+
+    public function Coupon_Remove()
+    {
+        Session::forget('coupon');
+        return response()->json(['success' => 'Kupon Silindi']);
     }
 }

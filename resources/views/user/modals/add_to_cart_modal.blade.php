@@ -48,7 +48,7 @@
 
                         <div class="form-group">
                             <label for="quantity">Miqdar</label><br>
-                            <input class="form-control" value="1" type="number" id="quantity" name="quantity" min="1">
+                            <input class="form-control" value="1" type="number" id="product_quantity" name="quantity" min="1">
                         </div>
                         <button type="submit" class="btn btn-primary btn-block" onclick="addToCart()">Səbətə Əlavə
                             Et</button>
