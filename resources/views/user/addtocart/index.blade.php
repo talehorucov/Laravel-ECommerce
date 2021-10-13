@@ -85,8 +85,8 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        <span class="estimate-title">Discount Code</span>
-                                        <p>Enter your coupon code if you have one..</p>
+                                        <span class="estimate-title">Endirim Kuponu</span>
+                                        <p>Kuponunuzu daxil edin..</p>
                                     </th>
                                 </tr>
                             </thead>
@@ -96,12 +96,12 @@
                                         <div class="form-group">
                                             <input id="name" type="text"
                                                 class="form-control unicase-form-control text-input"
-                                                placeholder="You Coupon..">
+                                                placeholder="Kuponunuz..">
                                         </div>
                                         <div class="clearfix pull-right">
                                             <button type="submit" class="btn-upper btn btn-primary"
                                                 onclick="applyCoupon()">
-                                                APPLY COUPON</button>
+                                                Təsdiq Et</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -118,21 +118,21 @@
                                 <tr>
                                     <th>
                                         <div class="cart-sub-total">
-                                            Subtotal<span class="inner-left-md ml-3">{{ Cart::total() }} Azn</span>
+                                            Toplam:<span class="inner-left-md ml-3">{{ Cart::total() }} Azn</span>
                                         </div>
                                         <div class="cart-grand-total">
-                                            Coupon<span class="inner-left-md ml-3"> {{ session('coupon')['name'] }}
+                                            Kupon:<span class="inner-left-md ml-3"> {{ session('coupon')['name'] }}
                                             </span>
                                             <button onclick="removeCoupon()" class="btn btn-danger" type="submit"><i
                                                     class="fa fa-times"></i></button>
                                         </div>
                                         <div class="cart-sub-total">
-                                            Discount Amount<span
+                                            Endiriminiz:<span
                                                 class="inner-left-md ml-3">{{ session('coupon')['discount_amount'] }}
                                                 Azn</span>
                                         </div>
                                         <div class="cart-grand-total">
-                                            Grand Total<span
+                                            Cəm:<span
                                                 class="inner-left-md ml-3">{{ session('coupon')['total_amount'] }}
                                                 Azn</span>
                                         </div>
@@ -142,10 +142,10 @@
                                 <tr>
                                     <th>
                                         <div class="cart-sub-total">
-                                            Subtotal<span class="inner-left-md">{{ Cart::subtotal() }} Azn</span>
+                                            Toplam:<span class="inner-left-md">{{ Cart::subtotal() }} Azn</span>
                                         </div>
                                         <div class="cart-grand-total">
-                                            Grand Total<span class="inner-left-md"> {{ Cart::total() }} Azn</span>
+                                            Cəm:<span class="inner-left-md"> {{ Cart::total() }} Azn</span>
                                         </div>
                                     </th>
                                 </tr>
@@ -155,8 +155,7 @@
                             <tr>
                                 <td>
                                     <div class="cart-checkout-btn pull-right">
-                                        <button type="submit" class="btn btn-primary checkout-btn">PROCCED TO
-                                            CHEKOUT</button>
+                                        <a href="{{ route('coupon.checkout') }}" class="btn btn-primary checkout-btn">Ödəniş Et</a>
                                     </div>
                                 </td>
                             </tr>
@@ -236,10 +235,10 @@
                         `<tr>
                         <th>
                             <div class="cart-sub-total">
-                                Subtotal<span class="inner-left-md">${data.total} Azn</span>
+                                Toplam:<span class="inner-left-md">${data.total} Azn</span>
                             </div>
                             <div class="cart-grand-total">
-                                Grand Total<span class="inner-left-md"> ${data.total} Azn</span>
+                                Cəm:<span class="inner-left-md"> ${data.total} Azn</span>
                             </div>
                         </th>
                     </tr>`
@@ -249,17 +248,17 @@
                         `<tr>
                         <th>
                             <div class="cart-sub-total">
-                                Subtotal<span class="inner-left-md ml-3">${data.subtotal} Azn</span>
+                                Toplam:<span class="inner-left-md ml-3">${data.subtotal} Azn</span>
                             </div>
                             <div class="cart-grand-total">
-                                Coupon<span class="inner-left-md ml-3"> ${data.name} </span>
+                                Kupon:<span class="inner-left-md ml-3"> ${data.name} </span>
                                 <button onclick="removeCoupon()" class="btn btn-danger" type="submit"><i class="fa fa-times"></i></button>
                             </div>
                             <div class="cart-sub-total">
-                                Discount Amount<span class="inner-left-md ml-3">${data.discount_amount} Azn</span>
+                                Endiriminiz:<span class="inner-left-md ml-3">${data.discount_amount} Azn</span>
                             </div>
                             <div class="cart-grand-total">
-                                Grand Total<span class="inner-left-md ml-3"> ${data.total_amount} Azn</span>
+                                Cəm:<span class="inner-left-md ml-3"> ${data.total_amount} Azn</span>
                             </div>
                         </th>
                     </tr>`

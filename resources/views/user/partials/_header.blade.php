@@ -14,7 +14,6 @@ $categories = App\Models\Category::with('subcategories.subsubcategories')
                         </li>
                         <li><a href="{{ route('user.wishlist') }}"><i class="icon fa fa-heart"></i>İstək</a></li>
                         <li><a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>Səbətim</a></li>
-                        <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
                         @auth
                             <li><a href="{{ route('login') }}"><i class="icon fa fa-user"></i>Hesabım</a></li>
                         @else
@@ -24,21 +23,6 @@ $categories = App\Models\Category::with('subcategories.subsubcategories')
                 </div>
                 <!-- /.cnt-account -->
 
-                <div class="cnt-block">
-                    <ul class="list-unstyled list-inline">
-                        <li class="dropdown dropdown-small"> <a href="#" class="dropdown-toggle" data-hover="dropdown"
-                                data-toggle="dropdown"><span class="value">USD
-                                </span><b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">USD</a></li>
-                                <li><a href="#">INR</a></li>
-                                <li><a href="#">GBP</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <!-- /.list-unstyled -->
-                </div>
-                <!-- /.cnt-cart -->
                 <div class="clearfix"></div>
             </div>
             <!-- /.header-top-inner -->
@@ -53,7 +37,9 @@ $categories = App\Models\Category::with('subcategories.subsubcategories')
                 <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
                     <!-- ============================================================= LOGO ============================================================= -->
                     <div class="logo"> <a href="/">
-                            <img style="margin-bottom: 10px" src="{{ asset('backend/images/logo-light.png') }}" alt="logo"> <span style="font-size: 22px; color:#732bef;font-weight:900;">MART BUY</span> 
+                            <img style="margin-bottom: 10px" src="{{ asset('backend/images/logo-light.png') }}"
+                                alt="logo"> <span style="font-size: 22px; color:#732bef;font-weight:900;">MART
+                                BUY</span>
                         </a> </div>
                     <!-- /.logo -->
                     <!-- ============================================================= LOGO : END ============================================================= -->
@@ -98,17 +84,22 @@ $categories = App\Models\Category::with('subcategories.subsubcategories')
                     <div class="dropdown dropdown-cart"> <a href="#" class="dropdown-toggle lnk-cart"
                             data-toggle="dropdown">
                             <div class="items-cart-inner">
-                                <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i>
+                                <div class="basket">
+                                    <i class="glyphicon glyphicon-shopping-cart"></i>
                                 </div>
                                 <div class="basket-item-count">
                                     <span class="count" id="cart_quantity"> </span>
                                 </div>
                                 <div class="total-price-basket">
-                                    <span class="total-price"> 
-                                        <span id="cart_subtotal"
-                                        class="value"></span> 
+                                    <span class="total-price">
+                                        @if (session('coupon'))
+                                            <span
+                                                class="value">{{ session('coupon')['total_amount'] }}</span>
+                                        @else
+                                            <span id="cart_subtotal" class="value"></span>
+                                        @endif
                                         <span class="sign">Azn </span>
-                                        </span> 
+                                    </span>
                                 </div>
                             </div>
                         </a>
@@ -122,8 +113,21 @@ $categories = App\Models\Category::with('subcategories.subsubcategories')
                                 </div>
                                 <!-- /.cart-item -->
                                 <div class="clearfix cart-total">
-                                    <div class="pull-right"> <span class="text">Toplam
-                                            :</span><span class='price' id="cart_subtotal"></span><span> Azn</span> </div>
+                                    <div class="pull-right">
+                                        @if (session('coupon'))
+                                            <span class="text">Kupon :</span>
+                                            <span style="color:red">{{ session('coupon')['name'] }}</span><br>
+                                            <span class="text">Endirim :</span>
+                                            <span style="color:red">{{ session('coupon')['discount_amount'] }}
+                                                Azn</span> <br>
+                                            <span class="text">Toplam :</span>
+                                            <span style="color:red">{{ session('coupon')['total_amount'] }} Azn</span>
+                                            <br>
+                                        @else
+                                            <span class="text">Toplam :</span>
+                                            <span class='price' id="cart_subtotal"></span> Azn
+                                        @endif
+                                    </div>
                                     <div class="clearfix"></div>
                                     <a href="checkout.html"
                                         class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>

@@ -37,15 +37,14 @@
                                             <div class="product-name"><a
                                                     href="{{ route('user.product.detail', $wishlist->product->slug) }}">{{ $wishlist->product->name }}</a>
                                             </div>
-                                            <div class="price">
+                                            <div>
                                                 @if ($wishlist->product->discount_price == null or $wishlist->product->discount_price == 0)
                                                     <span
-                                                        class="price">{{ $wishlist->product->selling_price }}</span>
+                                                        class="price">{{ $wishlist->product->selling_price }} Azn</span>
                                                 @else
                                                     <span
-                                                        class="price">{{ $wishlist->product->discount_price }}</span>
-                                                    <span
-                                                        class="price-strike">{{ $wishlist->product->selling_price }}</span>
+                                                        class="price">{{ $wishlist->product->discount_price }} Azn</span>
+                                                    <del>{{ $wishlist->product->selling_price }} Azn</del>
                                                 @endif
                                             </div>
                                         </td>

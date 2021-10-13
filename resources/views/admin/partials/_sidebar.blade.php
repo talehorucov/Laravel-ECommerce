@@ -174,9 +174,6 @@ $route = Route::current()->getName();
                     <li class="{{ $route == 'admin.city.index' ? 'active' : '' }}">
                         <a href="{{ route('admin.city.index') }}"><i class="ti-more"></i>Şəhər</a>
                     </li>
-                    <li class="{{ $route == 'admin.address.index' ? 'active' : '' }}">
-                        <a href="{{ route('admin.address.index') }}"><i class="ti-more"></i>Ünvan</a>
-                    </li>
                 </ul>
             </li>
 

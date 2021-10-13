@@ -13,7 +13,7 @@ class CityController extends Controller
     public function index()
     {
         $cities = City::all();
-        return view('admin.shipping.city.index',compact('cities'));
+        return view('admin.city.index',compact('cities'));
     }
 
     public function create(CityCreateRequest $request)
@@ -31,7 +31,7 @@ class CityController extends Controller
 
     public function edit(City $city)
     {
-        return view('admin.shipping.city.edit',compact('city'));
+        return view('admin.city.edit',compact('city'));
     }
 
     public function update(CityUpdateRequest $request, City $city)

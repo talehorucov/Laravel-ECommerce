@@ -17,6 +17,7 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\TagController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\WishListController;
 
@@ -31,8 +32,7 @@ Route::prefix('admin')->middleware(['auth:admin', 'verified'])->group(function (
     Route::get('/products', [ProductController::class, 'index'])->name('admin.product.index');
     Route::get('/sliders', [SliderController::class, 'index'])->name('admin.slider.index');
     Route::get('/coupons', [CouponController::class, 'index'])->name('admin.coupon.index');
-    Route::get('/shipping/cities', [CityController::class, 'index'])->name('admin.city.index');
-    Route::get('/shipping/addresses', [AddressController::class, 'index'])->name('admin.address.index');
+    Route::get('/cities', [CityController::class, 'index'])->name('admin.city.index');
     // End Of Indexes
 
 
@@ -153,25 +153,12 @@ Route::prefix('admin')->middleware(['auth:admin', 'verified'])->group(function (
         Route::get('/inactive/{coupon}', [CouponController::class, 'coupon_inactive'])->name('admin.coupon.inactive');
     });
 
-
-    //------------------------Admin Shipping ------------------------
-    Route::prefix('shipping')->group(function () {
-
-        //------------------------Admin Shipping City------------------------
-        Route::prefix('city')->group(function () {
-            Route::post('/create', [CityController::class, 'create'])->name('admin.city.create');
-            Route::get('/edit/{city}', [CityController::class, 'edit'])->name('admin.city.edit');
-            Route::post('/update/{city}', [CityController::class, 'update'])->name('admin.city.update');
-            Route::get('/delete/{city}', [CityController::class, 'delete'])->name('admin.city.delete');
-        });
-
-        //------------------------Admin Shipping Address------------------------
-        Route::prefix('address')->group(function () {
-            Route::post('/create', [AddressController::class, 'create'])->name('admin.address.create');
-            Route::get('/edit/{address}', [AddressController::class, 'edit'])->name('admin.address.edit');
-            Route::post('/update/{address}', [AddressController::class, 'update'])->name('admin.address.update');
-            Route::get('/delete/{address}', [AddressController::class, 'delete'])->name('admin.address.delete');
-        });
+    //------------------------Admin Shipping City------------------------
+    Route::prefix('city')->group(function () {
+        Route::post('/create', [CityController::class, 'create'])->name('admin.city.create');
+        Route::get('/edit/{city}', [CityController::class, 'edit'])->name('admin.city.edit');
+        Route::post('/update/{city}', [CityController::class, 'update'])->name('admin.city.update');
+        Route::get('/delete/{city}', [CityController::class, 'delete'])->name('admin.city.delete');
     });
 });
 
@@ -194,6 +181,7 @@ Route::middleware(['auth:sanctum,web', 'verified'])->group(function () {
     });
 
 
+    //------------------------User Wishlist ------------------------
     Route::prefix('wishlist')->group(function () {
         Route::get('/', [WishListController::class, 'index'])->name('user.wishlist');
         Route::post('/product/add/{id}', [WishListController::class, 'Add'])->name('add.wishlist');
@@ -201,19 +189,24 @@ Route::middleware(['auth:sanctum,web', 'verified'])->group(function () {
     });
 });
 
+//------------------------User Cart ------------------------
+Route::prefix('cart')->group(function () {
+    Route::get('/mycart', [CartController::class, 'index'])->name('mycart');
+    Route::get('/remove/{id}', [CartController::class, 'Remove'])->name('user.cart.remove');
+    Route::get('/apply/coupon', [CartController::class, 'Apply_Coupon'])->name('apply.coupon');
+    Route::get('/coupon/calculate', [CartController::class, 'Coupon_Calculate'])->name('apply.coupon.calculate');
+    Route::get('/coupon/remove', [CartController::class, 'Coupon_Remove'])->name('coupon.remove');
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('coupon.checkout');
+});
+
 Route::get('/product/detail/{slug}', [HomeController::class, 'product_detail'])->name('user.product.detail');
 Route::get('/tags/{tag}', [HomeController::class, 'tags'])->name('user.tags');
 Route::get('/subcategory/{slug}/products', [HomeController::class, 'subcategory'])->name('user.subcategory');
 Route::get('/sub/subcategory/{slug}/products', [HomeController::class, 'subsubcategory'])->name('user.subsubcategory');
 Route::get('/product/view/modal/{id}', [HomeController::class, 'ajax_product_modal'])->name('ajax.product.modal');
-Route::get('/mycart', [CartController::class, 'index'])->name('mycart');
 Route::get('/product/addtocart/{id}', [CartController::class, 'AddToCart'])->name('addtocart');
 Route::get('/product/mini/cart', [CartController::class, 'AddMiniCart'])->name('add.miniCart');
 Route::get('/product/mini/cart/remove/{rowId}', [CartController::class, 'RemoveMiniCart'])->name('remove.miniCart');
-Route::get('/cart/remove/{id}', [CartController::class, 'Remove'])->name('user.cart.remove');
-Route::get('/cart/apply/coupon', [CartController::class, 'Apply_Coupon'])->name('apply.coupon');
-Route::get('/cart/coupon/calculate', [CartController::class, 'Coupon_Calculate'])->name('apply.coupon.calculate');
-Route::get('/cart/coupon/remove', [CartController::class, 'Coupon_Remove'])->name('coupon.remove');
 
 Route::redirect('/web/dashboard', '/dashboard', 301);
 
