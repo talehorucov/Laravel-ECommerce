@@ -19,7 +19,10 @@ use App\Http\Controllers\Backend\TagController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\WishListController;
+use App\Http\Controllers\Frontend\OrderDetailController;
+use App\Models\Order;
 
 Route::prefix('admin')->middleware(['auth:admin', 'verified'])->group(function () {
 
@@ -173,8 +176,10 @@ Route::middleware(['auth:sanctum,web', 'verified'])->group(function () {
 
     Route::get('/dashboard', [IndexController::class, 'dashboard'])->name('dashboard');
 
-    Route::prefix('user')->group(function () {
+    Route::prefix('my')->group(function () {
         Route::get('/profile', [IndexController::class, 'user_profile'])->name('user.profile');
+        Route::get('/orders', [OrderController::class, 'my_orders'])->name('my.orders');
+        Route::get('/order/detail/{order_number}', [OrderDetailController::class, 'order_detail'])->name('my_order.detail');
         Route::post('/profile/update', [IndexController::class, 'user_update'])->name('user.update');
         Route::get('/change/password', [IndexController::class, 'change_password'])->name('change.password');
         Route::post('/update/password', [IndexController::class, 'update_password'])->name('update.password');
@@ -187,17 +192,20 @@ Route::middleware(['auth:sanctum,web', 'verified'])->group(function () {
         Route::post('/product/add/{id}', [WishListController::class, 'Add'])->name('add.wishlist');
         Route::get('/remove/{id}', [WishListController::class, 'remove'])->name('user.wishlist.remove');
     });
+
+
+    //------------------------User Cart ------------------------
+    Route::prefix('cart')->group(function () {
+        Route::get('/mycart', [CartController::class, 'index'])->name('mycart');
+        Route::get('/remove/{id}', [CartController::class, 'Remove'])->name('user.cart.remove');
+        Route::get('/apply/coupon', [CartController::class, 'Apply_Coupon'])->name('apply.coupon');
+        Route::get('/coupon/calculate', [CartController::class, 'Coupon_Calculate'])->name('apply.coupon.calculate');
+        Route::get('/coupon/remove', [CartController::class, 'Coupon_Remove'])->name('coupon.remove');
+        Route::get('/checkout', [CheckoutController::class, 'index'])->name('coupon.checkout');
+        Route::post('/order/create', [OrderController::class, 'index'])->name('order.create');
+    });
 });
 
-//------------------------User Cart ------------------------
-Route::prefix('cart')->group(function () {
-    Route::get('/mycart', [CartController::class, 'index'])->name('mycart');
-    Route::get('/remove/{id}', [CartController::class, 'Remove'])->name('user.cart.remove');
-    Route::get('/apply/coupon', [CartController::class, 'Apply_Coupon'])->name('apply.coupon');
-    Route::get('/coupon/calculate', [CartController::class, 'Coupon_Calculate'])->name('apply.coupon.calculate');
-    Route::get('/coupon/remove', [CartController::class, 'Coupon_Remove'])->name('coupon.remove');
-    Route::get('/checkout', [CheckoutController::class, 'index'])->name('coupon.checkout');
-});
 
 Route::get('/product/detail/{slug}', [HomeController::class, 'product_detail'])->name('user.product.detail');
 Route::get('/tags/{tag}', [HomeController::class, 'tags'])->name('user.tags');

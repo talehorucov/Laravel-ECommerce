@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\City;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +17,9 @@ class CheckoutController extends Controller
                 $carts = Cart::content();
                 $cart_count = Cart::count();
                 $cart_total = Cart::total();
+                $cities = City::get();
 
-                return view('user.checkout.index',compact('carts','cart_count','cart_total'));
+                return view('user.checkout.index',compact('carts','cart_count','cart_total','cities'));
             } else {
                 $notification = [
                     'message' => 'Səbətiniz boşdur',

@@ -29,63 +29,96 @@
                                 <!-- panel-body  -->
                                 <div class="panel-body">
                                     <div class="row">
-
                                         <!-- guest-login -->
-                                        <div class="col-md-6 col-sm-6 guest-login">
-                                            <h4 class="checkout-subtitle">Guest or Register Login</h4>
-                                            <p class="text title-tag-line">Register with us for future convenience:
-                                            </p>
-
-                                            <!-- radio-form  -->
-                                            <form class="register-form" role="form">
-                                                <div class="radio radio-checkout-unicase">
-                                                    <input id="guest" type="radio" name="text" value="guest" checked>
-                                                    <label class="radio-button guest-check" for="guest">Checkout as
-                                                        Guest</label>
-                                                    <br>
-                                                    <input id="register" type="radio" name="text" value="register">
-                                                    <label class="radio-button" for="register">Register</label>
+                                        <div class="col-md-6 col-sm-6 already-registered-login">
+                                            <form class="register-form" method="POST"
+                                                action="{{ route('order.create') }}">
+                                                @csrf
+                                                <div class="form-group">
+                                                    <label class="info-title"><b>Ad Soyad</b> <span>*</span></label>
+                                                    <input name="name" type="text" value="{{ Auth()->user()->name }}"
+                                                        class="form-control unicase-form-control text-input">
+                                                    @error('name')
+                                                        <span class="text-danger" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
-                                            </form>
-                                            <!-- radio-form  -->
-
-                                            <h4 class="checkout-subtitle outer-top-vs">Register and save time</h4>
-                                            <p class="text title-tag-line ">Register with us for future convenience:
-                                            </p>
-
-                                            <ul class="text instruction inner-bottom-30">
-                                                <li class="save-time-reg">- Fast and easy check out</li>
-                                                <li>- Easy access to your order history and status</li>
-                                            </ul>
-
-                                            <button type="submit"
-                                                class="btn-upper btn btn-primary checkout-page-button checkout-continue ">Continue</button>
+                                                <div class="form-group">
+                                                    <label class="info-title"><b>Email</b> <span>*</span></label>
+                                                    <input name="email" type="email"
+                                                        value="{{ Auth()->user()->email }}"
+                                                        class="form-control unicase-form-control text-input">
+                                                    @error('email')
+                                                        <span class="text-danger" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="info-title"><b>Nömrə</b><span>*</span></label>
+                                                    <input name="phone" type="number"
+                                                        value="{{ Auth()->user()->phone }}"
+                                                        class="form-control unicase-form-control text-input">
+                                                    @error('phone')
+                                                        <span class="text-danger" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="info-title"><b>Poçt</b></label>
+                                                    <input type="text" name="post_code"
+                                                        class="form-control unicase-form-control text-input">
+                                                    @error('post_code')
+                                                        <span class="text-danger" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
                                         </div>
                                         <!-- guest-login -->
 
                                         <!-- already-registered-login -->
                                         <div class="col-md-6 col-sm-6 already-registered-login">
-                                            <h4 class="checkout-subtitle">Already registered?</h4>
-                                            <p class="text title-tag-line">Please log in below:</p>
-                                            <form class="register-form" role="form">
-                                                <div class="form-group">
-                                                    <label class="info-title" for="exampleInputEmail1">Email Address
-                                                        <span>*</span></label>
-                                                    <input type="email"
-                                                        class="form-control unicase-form-control text-input"
-                                                        id="exampleInputEmail1" placeholder="">
+                                            <div class="form-group">
+                                                <label class="info-title">Şəhər Seçin <span>*</span></label>
+                                                <div class="controls">
+                                                    <select name="city_id" class="form-control">
+                                                        <option selected disabled class="text-center">---Şəhər
+                                                            Seçin---
+                                                        </option>
+                                                        @foreach ($cities as $city)
+                                                            <option class="text-center"
+                                                                value="{{ ucwords($city->id) }}">
+                                                                {{ $city->name }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="info-title" for="exampleInputPassword1">Password
-                                                        <span>*</span></label>
-                                                    <input type="password"
-                                                        class="form-control unicase-form-control text-input"
-                                                        id="exampleInputPassword1" placeholder="">
-                                                    <a href="#" class="forgot-password">Forgot your Password?</a>
-                                                </div>
-                                                <button type="submit"
-                                                    class="btn-upper btn btn-primary checkout-page-button">Login</button>
-                                            </form>
+                                                @error('city_id')
+                                                    <span class="text-danger" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="info-title">Ünvan <span>*</span></label>
+                                                <textarea class="form-control" name="address" cols="30"
+                                                    rows="3"></textarea>
+                                                @error('address')
+                                                    <span class="text-danger" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="info-title">Qeyd</label>
+                                                <textarea class="form-control" name="not" cols="30"
+                                                    rows="3"></textarea>
+                                            </div>
+                                            <button type="submit"
+                                                class="btn-upper btn btn-primary checkout-page-button">Sifariş
+                                                Ver</button>
                                         </div>
                                         <!-- already-registered-login -->
 
@@ -93,6 +126,7 @@
                                 </div>
                                 <!-- panel-body  -->
 
+                                </form>
                             </div><!-- row -->
                         </div>
                         <!-- checkout-step-01  -->
@@ -103,8 +137,8 @@
                     <div class="checkout-progress-sidebar ">
                         <div class="panel-group">
                             <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="unicase-checkout-title">Your Checkout Progress</h4>
+                                <div>
+                                    <h4 class="unicase-checkout-title"><b>Almaq İstədikləriniz..</b></h4>
                                 </div>
                                 <div>
                                     <ul class="nav nav-checkout-progress list-unstyled">
@@ -132,21 +166,22 @@
                                             <hr>
                                             <li>
                                                 <strong>Endirim:</strong>
-                                                <span style="color:red">{{ session('coupon')['discount_amount'] }} Azn
+                                                <span style="color:red">{{ session('coupon')['discount_amount'] }}
+                                                    Azn
                                                 </span>
                                             </li>
                                             <hr>
                                             <li>
                                                 <strong>Cəm:</strong>
                                                 <span style="color:red">{{ session('coupon')['total_amount'] }} Azn
-                                                </span> 
+                                                </span>
                                             </li>
                                         @else
-                                        <li>
-                                            <strong>Cəm:</strong>
-                                            <span style="color:red">{{ $cart_total }} Azn
-                                            </span> 
-                                        </li>
+                                            <li>
+                                                <strong>Cəm:</strong>
+                                                <span style="color:red">{{ $cart_total }} Azn
+                                                </span>
+                                            </li>
                                         @endif
                                     </ul>
                                 </div>

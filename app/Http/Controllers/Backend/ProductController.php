@@ -58,7 +58,10 @@ class ProductController extends Controller
         $product->subcategory_id = $request->subcategory_id;
         $product->subsubcategory_id = $request->subsubcategory_id;
         $product->name = $request->name;
-        $product->code = (string)($old->code + 1);
+        if ($old) {
+            $product->code = (string)('00000000'.$old->code + 1);
+        }
+        
         $product->quantity = $request->quantity;
         $product->selling_price = $request->selling_price;
         $product->discount_price = $request->discount_price;
@@ -108,7 +111,7 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        $product = Product::with('colors','sizes','tags')->findOrFail($product->id)->first();
+        $product = Product::with('colors','sizes','tags')->findOrFail($product->id)->firstOrFail();
         Brand::findOrFail($product->brand_id);
         Category::findOrFail($product->category_id);
         SubCategory::findOrFail($product->subcategory_id);

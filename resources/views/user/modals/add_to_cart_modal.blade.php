@@ -78,7 +78,7 @@
                 $('#product_id').val(id);
                 $('#quantity').val(1);
 
-                if (data.product.discount_price == null) {
+                if (data.product.discount_price == null || data.product.discount_price == 0) {
                     $('#discount_price').text('');
                     $('#selling_price').text('');
                     $('#selling_price').text(data.product.selling_price + ' Azn');
