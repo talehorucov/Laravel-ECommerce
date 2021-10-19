@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
-use App\Models\Brand;
-use App\Models\Category;
-use App\Models\Product;
-use App\Models\Slider;
-use App\Models\SubCategory;
-use App\Models\SubSubCategory;
 use App\Models\Tag;
+use App\Models\Brand;
+use App\Models\Slider;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use App\Models\SubSubCategory;
+use App\Services\AddToCartService;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {

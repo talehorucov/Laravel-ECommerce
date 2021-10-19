@@ -177,6 +177,46 @@ $route = Route::current()->getName();
                 </ul>
             </li>
 
+            <li class="treeview {{ ($prefix == 'admin/order' or $route == 'admin.orders') ? 'active' : '' }}">
+                <a href="#">
+                    <i style="font-size: 20px" class="fas fa-badge-percent"></i>
+                    <span>Sifarişlər</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ $route == 'admin.pending.order' ? 'active' : '' }}">
+                        <a href="{{ route('admin.pending.order') }}"><i class="ti-more"></i>Gözləyən
+                            Sifarişlər</a>
+                    </li>
+                    <li class="{{ $route == 'admin.confirmed.order' ? 'active' : '' }}">
+                        <a href="{{ route('admin.confirmed.order') }}"><i class="ti-more"></i>Təsdiqlənmiş
+                            Sifarişlər</a>
+                    </li>
+                    <li class="{{ $route == 'admin.processing.order' ? 'active' : '' }}">
+                        <a href="{{ route('admin.processing.order') }}"><i class="ti-more"></i>Hazırlanan
+                            Sifarişlər</a>
+                    </li>
+                    <li class="{{ $route == 'admin.picked.order' ? 'active' : '' }}">
+                        <a href="{{ route('admin.picked.order') }}"><i class="ti-more"></i>Əldə Edilmiş
+                            Sifarişlər</a>
+                    </li>
+                    <li class="{{ $route == 'admin.shipped.order' ? 'active' : '' }}">
+                        <a href="{{ route('admin.shipped.order') }}"><i class="ti-more"></i>Göndərilmiş
+                            Sifarişlər</a>
+                    </li>
+                    <li class="{{ $route == 'admin.delivered.order' ? 'active' : '' }}">
+                        <a href="{{ route('admin.delivered.order') }}"><i class="ti-more"></i>Təhvil Verilmiş
+                            Sifarişlər</a>
+                    </li>
+                    <li class="{{ $route == 'admin.cancel.order' ? 'active' : '' }}">
+                        <a href="{{ route('admin.cancel.order') }}"><i class="ti-more"></i>Ləğv Edilmiş
+                            Sifarişlər</a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="header nav-small-cap">User Interface</li>
 
             <li class="treeview">

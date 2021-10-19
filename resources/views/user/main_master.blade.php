@@ -14,6 +14,7 @@
     <!-- Bootstrap Core CSS -->
 
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
     <!-- Customizable CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css') }}">
@@ -56,7 +57,7 @@
 
     <!-- JavaScripts placed at the end of the document so the pages load faster -->
     <script src="{{ asset('frontend/assets/js/jquery-1.11.1.min.js') }}"></script>
-    <script src="{{ asset('frontend/assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/bootstrap.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/bootstrap-hover-dropdown.min.js') }}"></script>
     <!-- safe -->
     <script src="{{ asset('frontend/assets/js/owl.carousel.min.js') }}"></script>

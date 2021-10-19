@@ -166,8 +166,6 @@ $categories = App\Models\Category::with('subcategories.subsubcategories')
                     <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
                         <div class="nav-outer">
                             <ul class="nav navbar-nav">
-                                <li class="active dropdown yamm-fw"> <a href="/" data-hover="dropdown"
-                                        class="dropdown-toggle" data-toggle="dropdown">Ana Səhifə</a> </li>
                                 @foreach ($categories as $category)
                                     <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown"
                                             class="dropdown-toggle" data-toggle="dropdown">{{ $category->name }}</a>

@@ -95,50 +95,8 @@
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="{{ asset('backend/js/sweetalert.js') }}"></script>
 
-    <script type="text/javascript">
-        $(function() {
-            $(document).on('click', '.delete', function(e) {
-                e.preventDefault();
-                var link = $(this).attr("href");
-                const swalWithBootstrapButtons = Swal.mixin({
-                    customClass: {
-                        confirmButton: 'btn btn-success ml-1',
-                        cancelButton: 'btn btn-danger mr-1'
-                    },
-                    buttonsStyling: false
-                })
-
-                swalWithBootstrapButtons.fire({
-                    title: 'Əminsən ?',
-                    text: "Sildikən sonra geri qaytarılamaz",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Bəli, Sil!',
-                    cancelButtonText: 'Xeyr, Silmə!',
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = link;
-                        swalWithBootstrapButtons.fire(
-                            'Silindi!',
-                            'Uğurla Silindi',
-                            'success'
-                        )
-                    } else if (
-                        /* Read more about handling dismissals below */
-                        result.dismiss === Swal.DismissReason.cancel
-                    ) {
-                        swalWithBootstrapButtons.fire(
-                            'Ləğv Edildi!',
-                            'Məlumatlar Güvəndədir! ;)',
-                            'error'
-                        )
-                    }
-                })
-            })
-        })
-    </script>
 </body>
 
 </html>

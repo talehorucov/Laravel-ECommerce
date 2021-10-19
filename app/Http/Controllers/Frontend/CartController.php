@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CartRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
+use App\Services\AddToCartService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -27,43 +28,27 @@ class CartController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        if ($product->discount_price == null) {
-            Cart::add([
-                'id' => $product->id,
-                'name' => $product->name,
-                'qty' => $request->quantity,
-                'price' => $product->selling_price,
-                'weight' => 0,
-                'options' => [
-                    'image' => $product->thumbnail,
-                    'color' => $request->color,
-                    'size' => $request->size
-                ]
-            ]);
-
-            if (!session()->has('cart_id')) {
-                $cart = new ShoppingCart;
-                $cart->user_id = Auth::check() ? auth()->user()->id : null;
-                $cart->save();
-                Session::put('cart_id', $cart->id);
-            }
-
-            return response()->json(['success' => 'Məhsul Səbətə Uğurla Əlavə Edildi']);
-        } else {
-            Cart::add([
-                'id' => $product->id,
-                'name' => $product->name,
-                'qty' => $request->quantity,
-                'price' => $product->discount_price,
-                'weight' => 1,
-                'options' => [
-                    'image' => $product->thumbnail,
-                    'color' => $request->color,
-                    'size' => $request->size
-                ]
-            ]);
-            return response()->json(['success' => 'Məhsul Səbətə Uğurla Əlavə Edildi']);
+        if (!session()->has('cart_id')) {
+            $cart = new ShoppingCart;
+            $cart->user_id = auth()->id ?? null;
+            $cart->save();
+            Session::put('cart_id', $cart->id);
+        } elseif (session()->has('cart_id')) {
+            AddToCartService::AddToCart();
         }
+        Cart::add([
+            'id' => $product->id,
+            'name' => $product->name,
+            'qty' => $request->quantity,
+            'price' => ($product->discount_price == 0 || null) ? $product->selling_price : $product->discount_price,
+            'weight' => 0,
+            'options' => [
+                'image' => $product->thumbnail,
+                'color' => $request->color,
+                'size' => $request->size
+            ]
+        ]);
+        return response()->json(['success' => 'Məhsul Səbətə Uğurla Əlavə Edildi']);
     }
 
     public function AddMiniCart()
@@ -134,7 +119,7 @@ class CartController extends Controller
                 $cart_count = Cart::count();
                 $cart_total = Cart::total();
 
-                return view('user.checkout.index',compact('carts','cart_count','cart_total'));
+                return view('user.checkout.index', compact('carts', 'cart_count', 'cart_total'));
             } else {
                 $notification = [
                     'message' => 'Səbətiniz boşdur',

@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CityController;
 use App\Http\Controllers\Backend\ColorController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\OrderController as BackendOrderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SizeController;
 use App\Http\Controllers\Backend\SliderController;
@@ -163,6 +164,27 @@ Route::prefix('admin')->middleware(['auth:admin', 'verified'])->group(function (
         Route::post('/update/{city}', [CityController::class, 'update'])->name('admin.city.update');
         Route::get('/delete/{city}', [CityController::class, 'delete'])->name('admin.city.delete');
     });
+
+    //------------------------Admin Orders------------------------
+    Route::prefix('order')->group(function () {
+        Route::group(['as' => 'admin.'], function () {
+            Route::get('/pending', [BackendOrderController::class, 'pending_orders'])->name('pending.order');
+            Route::get('/confirmed', [BackendOrderController::class, 'confirmed_orders'])->name('confirmed.order');
+            Route::get('/processing', [BackendOrderController::class, 'processing_orders'])->name('processing.order');
+            Route::get('/picked', [BackendOrderController::class, 'picked_orders'])->name('picked.order');
+            Route::get('/shipped', [BackendOrderController::class, 'shipped_orders'])->name('shipped.order');
+            Route::get('/delivered', [BackendOrderController::class, 'delivered_orders'])->name('delivered.order');
+            Route::get('/cancel', [BackendOrderController::class, 'cancel_orders'])->name('cancel.order');
+            Route::get('/{order_number}/detail', [BackendOrderController::class, 'order_details'])->name('order.detail');
+        });
+
+        //------------------------Admin Update Order Status------------------------
+        Route::get('/change/pending-to-confirm/{order_number}', [BackendOrderController::class, 'pending_to_confirm'])->name('pending_to_confirm');
+        Route::get('/change/confirm-to-processing/{order_number}', [BackendOrderController::class, 'confirm_to_processing'])->name('confirm_to_processing');
+        Route::get('/change/processing-to-picked/{order_number}', [BackendOrderController::class, 'processing_to_picked'])->name('processing_to_picked');
+        Route::get('/change/picked-to-shipped/{order_number}', [BackendOrderController::class, 'picked_to_shipped'])->name('picked_to_shipped');
+        Route::get('/change/shipped-to-delivered/{order_number}', [BackendOrderController::class, 'shipped_to_delivered'])->name('shipped_to_delivered');
+    });
 });
 
 
@@ -179,10 +201,14 @@ Route::middleware(['auth:sanctum,web', 'verified'])->group(function () {
     Route::prefix('my')->group(function () {
         Route::get('/profile', [IndexController::class, 'user_profile'])->name('user.profile');
         Route::get('/orders', [OrderController::class, 'my_orders'])->name('my.orders');
+        Route::get('/return/orders', [OrderDetailController::class, 'my_return_orders'])->name('my.return.orders');
+        Route::get('/cancelled/orders', [OrderDetailController::class, 'my_cancelled_orders'])->name('my.cancel.orders');
         Route::get('/order/detail/{order_number}', [OrderDetailController::class, 'order_detail'])->name('my_order.detail');
         Route::post('/profile/update', [IndexController::class, 'user_update'])->name('user.update');
         Route::get('/change/password', [IndexController::class, 'change_password'])->name('change.password');
         Route::post('/update/password', [IndexController::class, 'update_password'])->name('update.password');
+        Route::get('/return/order/{orderDetail}', [OrderController::class, 'return_order'])->name('return_order');
+        Route::get('/cancel/order/{order}', [OrderController::class, 'cancel_order'])->name('cancel.order');
     });
 
 

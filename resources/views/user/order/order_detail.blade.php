@@ -144,8 +144,12 @@
                                                 <label>{{ $order_detail->price }} Azn</label>
                                             </td>
                                             <td class="col-md-1">
-                                                <button type="button" class="btn btn-info" data-toggle="modal"
-                                                    data-target="#return">İadə</button>
+                                                @if ($order->status == 'Delivered' and $order_detail->return_reason != null)
+                                                    <button type="button" class="btn btn-info" data-toggle="modal"
+                                                        data-target="#returnModal">İadə</button>
+                                                @else
+
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

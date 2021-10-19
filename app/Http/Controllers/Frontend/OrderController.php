@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\OrderCreateRequest;
+use App\Http\Requests\OrderReturnRequest;
+use App\Models\Product;
+use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class OrderController extends Controller
@@ -26,15 +29,15 @@ class OrderController extends Controller
         $order->post_code = $request->post_code;
         $order->note = $request->note;
         if ($old) {
-            $order->order_number = (string)('00000000'.$old->order_number + 1);
-        }   
+            $order->order_number = (string)('00000000' . $old->order_number + 1);
+        }
         if (session('coupon')) {
             $order->coupon = session('coupon')['name'];
-            $order->discount = session('coupon')['discount'].'%';
+            $order->discount = session('coupon')['discount'] . '%';
             $order->discount_amount = session('coupon')['total_amount'];
         }
         $order->amount = Cart::total();
-        $order->status = 'Gözləyən';
+        $order->status = 'Pending';
         $order->save();
         $order_id = $order->id;
 
@@ -60,9 +63,40 @@ class OrderController extends Controller
 
     public function my_orders()
     {
-        $orders = Order::where('user_id',auth()->user()->id)->get();
-        return view('user.order.my_order',compact('orders'));
+        $orders = Order::where('user_id', auth()->user()->id)->get();
+        return view('user.order.my_order', compact('orders'));
     }
 
-    
+    public function return_order(Request $request, OrderDetail $orderDetail)
+    {
+        if (!$request->return_reason) {
+            $notification = [
+                'message' => 'İadə Səbəbini Qeyd Edin !',
+                'alert-type' => 'error'
+            ];
+            return redirect()->back()->with($notification);
+        }
+        $orderDetail->return_reason = $request->return_reason;
+        $orderDetail->return_date = Carbon::now();
+        $orderDetail->save();
+
+        $notification = [
+            'message' => 'İadə tələbiniz uğurla göndərildi',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('my.orders')->with($notification);
+    }
+
+    public function cancel_order(Order $order)
+    {
+        $order->status = 'Cancelled';
+        $order->cancel_date = Carbon::now();
+        $order->save();
+
+        $notification = [
+            'message' => 'Sifarişiniz uğurla ləğv edildi',
+            'alert-type' => 'success'
+        ];
+        return redirect()->route('my.orders')->with($notification);
+    }
 }
