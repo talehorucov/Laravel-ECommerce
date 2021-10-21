@@ -43,6 +43,7 @@
     @include('user.partials._header')
 
     <!-- ============================================== HEADER : END ============================================== -->
+    <input type="hidden" id="auth_check" value="{{ auth()->user() ? 'true' : 'false' }}">
     @yield('content')
     <!-- /#top-banner-and-menu -->
 
@@ -216,40 +217,42 @@
         function addToWishList(id) {
             var url = '{{ route('add.wishlist', ':id') }}';
             url = url.replace(':id', id);
-
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: url,
-                success: function(data) {
-                    if (data.success) {
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: data.success,
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                    } else if (data.danger) {
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'error',
-                            title: data.danger,
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                    } else {
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'error',
-                            title: data.error,
-                            showConfirmButton: false,
-                            footer: '<a href="{{ route('login') }}"><h5>Daxil Ol</h5></a>',
-                            timer: 1500
-                        })
+            var check = $('#auth_check').val();
+            if (check == true) {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: url,
+                    success: function(data) {
+                        if (data.success) {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: data.success,
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        } else if (data.danger) {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'error',
+                                title: data.danger,
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        }
                     }
-                }
-            })
+                })
+            } else {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Sayta Giriş Etməlisiniz',
+                    showConfirmButton: false,
+                    footer: '<a href="{{ route('login') }}"><h5>Daxil Ol</h5></a>',
+                    timer: 3000
+                })
+            }
         }
     </script>
 </body>

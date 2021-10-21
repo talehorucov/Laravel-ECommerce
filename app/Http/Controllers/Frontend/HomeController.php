@@ -47,7 +47,7 @@ class HomeController extends Controller
 
     public function product_detail($slug)
     {
-        $product = Product::whereSlug($slug)->with('multiProductImg','colors','sizes')->firstOrFail();
+        $product = Product::whereSlug($slug)->with('multiProductImg','colors','sizes','tags')->firstOrFail();
         $similar_products = Product::where('category_id',$product->category_id)->where('id','!=',$product->id)->get();
         return view('user.product.details', compact('product','similar_products'));
     }

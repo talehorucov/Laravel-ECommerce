@@ -1,40 +1,16 @@
 <div class="sidebar-widget hot-deals wow fadeInUp outer-bottom-xs">
-    <h3 class="section-title">hot deals</h3>
+    <h3 class="section-title">xüsusi endirimlər</h3>
     <div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-ss">
         @foreach ($hot_deals as $product)
             <div class="item">
                 <div class="products">
                     <div class="hot-deal-wrapper">
-                        <div class="image"> <img src="{{ asset($product->thumbnail) }}"
-                                alt="">
+                        <div class="image"> <img src="{{ asset($product->thumbnail) }}" alt="">
                         </div>
                         @if ($product->discount_percent)
                             <div class="sale-offer-tag"><span>{{ $product->discount_percent }}<br>
                                     off</span></div>
                         @endif
-
-                        <div class="timing-wrapper">
-                            <div class="box-wrapper">
-                                <div class="date box"> <span class="key">120</span>
-                                    <span class="value">DAYS</span>
-                                </div>
-                            </div>
-                            <div class="box-wrapper">
-                                <div class="hour box"> <span class="key">20</span>
-                                    <span class="value">HRS</span>
-                                </div>
-                            </div>
-                            <div class="box-wrapper">
-                                <div class="minutes box"> <span class="key">36</span>
-                                    <span class="value">MINS</span>
-                                </div>
-                            </div>
-                            <div class="box-wrapper hidden-md">
-                                <div class="seconds box"> <span class="key">60</span>
-                                    <span class="value">SEC</span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <!-- /.hot-deal-wrapper -->
 
@@ -49,9 +25,8 @@
                             </div>
                         @else
                             <div class="product-price"> <span class="price">
-                                    ${{ $product->discount_price }} </span> <span
-                                    class="price-before-discount">$
-                                    {{ $product->selling_price }}</span> </div>
+                                    ${{ $product->discount_price }} Azn</span> <span class="price-before-discount">$
+                                    {{ $product->selling_price }} Azn</span> </div>
                         @endif
                         <!-- /.product-price -->
                     </div>
@@ -60,11 +35,13 @@
                     <div class="cart clearfix animate-effect">
                         <div class="action">
                             <div class="add-cart-button btn-group">
-                                <button class="btn btn-primary icon" data-toggle="dropdown"
-                                    type="button">
-                                    <i class="fa fa-shopping-cart"></i> </button>
-                                <button class="btn btn-primary cart-btn" type="button">Add to
-                                    cart</button>
+                                <button class="btn btn-primary icon" data-toggle="modal" data-target="#productModal"
+                                    type="button" id="{{ $product->id }}" onclick="productCart(this.id)">
+                                    <i class="fa fa-shopping-cart"></i>
+                                </button>
+                                {{-- Add-To-Cart's Modal in main_master page --}}
+                                <button class="btn btn-primary cart-btn" data-toggle="modal" data-target="#productModal"
+                                id="{{ $product->id }}" onclick="productCart(this.id)" type="button">Səbətə Əlavə Et</button>
                             </div>
                         </div>
                         <!-- /.action -->

@@ -37,6 +37,7 @@ Route::prefix('admin')->middleware(['auth:admin', 'verified'])->group(function (
     Route::get('/sliders', [SliderController::class, 'index'])->name('admin.slider.index');
     Route::get('/coupons', [CouponController::class, 'index'])->name('admin.coupon.index');
     Route::get('/cities', [CityController::class, 'index'])->name('admin.city.index');
+    Route::get('/users', [AdminProfileController::class, 'users'])->name('admin.user.index');
     // End Of Indexes
 
 

@@ -10,8 +10,6 @@ $categories = App\Models\Category::with('subcategories.subsubcategories')
             <div class="header-top-inner">
                 <div class="cnt-account">
                     <ul class="list-unstyled">
-                        <li><a href="#"><i class="icon fa fa-user"></i> Mənim Hesabım</a>
-                        </li>
                         <li><a href="{{ route('user.wishlist') }}"><i class="icon fa fa-heart"></i>İstək</a></li>
                         <li><a href="{{ route('mycart') }}"><i class="icon fa fa-shopping-cart"></i>Səbətim</a></li>
                         @auth

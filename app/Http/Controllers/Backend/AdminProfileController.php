@@ -9,6 +9,7 @@ use App\Http\Requests\AdminPasswordRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\PasswordRequest;
+use App\Models\User;
 
 class AdminProfileController extends Controller
 {
@@ -62,5 +63,11 @@ class AdminProfileController extends Controller
         else{
             return redirect()->back();
         }
+    }
+
+    public function users()
+    {
+        $users = User::all();
+        return view('admin.user.index', compact('users'));
     }
 }

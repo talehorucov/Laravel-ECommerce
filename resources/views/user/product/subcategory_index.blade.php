@@ -144,19 +144,14 @@
                         <!-- ============================================== COMPARE: END ============================================== -->
                         <!-- ============================================== PRODUCT TAGS ============================================== -->
 
-                        <!-- /.sidebar-widget -->
-                        <!----------- Testimonials------------->
-                        @include('user.common.testmomials')
-                        <!-- ============================================== Testimonials: END ============================================== -->
-
-                        <div class="home-banner"> <img
-                                src="{{ asset('frontend/assets/images/banners/LHS-banner.jpg') }}" alt="Image"> </div>
+                        <!-- /.sidebar-filter -->
                     </div>
-                    <!-- /.sidebar-filter -->
+                    <!-- /.sidebar-module-container -->
                 </div>
-                <!-- /.sidebar-module-container -->
+                <!-- /.sidebar -->
+
+                <!-- /.col -->
             </div>
-            <!-- /.sidebar -->
             <div class='col-md-9'>
                 <!-- ========================================== SECTION – HERO ========================================= -->
 
@@ -169,7 +164,8 @@
                             <div class="caption vertical-top text-left">
                                 <div class="big-text"> Big Sale </div>
                                 <div class="excerpt hidden-sm hidden-md"> Save up to 49% off </div>
-                                <div class="excerpt-normal hidden-sm hidden-md"> Lorem ipsum dolor sit amet, consectetur
+                                <div class="excerpt-normal hidden-sm hidden-md"> Lorem ipsum dolor sit amet,
+                                    consectetur
                                     adipiscing elit </div>
                             </div>
                             <!-- /.caption -->
@@ -255,7 +251,7 @@
                 </div>
                 <div class="search-result-container ">
                     <div id="myTabContent" class="tab-content category-list">
-                        <div class="tab-pane active " id="grid-container">
+                        <div class="tab-pane active" id="grid-container">
                             <div class="category-product">
                                 <div class="row">
                                     @foreach ($products as $product)
@@ -305,13 +301,15 @@
                                                                 <li class="add-cart-button btn-group">
                                                                     <button class="btn btn-primary icon"
                                                                         data-toggle="dropdown" type="button"> <i
-                                                                            class="fa fa-shopping-cart"></i> </button>
+                                                                            class="fa fa-shopping-cart"></i>
+                                                                    </button>
                                                                     <button class="btn btn-primary cart-btn"
                                                                         type="button">Add to cart</button>
                                                                 </li>
                                                                 <li class="lnk wishlist"> <a class="add-to-cart"
                                                                         href="detail.html" title="Wishlist"> <i
-                                                                            class="icon fa fa-heart"></i> </a> </li>
+                                                                            class="icon fa fa-heart"></i> </a>
+                                                                </li>
                                                                 <li class="lnk"> <a class="add-to-cart"
                                                                         href="detail.html" title="Compare"> <i
                                                                             class="fa fa-signal"></i> </a> </li>
@@ -366,9 +364,10 @@
                                                             @else
                                                                 <div class="product-price"> <span
                                                                         class="price">
-                                                                        ${{ $product->discount_price }} </span> <span
-                                                                        class="price-before-discount">$
-                                                                        {{ $product->selling_price }}</span> </div>
+                                                                        ${{ $product->discount_price }} </span>
+                                                                    <span class="price-before-discount">$
+                                                                        {{ $product->selling_price }}</span>
+                                                                </div>
                                                             @endif
                                                             <div class="description m-t-10">
                                                                 {{ $product->short_desc }}
@@ -386,13 +385,14 @@
                                                                         </li>
                                                                         <li class="lnk wishlist"> <a
                                                                                 class="add-to-cart"
-                                                                                href="detail.html" title="Wishlist"> <i
-                                                                                    class="icon fa fa-heart"></i> </a>
+                                                                                href="detail.html" title="Wishlist">
+                                                                                <i class="icon fa fa-heart"></i>
+                                                                            </a>
                                                                         </li>
                                                                         <li class="lnk"> <a
                                                                                 class="add-to-cart"
-                                                                                href="detail.html" title="Compare"> <i
-                                                                                    class="fa fa-signal"></i> </a>
+                                                                                href="detail.html" title="Compare">
+                                                                                <i class="fa fa-signal"></i> </a>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -445,75 +445,83 @@
                 <!-- /.search-result-container -->
 
             </div>
-            <!-- /.col -->
-        </div>
-        <!-- /.row -->
-        <!-- ============================================== BRANDS CAROUSEL ============================================== -->
-        <div id="brands-carousel" class="logo-slider wow fadeInUp">
-            <div class="logo-slider-inner">
-                <div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
-                    <div class="item m-t-15"> <a href="#" class="image"> <img
-                                data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt=""> </a>
-                    </div>
-                    <!--/.item-->
+            <!-- /.row -->
+            <!-- ============================================== BRANDS CAROUSEL ============================================== -->
+            <div id="brands-carousel" class="logo-slider wow fadeInUp">
+                <div class="logo-slider-inner">
+                    <div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme">
+                        <div class="item m-t-15"> <a href="#" class="image"> <img
+                                    data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt="">
+                            </a>
+                        </div>
+                        <!--/.item-->
 
-                    <div class="item m-t-10"> <a href="#" class="image"> <img
-                                data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt=""> </a>
-                    </div>
-                    <!--/.item-->
+                        <div class="item m-t-10"> <a href="#" class="image"> <img
+                                    data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt="">
+                            </a>
+                        </div>
+                        <!--/.item-->
 
-                    <div class="item"> <a href="#" class="image"> <img
-                                data-echo="assets/images/brands/brand3.png" src="assets/images/blank.gif" alt=""> </a>
-                    </div>
-                    <!--/.item-->
+                        <div class="item"> <a href="#" class="image"> <img
+                                    data-echo="assets/images/brands/brand3.png" src="assets/images/blank.gif" alt="">
+                            </a>
+                        </div>
+                        <!--/.item-->
 
-                    <div class="item"> <a href="#" class="image"> <img
-                                data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt=""> </a>
-                    </div>
-                    <!--/.item-->
+                        <div class="item"> <a href="#" class="image"> <img
+                                    data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt="">
+                            </a>
+                        </div>
+                        <!--/.item-->
 
-                    <div class="item"> <a href="#" class="image"> <img
-                                data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt=""> </a>
-                    </div>
-                    <!--/.item-->
+                        <div class="item"> <a href="#" class="image"> <img
+                                    data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt="">
+                            </a>
+                        </div>
+                        <!--/.item-->
 
-                    <div class="item"> <a href="#" class="image"> <img
-                                data-echo="assets/images/brands/brand6.png" src="assets/images/blank.gif" alt=""> </a>
-                    </div>
-                    <!--/.item-->
+                        <div class="item"> <a href="#" class="image"> <img
+                                    data-echo="assets/images/brands/brand6.png" src="assets/images/blank.gif" alt="">
+                            </a>
+                        </div>
+                        <!--/.item-->
 
-                    <div class="item"> <a href="#" class="image"> <img
-                                data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt=""> </a>
-                    </div>
-                    <!--/.item-->
+                        <div class="item"> <a href="#" class="image"> <img
+                                    data-echo="assets/images/brands/brand2.png" src="assets/images/blank.gif" alt="">
+                            </a>
+                        </div>
+                        <!--/.item-->
 
-                    <div class="item"> <a href="#" class="image"> <img
-                                data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt=""> </a>
-                    </div>
-                    <!--/.item-->
+                        <div class="item"> <a href="#" class="image"> <img
+                                    data-echo="assets/images/brands/brand4.png" src="assets/images/blank.gif" alt="">
+                            </a>
+                        </div>
+                        <!--/.item-->
 
-                    <div class="item"> <a href="#" class="image"> <img
-                                data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt=""> </a>
-                    </div>
-                    <!--/.item-->
+                        <div class="item"> <a href="#" class="image"> <img
+                                    data-echo="assets/images/brands/brand1.png" src="assets/images/blank.gif" alt="">
+                            </a>
+                        </div>
+                        <!--/.item-->
 
-                    <div class="item"> <a href="#" class="image"> <img
-                                data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt=""> </a>
+                        <div class="item"> <a href="#" class="image"> <img
+                                    data-echo="assets/images/brands/brand5.png" src="assets/images/blank.gif" alt="">
+                            </a>
+                        </div>
+                        <!--/.item-->
                     </div>
-                    <!--/.item-->
+                    <!-- /.owl-carousel #logo-slider -->
                 </div>
-                <!-- /.owl-carousel #logo-slider -->
+                <!-- /.logo-slider-inner -->
+
             </div>
-            <!-- /.logo-slider-inner -->
-
+            <!-- /.logo-slider -->
+            <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
         </div>
-        <!-- /.logo-slider -->
-        <!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
-    </div>
-    <!-- /.container -->
+        <!-- /.container -->
 
-</div>
-<!-- /.body-content -->
+    </div>
+    <!-- /.body-content -->
 
 
 @endsection

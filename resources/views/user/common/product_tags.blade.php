@@ -1,4 +1,4 @@
-<div class="sidebar-widget product-tag wow fadeInUp">
+<div class="sidebar-widget product-tag wow fadeInUp outer-bottom-xs animated">
     <h3 class="section-title">Məhsul Təqləri</h3>
     <div class="sidebar-widget-body outer-top-xs">
         <div class="tag-list">

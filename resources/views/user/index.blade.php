@@ -20,57 +20,61 @@
                 <!-- ============================================== HOT DEALS: END ============================================== -->
 
                 <!-- ============================================== SPECIAL OFFER ============================================== -->
+                @if (count($products->where('special_offer', 1)) > 0)
+                    <div class="sidebar-widget outer-bottom-small wow fadeInUp">
+                        <h3 class="section-title">Xüsusi Təkliflər</h3>
+                        <div class="sidebar-widget-body outer-top-xs">
+                            <div
+                                class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
+                                <div class="item">
+                                    <div class="products special-product">
+                                        @foreach ($products->where('special_offer', 1)->take(3) as $product)
+                                            <div class="product">
+                                                <div class="product-micro">
+                                                    <div class="row product-micro-row">
+                                                        <div class="col col-xs-5">
+                                                            <div class="product-image">
+                                                                <div class="image"> <a
+                                                                        href="{{ route('user.product.detail', $product->slug) }}">
+                                                                        <img src="{{ asset($product->thumbnail) }}"
+                                                                            alt="">
+                                                                    </a> </div>
+                                                                <!-- /.image -->
 
-                <div class="sidebar-widget outer-bottom-small wow fadeInUp">
-                    <h3 class="section-title">Special Offer</h3>
-                    <div class="sidebar-widget-body outer-top-xs">
-                        <div class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
-                            <div class="item">
-                                <div class="products special-product">
-                                    @foreach ($products->where('special_offer', 1)->take(3) as $product)
-                                        <div class="product">
-                                            <div class="product-micro">
-                                                <div class="row product-micro-row">
-                                                    <div class="col col-xs-5">
-                                                        <div class="product-image">
-                                                            <div class="image"> <a
-                                                                    href="{{ route('user.product.detail', $product->slug) }}">
-                                                                    <img src="{{ asset($product->thumbnail) }}"
-                                                                        alt="">
-                                                                </a> </div>
-                                                            <!-- /.image -->
-
+                                                            </div>
+                                                            <!-- /.product-image -->
                                                         </div>
-                                                        <!-- /.product-image -->
-                                                    </div>
-                                                    <!-- /.col -->
-                                                    <div class="col col-xs-7">
-                                                        <div class="product-info">
-                                                            <h3 class="name"><a
-                                                                    href="{{ route('user.product.detail', $product->slug) }}">{{ $product->name }}</a>
-                                                            </h3>
-                                                            <div class="rating rateit-small"></div>
-                                                            <div class="product-price"> <span class="price">
-                                                                    ${{ $product->selling_price }} </span> </div>
-                                                            <!-- /.product-price -->
+                                                        <!-- /.col -->
+                                                        <div class="col col-xs-7">
+                                                            <div class="product-info">
+                                                                <h3 class="name"><a
+                                                                        href="{{ route('user.product.detail', $product->slug) }}">{{ $product->name }}</a>
+                                                                </h3>
+                                                                <div class="rating rateit-small"></div>
+                                                                <div class="product-price"> <span
+                                                                        class="price">
+                                                                        ${{ $product->selling_price }} </span> </div>
+                                                                <!-- /.product-price -->
 
+                                                            </div>
                                                         </div>
+                                                        <!-- /.col -->
                                                     </div>
-                                                    <!-- /.col -->
+                                                    <!-- /.product-micro-row -->
                                                 </div>
-                                                <!-- /.product-micro-row -->
+                                                <!-- /.product-micro -->
+
                                             </div>
-                                            <!-- /.product-micro -->
+                                        @endforeach
 
-                                        </div>
-                                    @endforeach
-
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- /.sidebar-widget-body -->
                     </div>
-                    <!-- /.sidebar-widget-body -->
-                </div>
+                @endif
+
                 <!-- /.sidebar-widget -->
                 <!-- ============================================== SPECIAL OFFER : END ============================================== -->
                 <!-- ============================================== PRODUCT TAGS ============================================== -->
@@ -80,7 +84,7 @@
                 <!-- ============================================== SPECIAL DEALS ============================================== -->
 
                 <div class="sidebar-widget outer-bottom-small wow fadeInUp">
-                    <h3 class="section-title">Special Deals</h3>
+                    <h3 class="section-title">Xüsusi Endirimlər</h3>
                     <div class="sidebar-widget-body outer-top-xs">
                         <div class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
                             <div class="item">
@@ -132,32 +136,6 @@
                     <!-- /.sidebar-widget-body -->
                 </div>
                 <!-- /.sidebar-widget -->
-                <!-- ============================================== SPECIAL DEALS : END ============================================== -->
-                <!-- ============================================== NEWSLETTER ============================================== -->
-                <div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small">
-                    <h3 class="section-title">Newsletters</h3>
-                    <div class="sidebar-widget-body outer-top-xs">
-                        <p>Sign Up for Our Newsletter!</p>
-                        <form>
-                            <div class="form-group">
-                                <label class="sr-only" for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1"
-                                    placeholder="Subscribe to our newsletter">
-                            </div>
-                            <button class="btn btn-primary">Subscribe</button>
-                        </form>
-                    </div>
-                    <!-- /.sidebar-widget-body -->
-                </div>
-                <!-- /.sidebar-widget -->
-                <!-- ============================================== NEWSLETTER: END ============================================== -->
-
-                <!-- ============================================== Testimonials============================================== -->
-                @include('user.common.testmomials')
-                <!-- ============================================== Testimonials: END ============================================== -->
-
-                <div class="home-banner"> <img src="{{ asset('frontend/assets/images/banners/LHS-banner.jpg') }}"
-                        alt="Image"> </div>
             </div>
             <!-- /.sidemenu-holder -->
             <!-- ============================================== SIDEBAR : END ============================================== -->
@@ -202,10 +180,10 @@
                                 <div class="info-box">
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <h4 class="info-box-heading green">money back</h4>
+                                            <h4 class="info-box-heading green">pul iadəsi</h4>
                                         </div>
                                     </div>
-                                    <h6 class="text">30 Days Money Back Guarantee</h6>
+                                    <h6 class="text">30 gün ərzində pul iadəsi qarantiyası</h6>
                                 </div>
                             </div>
                             <!-- .col -->
@@ -214,10 +192,10 @@
                                 <div class="info-box">
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <h4 class="info-box-heading green">free shipping</h4>
+                                            <h4 class="info-box-heading green">Pulsuz Çatdırılma</h4>
                                         </div>
                                     </div>
-                                    <h6 class="text">Shipping on orders over $99</h6>
+                                    <h6 class="text">9 manatdan yuxarı sifarişlərdə pusluz çatdırılma</h6>
                                 </div>
                             </div>
                             <!-- .col -->
@@ -226,10 +204,10 @@
                                 <div class="info-box">
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <h4 class="info-box-heading green">Special Sale</h4>
+                                            <h4 class="info-box-heading green">bölgələrə Çatdırılma</h4>
                                         </div>
                                     </div>
-                                    <h6 class="text">Extra $5 off on all items </h6>
+                                    <h6 class="text">Azərbaycanın istənilən bölgəsinə çatdırılma</h6>
                                 </div>
                             </div>
                             <!-- .col -->
@@ -244,10 +222,10 @@
                 <!-- ============================================== SCROLL TABS ============================================== -->
                 <div id="product-tabs-slider" class="scroll-tabs outer-top-vs wow fadeInUp">
                     <div class="more-info-tab clearfix ">
-                        <h3 class="new-product-title pull-left">New Products</h3>
+                        <h3 class="new-product-title pull-left">Yeni Məhsullar</h3>
                         <ul class="nav nav-tabs nav-tab-line pull-right" id="new-products-1">
                             <li class="active"><a data-transition-type="backSlide" href="#all"
-                                    data-toggle="tab">All</a></li>
+                                    data-toggle="tab">Hamısı</a></li>
                             @foreach ($categories->take(6) as $category)
                                 <li><a data-transition-type="backSlide" href="#category{{ $category->slug }}"
                                         data-toggle="tab">{{ $category->name }}</a>
@@ -276,7 +254,7 @@
                                                         </div>
                                                         <!-- /.image -->
                                                         @if ($product->discount_price == null or $product->discount_price == 0)
-                                                            <div class="tag new"><span>new</span></div>
+                                                            <div class="tag new"><span>yeni</span></div>
                                                         @else
                                                             <div class="tag hot">
                                                                 <span>{{ $product->discount_percent }}</span>
@@ -311,18 +289,24 @@
                                                         <div class="action">
                                                             <ul class="list-unstyled">
                                                                 <li class="add-cart-button btn-group">
-                                                                    <button data-toggle="tooltip"
-                                                                        class="btn btn-primary icon" type="button"
-                                                                        title="Add Cart"> <i
-                                                                            class="fa fa-shopping-cart"></i> </button>
+                                                                    {{-- Add-To-Cart's Modal in main_master page --}}
+                                                                    <button class="btn btn-primary icon"
+                                                                        data-toggle="modal" data-target="#productModal"
+                                                                        type="button" id="{{ $product->id }}"
+                                                                        onclick="productCart(this.id)">
+                                                                        <i class="fa fa-shopping-cart"></i>
+                                                                    </button>
+                                                                    {{-- Add-To-Cart's Modal in main_master page --}}
                                                                     <button class="btn btn-primary cart-btn"
-                                                                        type="button">Add to cart</button>
+                                                                        type="button">Səbətə Əlavə Et</button>
                                                                 </li>
-                                                                <li class="lnk wishlist"> <a data-toggle="tooltip"
-                                                                        class="add-to-cart" href="detail.html"
-                                                                        title="Wishlist"> <i
-                                                                            class="icon fa fa-heart"></i>
-                                                                    </a> </li>
+                                                                <li>
+                                                                    <button class="btn btn-primary icon" type="button"
+                                                                        id="{{ $product->id }}"
+                                                                        onclick="addToWishList(this.id)">
+                                                                        <i class="fa fa-heart"></i>
+                                                                    </button>
+                                                                </li>
                                                                 <li class="lnk"> <a data-toggle="tooltip"
                                                                         class="add-to-cart" href="detail.html"
                                                                         title="Compare"> <i class="fa fa-signal"
@@ -365,7 +349,7 @@
                                                             </div>
                                                             <!-- /.image -->
                                                             @if ($product->discount_price == null or $product->discount_price == 0)
-                                                                <div class="tag new"><span>new</span></div>
+                                                                <div class="tag new"><span>yeni</span></div>
                                                             @else
                                                                 <div class="tag hot">
                                                                     <span>{{ $product->discount_percent }}</span>
@@ -401,19 +385,24 @@
                                                             <div class="action">
                                                                 <ul class="list-unstyled">
                                                                     <li class="add-cart-button btn-group">
-                                                                        <button data-toggle="tooltip"
-                                                                            class="btn btn-primary icon" type="button"
-                                                                            title="Add Cart"> <i
-                                                                                class="fa fa-shopping-cart"></i>
+                                                                        {{-- Add-To-Cart's Modal in main_master page --}}
+                                                                        <button class="btn btn-primary icon"
+                                                                            data-toggle="modal"
+                                                                            data-target="#productModal" type="button"
+                                                                            id="{{ $product->id }}"
+                                                                            onclick="productCart(this.id)">
+                                                                            <i class="fa fa-shopping-cart"></i>
                                                                         </button>
+                                                                        {{-- Add-To-Cart's Modal in main_master page --}}
                                                                         <button class="btn btn-primary cart-btn"
-                                                                            type="button">Add to cart</button>
+                                                                            type="button">Səbətə Əlavə Et</button>
                                                                     </li>
-                                                                    <li class="lnk wishlist">
-                                                                        <a data-toggle="tooltip" class="add-to-cart"
-                                                                            href="detail.html" title="Wishlist"> <i
-                                                                                class="icon fa fa-heart"></i>
-                                                                        </a>
+                                                                    <li>
+                                                                        <button class="btn btn-primary icon"
+                                                                            type="button" id="{{ $product->id }}"
+                                                                            onclick="addToWishList(this.id)">
+                                                                            <i class="fa fa-heart"></i>
+                                                                        </button>
                                                                     </li>
                                                                     <li class="lnk">
                                                                         <a data-toggle="tooltip" class="add-to-cart"
@@ -481,7 +470,7 @@
                 <!-- ============================================== WIDE PRODUCTS : END ============================================== -->
                 <!-- ============================================== FEATURED PRODUCTS ============================================== -->
                 <section class="section featured-product wow fadeInUp">
-                    <h3 class="section-title">Featured products</h3>
+                    <h3 class="section-title">Seçilmiş məhsullar</h3>
                     <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
                         @foreach ($products->where('featured', 1) as $product)
                             <div class="item item-carousel">
@@ -528,15 +517,15 @@
                                             <div class="action">
                                                 <ul class="list-unstyled">
                                                     <li class="add-cart-button btn-group">
-                                                         {{-- Add-To-Cart's Modal in main_master page --}}
+                                                        {{-- Add-To-Cart's Modal in main_master page --}}
                                                         <button class="btn btn-primary icon" data-toggle="modal"
                                                             data-target="#productModal" type="button"
                                                             id="{{ $product->id }}" onclick="productCart(this.id)">
                                                             <i class="fa fa-shopping-cart"></i>
                                                         </button>
                                                         {{-- Add-To-Cart's Modal in main_master page --}}
-                                                        <button class="btn btn-primary cart-btn" type="button">Add to
-                                                            cart</button>
+                                                        <button class="btn btn-primary cart-btn" type="button">
+                                                            Səbətə Əlavə Et</button>
                                                     </li>
                                                     <li>
                                                         <button class="btn btn-primary icon" type="button"
@@ -587,7 +576,7 @@
                                                     </div>
                                                     <!-- /.image -->
                                                     @if ($product->discount_price == null or $product->discount_price == 0)
-                                                        <div class="tag new"><span>new</span></div>
+                                                        <div class="tag new"><span>yeni</span></div>
                                                     @else
                                                         <div class="tag hot">
                                                             <span>{{ $product->discount_percent }}</span>
@@ -621,28 +610,31 @@
                                                 <div class="cart clearfix animate-effect">
                                                     <div class="action">
                                                         <ul class="list-unstyled">
-                                                            <li class="add-cart-button btn-group">
-                                                                <button data-toggle="tooltip"
-                                                                    class="btn btn-primary icon" type="button"
-                                                                    title="Add Cart"> <i
-                                                                        class="fa fa-shopping-cart"></i>
-                                                                </button>
-                                                                <button class="btn btn-primary cart-btn"
-                                                                    type="button">Add to
-                                                                    cart</button>
-                                                            </li>
-                                                            <li class="lnk wishlist">
-                                                                <a data-toggle="tooltip" class="add-to-cart"
-                                                                    href="detail.html" title="Wishlist"> <i
-                                                                        class="icon fa fa-heart"></i>
-                                                                </a>
-                                                            </li>
-                                                            <li class="lnk">
-                                                                <a data-toggle="tooltip" class="add-to-cart"
-                                                                    href="detail.html" title="Compare"> <i
-                                                                        class="fa fa-signal" aria-hidden="true"></i>
-                                                                </a>
-                                                            </li>
+                                                            <ul class="list-unstyled">
+                                                                <li class="add-cart-button btn-group">
+                                                                    {{-- Add-To-Cart's Modal in main_master page --}}
+                                                                    <button class="btn btn-primary icon"
+                                                                        data-toggle="modal" data-target="#productModal"
+                                                                        type="button" id="{{ $product->id }}"
+                                                                        onclick="productCart(this.id)">
+                                                                        <i class="fa fa-shopping-cart"></i>
+                                                                    </button>
+                                                                    {{-- Add-To-Cart's Modal in main_master page --}}
+                                                                    <button class="btn btn-primary cart-btn"
+                                                                        type="button">Səbətə Əlavə Et</button>
+                                                                </li>
+                                                                <li>
+                                                                    <button class="btn btn-primary icon" type="button"
+                                                                        id="{{ $product->id }}"
+                                                                        onclick="addToWishList(this.id)">
+                                                                        <i class="fa fa-heart"></i>
+                                                                    </button>
+                                                                </li>
+                                                                <li class="lnk"> <a data-toggle="tooltip"
+                                                                        class="add-to-cart" href="detail.html"
+                                                                        title="Compare"> <i class="fa fa-signal"
+                                                                            aria-hidden="true"></i> </a> </li>
+                                                            </ul>
                                                         </ul>
                                                     </div>
                                                     <!-- /.action -->
@@ -676,13 +668,13 @@
                                 </div>
                                 <div class="strip strip-text">
                                     <div class="strip-inner">
-                                        <h2 class="text-right">New Mens Fashion<br>
-                                            <span class="shopping-needs">Save up to 40% off</span>
+                                        <h2 class="text-right">YENİ KİŞİ MODASI<br>
+                                            <span class="shopping-needs">40% -ə qədər endirim</span>
                                         </h2>
                                     </div>
                                 </div>
                                 <div class="new-label">
-                                    <div class="text">NEW</div>
+                                    <div class="text">YENİ</div>
                                 </div>
                                 <!-- /.new-label -->
                             </div>
@@ -712,7 +704,7 @@
                                                     </div>
                                                     <!-- /.image -->
                                                     @if ($product->discount_price == null or $product->discount_price == 0)
-                                                        <div class="tag new"><span>new</span></div>
+                                                        <div class="tag new"><span>yeni</span></div>
                                                     @else
                                                         <div class="tag hot">
                                                             <span>{{ $product->discount_percent }}</span>
@@ -735,8 +727,8 @@
                                                     @else
                                                         <div class="product-price"> <span class="price">
                                                                 ${{ $product->discount_price }} </span> <span
-                                                                class="price-before-discount">$
-                                                                {{ $product->selling_price }}</span> </div>
+                                                                class="price-before-discount">
+                                                                {{ $product->selling_price }} Azn</span> </div>
                                                     @endif
 
                                                     <!-- /.product-price -->
@@ -746,28 +738,31 @@
                                                 <div class="cart clearfix animate-effect">
                                                     <div class="action">
                                                         <ul class="list-unstyled">
-                                                            <li class="add-cart-button btn-group">
-                                                                <button data-toggle="tooltip"
-                                                                    class="btn btn-primary icon" type="button"
-                                                                    title="Add Cart"> <i
-                                                                        class="fa fa-shopping-cart"></i>
-                                                                </button>
-                                                                <button class="btn btn-primary cart-btn"
-                                                                    type="button">Add to
-                                                                    cart</button>
-                                                            </li>
-                                                            <li class="lnk wishlist">
-                                                                <a data-toggle="tooltip" class="add-to-cart"
-                                                                    href="detail.html" title="Wishlist"> <i
-                                                                        class="icon fa fa-heart"></i>
-                                                                </a>
-                                                            </li>
-                                                            <li class="lnk">
-                                                                <a data-toggle="tooltip" class="add-to-cart"
-                                                                    href="detail.html" title="Compare"> <i
-                                                                        class="fa fa-signal" aria-hidden="true"></i>
-                                                                </a>
-                                                            </li>
+                                                            <ul class="list-unstyled">
+                                                                <li class="add-cart-button btn-group">
+                                                                    {{-- Add-To-Cart's Modal in main_master page --}}
+                                                                    <button class="btn btn-primary icon"
+                                                                        data-toggle="modal" data-target="#productModal"
+                                                                        type="button" id="{{ $product->id }}"
+                                                                        onclick="productCart(this.id)">
+                                                                        <i class="fa fa-shopping-cart"></i>
+                                                                    </button>
+                                                                    {{-- Add-To-Cart's Modal in main_master page --}}
+                                                                    <button class="btn btn-primary cart-btn"
+                                                                        type="button">Səbətə Əlavə Et</button>
+                                                                </li>
+                                                                <li>
+                                                                    <button class="btn btn-primary icon" type="button"
+                                                                        id="{{ $product->id }}"
+                                                                        onclick="addToWishList(this.id)">
+                                                                        <i class="fa fa-heart"></i>
+                                                                    </button>
+                                                                </li>
+                                                                <li class="lnk"> <a data-toggle="tooltip"
+                                                                        class="add-to-cart" href="detail.html"
+                                                                        title="Compare"> <i class="fa fa-signal"
+                                                                            aria-hidden="true"></i> </a> </li>
+                                                            </ul>
                                                         </ul>
                                                     </div>
                                                     <!-- /.action -->
@@ -794,7 +789,7 @@
                 <!-- ============================================== BEST SELLER ============================================== -->
 
                 <div class="best-deal wow fadeInUp outer-bottom-xs">
-                    <h3 class="section-title">Best seller</h3>
+                    <h3 class="section-title">Çox satılanlar</h3>
                     <div class="sidebar-widget-body outer-top-xs">
                         <div class="owl-carousel best-seller custom-carousel owl-theme outer-top-xs">
                             <div class="item">
@@ -1083,146 +1078,6 @@
                 </div>
                 <!-- /.sidebar-widget -->
                 <!-- ============================================== BEST SELLER : END ============================================== -->
-
-                <!-- ============================================== BLOG SLIDER ============================================== -->
-                <section class="section latest-blog outer-bottom-vs wow fadeInUp">
-                    <h3 class="section-title">latest form blog</h3>
-                    <div class="blog-slider-container outer-top-xs">
-                        <div class="owl-carousel blog-slider custom-carousel">
-                            <div class="item">
-                                <div class="blog-post">
-                                    <div class="blog-post-image">
-                                        <div class="image"> <a href="blog.html"><img
-                                                    src="{{ asset('frontend/assets/images/blog-post/post1.jpg') }}"
-                                                    alt=""></a> </div>
-                                    </div>
-                                    <!-- /.blog-post-image -->
-
-                                    <div class="blog-post-info text-left">
-                                        <h3 class="name"><a href="#">Voluptatem accusantium doloremque
-                                                laudantium</a></h3>
-                                        <span class="info">By Jone Doe &nbsp;|&nbsp; 21 March 2016
-                                        </span>
-                                        <p class="text">Sed quia non numquam eius modi tempora incidunt
-                                            ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-                                        <a href="#" class="lnk btn btn-primary">Read more</a>
-                                    </div>
-                                    <!-- /.blog-post-info -->
-
-                                </div>
-                                <!-- /.blog-post -->
-                            </div>
-                            <!-- /.item -->
-
-                            <div class="item">
-                                <div class="blog-post">
-                                    <div class="blog-post-image">
-                                        <div class="image"> <a href="blog.html"><img
-                                                    src="{{ asset('frontend/assets/images/blog-post/post2.jpg') }}"
-                                                    alt=""></a> </div>
-                                    </div>
-                                    <!-- /.blog-post-image -->
-
-                                    <div class="blog-post-info text-left">
-                                        <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas
-                                                nulla pariatur</a></h3>
-                                        <span class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016
-                                        </span>
-                                        <p class="text">Sed quia non numquam eius modi tempora incidunt
-                                            ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-                                        <a href="#" class="lnk btn btn-primary">Read more</a>
-                                    </div>
-                                    <!-- /.blog-post-info -->
-
-                                </div>
-                                <!-- /.blog-post -->
-                            </div>
-                            <!-- /.item -->
-
-                            <!-- /.item -->
-
-                            <div class="item">
-                                <div class="blog-post">
-                                    <div class="blog-post-image">
-                                        <div class="image"> <a href="blog.html"><img
-                                                    src="{{ asset('frontend/assets/images/blog-post/post1.jpg') }}"
-                                                    alt=""></a> </div>
-                                    </div>
-                                    <!-- /.blog-post-image -->
-
-                                    <div class="blog-post-info text-left">
-                                        <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas
-                                                nulla pariatur</a></h3>
-                                        <span class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016
-                                        </span>
-                                        <p class="text">Sed ut perspiciatis unde omnis iste natus error
-                                            sit voluptatem accusantium</p>
-                                        <a href="#" class="lnk btn btn-primary">Read more</a>
-                                    </div>
-                                    <!-- /.blog-post-info -->
-
-                                </div>
-                                <!-- /.blog-post -->
-                            </div>
-                            <!-- /.item -->
-
-                            <div class="item">
-                                <div class="blog-post">
-                                    <div class="blog-post-image">
-                                        <div class="image"> <a href="blog.html"><img
-                                                    src="{{ asset('frontend/assets/images/blog-post/post2.jpg') }}"
-                                                    alt=""></a> </div>
-                                    </div>
-                                    <!-- /.blog-post-image -->
-
-                                    <div class="blog-post-info text-left">
-                                        <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas
-                                                nulla pariatur</a></h3>
-                                        <span class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016
-                                        </span>
-                                        <p class="text">Sed ut perspiciatis unde omnis iste natus error
-                                            sit voluptatem accusantium</p>
-                                        <a href="#" class="lnk btn btn-primary">Read more</a>
-                                    </div>
-                                    <!-- /.blog-post-info -->
-
-                                </div>
-                                <!-- /.blog-post -->
-                            </div>
-                            <!-- /.item -->
-
-                            <div class="item">
-                                <div class="blog-post">
-                                    <div class="blog-post-image">
-                                        <div class="image"> <a href="blog.html"><img
-                                                    src="{{ asset('frontend/assets/images/blog-post/post1.jpg') }}"
-                                                    alt=""></a> </div>
-                                    </div>
-                                    <!-- /.blog-post-image -->
-
-                                    <div class="blog-post-info text-left">
-                                        <h3 class="name"><a href="#">Dolorem eum fugiat quo voluptas
-                                                nulla pariatur</a></h3>
-                                        <span class="info">By Saraha Smith &nbsp;|&nbsp; 21 March 2016
-                                        </span>
-                                        <p class="text">Sed ut perspiciatis unde omnis iste natus error
-                                            sit voluptatem accusantium</p>
-                                        <a href="#" class="lnk btn btn-primary">Read more</a>
-                                    </div>
-                                    <!-- /.blog-post-info -->
-
-                                </div>
-                                <!-- /.blog-post -->
-                            </div>
-                            <!-- /.item -->
-
-                        </div>
-                        <!-- /.owl-carousel -->
-                    </div>
-                    <!-- /.blog-slider-container -->
-                </section>
-                <!-- /.section -->
-                <!-- ============================================== BLOG SLIDER : END ============================================== -->
 
                 <!-- ============================================== FEATURED PRODUCTS ============================================== -->
                 <section class="section wow fadeInUp new-arriavls">
