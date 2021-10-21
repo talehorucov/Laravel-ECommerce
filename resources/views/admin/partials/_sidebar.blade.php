@@ -218,7 +218,7 @@ $route = Route::current()->getName();
             </li>
 
             <li
-                class="treeview {{ ($prefix == 'admin/users' or $route == 'admin.user.index') ? 'active' : '' }}">
+                class="treeview {{ ($prefix == 'admin/users') ? 'active' : '' }}">
                 <a href="#">
                     <i style="font-size:20px" class="fas fa-users"></i>
                     <span>İstifadəçilər</span>
@@ -229,6 +229,22 @@ $route = Route::current()->getName();
                 <ul class="treeview-menu">
                     <li class="{{ $route == 'admin.user.index' ? 'active' : '' }}">
                         <a href="{{ route('admin.user.index') }}"><i class="ti-more"></i>İstifadəçilər</a>
+                    </li>                    
+                </ul>
+            </li>
+
+            <li
+                class="treeview {{ ($prefix == 'admin/setting' or $route == 'admin.setting.index') ? 'active' : '' }}">
+                <a href="#">
+                    <i style="font-size:20px" class="fas fa-sliders-h"></i>
+                    <span>Sayt Parametrləri</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ $route == 'admin.setting.index' ? 'active' : '' }}">
+                        <a href="{{ route('admin.setting.index') }}"><i class="ti-more"></i>Sayt Parametrləri</a>
                     </li>                    
                 </ul>
             </li>

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Models\SubSubCategory;
 use App\Services\AddToCartService;
 use App\Http\Controllers\Controller;
+use App\Models\SiteSetting;
 
 class HomeController extends Controller
 {

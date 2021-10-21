@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\ColorController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\OrderController as BackendOrderController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\SiteSettingController;
 use App\Http\Controllers\Backend\SizeController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -26,19 +27,21 @@ use App\Http\Controllers\Frontend\OrderDetailController;
 use App\Models\Order;
 
 Route::prefix('admin')->middleware(['auth:admin', 'verified'])->group(function () {
-
+Route::group(['as' => 'admin.'], function () {    
     // Indexes
-    Route::get('/brands', [BrandController::class, 'index'])->name('admin.brand.index');
-    Route::get('/categories', [CategoryController::class, 'index'])->name('admin.category.index');
-    Route::get('/colors', [ColorController::class, 'index'])->name('admin.color.index');
-    Route::get('/sizes', [SizeController::class, 'index'])->name('admin.size.index');
-    Route::get('/tags', [TagController::class, 'index'])->name('admin.tag.index');
-    Route::get('/products', [ProductController::class, 'index'])->name('admin.product.index');
-    Route::get('/sliders', [SliderController::class, 'index'])->name('admin.slider.index');
-    Route::get('/coupons', [CouponController::class, 'index'])->name('admin.coupon.index');
-    Route::get('/cities', [CityController::class, 'index'])->name('admin.city.index');
-    Route::get('/users', [AdminProfileController::class, 'users'])->name('admin.user.index');
+    Route::get('/brands', [BrandController::class, 'index'])->name('brand.index');
+    Route::get('/categories', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('/colors', [ColorController::class, 'index'])->name('color.index');
+    Route::get('/sizes', [SizeController::class, 'index'])->name('size.index');
+    Route::get('/tags', [TagController::class, 'index'])->name('tag.index');
+    Route::get('/products', [ProductController::class, 'index'])->name('product.index');
+    Route::get('/sliders', [SliderController::class, 'index'])->name('slider.index');
+    Route::get('/coupons', [CouponController::class, 'index'])->name('coupon.index');
+    Route::get('/cities', [CityController::class, 'index'])->name('city.index');
+    Route::get('/users', [AdminProfileController::class, 'users'])->name('user.index');
+    Route::get('/setting/site', [SiteSettingController::class, 'site_setting'])->name('setting.index');
     // End Of Indexes
+});
 
 
     Route::get('/logout', [AdminController::class, 'destroy'])->name('admin.logout');
@@ -185,6 +188,18 @@ Route::prefix('admin')->middleware(['auth:admin', 'verified'])->group(function (
         Route::get('/change/processing-to-picked/{order_number}', [BackendOrderController::class, 'processing_to_picked'])->name('processing_to_picked');
         Route::get('/change/picked-to-shipped/{order_number}', [BackendOrderController::class, 'picked_to_shipped'])->name('picked_to_shipped');
         Route::get('/change/shipped-to-delivered/{order_number}', [BackendOrderController::class, 'shipped_to_delivered'])->name('shipped_to_delivered');
+    });
+
+
+    //------------------------Admin Site Settings ------------------------
+    Route::prefix('setting')->group(function () {
+        Route::POST('/update/{site_setting}', [SiteSettingController::class, 'update'])->name('update.site.setting');
+        // Route::post('/create', [CouponController::class, 'create'])->name('admin.coupon.create');
+        // Route::get('/edit/{coupon}', [CouponController::class, 'edit'])->name('admin.coupon.edit');
+        // Route::post('/update/{coupon}', [CouponController::class, 'update'])->name('admin.coupon.update');
+        // Route::get('/delete/{coupon}', [CouponController::class, 'delete'])->name('admin.coupon.delete');
+        // Route::get('/active/{coupon}', [CouponController::class, 'coupon_active'])->name('admin.coupon.active');
+        // Route::get('/inactive/{coupon}', [CouponController::class, 'coupon_inactive'])->name('admin.coupon.inactive');
     });
 });
 
