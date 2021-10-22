@@ -30,7 +30,7 @@
                                                 <td class="text-center">{{ $order->created_at }}</td>
                                                 <td class="text-center">{{ $order->order_number }} </td>
                                                 <td class="text-center">{{ $order->coupon }}</td>
-                                                <td class="text-center">{{ $order->discount_amount }} Azn</td>
+                                                <td class="text-center">{{ $order->amount ?? $order->discount_amount }} Azn</td>
                                                 <td class="text-center" width=25%>
                                                     <a href="{{ route('admin.order.detail', $order->order_number) }}"
                                                         class="btn btn-primary"><i class="fa fa-eye"></i></a>

@@ -48,7 +48,7 @@ $categories = App\Models\Category::with('subcategories.subsubcategories')
                     <!-- /.contact-row -->
                     <!-- ============================================================= SEARCH AREA ============================================================= -->
                     <div class="search-area">
-                        <form>
+                        <form method="GET" action="{{ route('user.product.search') }}">
                             <div class="control-group">
                                 <ul class="categories-filter animate-dropdown">
                                     <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown"
@@ -66,7 +66,7 @@ $categories = App\Models\Category::with('subcategories.subsubcategories')
                                         </ul>
                                     </li>
                                 </ul>
-                                <input class="search-field" placeholder="Search here..." />
+                                <input class="search-field" name="search" placeholder="Axtar" />
                                 <a class="search-button" href="#"></a>
                             </div>
                         </form>

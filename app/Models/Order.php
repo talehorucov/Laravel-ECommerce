@@ -9,6 +9,7 @@ class Order extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $appends = ['earn'];
 
     public function order_details()
     {
@@ -18,5 +19,13 @@ class Order extends Model
     public function city()
     {
         return $this->belongsTo(City::class);
+    }
+
+    public function getEarnAttribute()
+    {
+        if ($this->discount_amount != 0 and $this->discount_amount != null) {
+            return $this->discount_amount;
+        }
+        return $this->amount;
     }
 }

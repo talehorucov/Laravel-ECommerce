@@ -28,14 +28,14 @@ class CartController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        if (!session()->has('cart_id')) {
-            $cart = new ShoppingCart;
-            $cart->user_id = auth()->id ?? null;
-            $cart->save();
-            Session::put('cart_id', $cart->id);
-        } elseif (session()->has('cart_id')) {
-            AddToCartService::AddToCart();
-        }
+        // if (!session()->has('cart_id')) {
+        //     $cart = new ShoppingCart;
+        //     $cart->user_id = auth()->id ?? null;
+        //     $cart->save();
+        //     Session::put('cart_id', $cart->id);
+        // } elseif (session()->has('cart_id')) {
+        //     AddToCartService::AddToCart();
+        // }
         Cart::add([
             'id' => $product->id,
             'name' => $product->name,

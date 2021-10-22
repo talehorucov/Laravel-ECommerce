@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Features;
 use Illuminate\Routing\Pipeline;
 use Illuminate\Routing\Controller;
+use App\Http\Responses\LoginResponse;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Laravel\Fortify\Contracts\LogoutResponse;
+use App\Actions\Fortify\AttemptToAuthenticate;
 use Laravel\Fortify\Http\Requests\LoginRequest;
 use Laravel\Fortify\Contracts\LoginViewResponse;
-use App\Http\Responses\LoginResponse;
-use App\Actions\Fortify\AttemptToAuthenticate;
 use Laravel\Fortify\Actions\EnsureLoginIsNotThrottled;
 use Laravel\Fortify\Actions\PrepareAuthenticatedSession;
 use App\Actions\Fortify\RedirectIfTwoFactorAuthenticatable;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -39,7 +41,12 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('admin.index', ['guard' => 'admin']);
+        $today_earn = Order::where('created_at',Carbon::now())->get()->sum('earn');
+        $month_earn = Order::whereBetween('created_at',[now()->startOfMonth(),now()->endOfMonth()])->get()->sum('earn');
+        $year_earn = Order::whereBetween('created_at',[now()->startOfYear(),now()->endOfYear()])->get()->sum('earn');
+        $pending_count = Order::where('status','Pending')->count();
+        $orders = Order::orderByDesc('id')->get();
+        return view('admin.index', ['guard' => 'admin'], compact('today_earn','month_earn','year_earn','pending_count','orders'));
     }
 
     public function loginForm()

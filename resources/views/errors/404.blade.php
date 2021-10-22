@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-md-12 x-text text-center">
                         <h1>404</h1>
-                        <p>İstədiyiniz səhifə mövcud deyil. </p>
+                        <p>İstədiyiniz səhifə mövcud deyil ! </p>
                         <a href="/"><i class="fa fa-home"></i> Ana Səhifəyə Get</a>
                     </div>
                 </div><!-- /.row -->

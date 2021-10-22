@@ -160,7 +160,7 @@
                                                 <option selected disabled class="text-center">---Rəng Seçin---
                                                 </option>
                                                 @foreach ($product->colors as $color)
-                                                    <option class="text-center" value="{{ ucwords($color->id) }}">
+                                                    <option class="text-center" value="{{ ucwords($color->name) }}">
                                                         {{ $color->name }}</option>
                                                 @endforeach
                                             </select>
@@ -175,7 +175,7 @@
                                                     </option>
                                                     @foreach ($product->sizes as $size)
                                                         <option class="text-center"
-                                                            value="{{ ucwords($size->id) }}">
+                                                            value="{{ ucwords($size->name) }}">
                                                             {{ $size->name }}
                                                         </option>
                                                     @endforeach

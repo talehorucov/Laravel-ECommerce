@@ -1,7 +1,7 @@
 @extends('user.main_master')
 @section('content')
 @section('title')
-    {{ $subcategory->name }} Alt Kateqoriyasının Məhsulları
+    Axtarışınıza uyğun məhsullar
 @endsection
 
 
@@ -10,7 +10,6 @@
         <div class="breadcrumb-inner">
             <ul class="list-inline list-unstyled">
                 <li><a href="#">Ana Səhifə</a></li>
-                <li class='active'>{{ $subcategory->name }}</li>
             </ul>
         </div>
         <!-- /.breadcrumb-inner -->
@@ -254,15 +253,14 @@
                         <div class="tab-pane active" id="grid-container">
                             <div class="category-product">
                                 <div class="row">
-                                    @foreach ($products as $product)
+                                    @forelse ($products as $product)
                                         <div class="col-sm-6 col-md-4 wow fadeInUp">
                                             <div class="products">
                                                 <div class="product">
                                                     <div class="product-image">
                                                         <div class="image"> <a
                                                                 href="{{ route('user.product.detail', $product->slug) }}"><img
-                                                                    src="{{ asset($product->thumbnail) }}"
-                                                                    alt=""></a>
+                                                                    src="{{ asset($product->thumbnail) }}" alt=""></a>
                                                         </div>
                                                         <!-- /.image -->
                                                         @if ($product->discount_price == null or $product->discount_price == 0)
@@ -324,8 +322,13 @@
                                             </div>
                                             <!-- /.products -->
                                         </div>
-                                    @endforeach
-
+                                    @empty
+                                        <div>
+                                            <h2 class="text-center">
+                                                <span class="text-danger">Axtarışa uyğun məhsul tapılmadı</span>
+                                            </h2>
+                                        </div>
+                                    @endforelse
                                 </div>
                                 <!-- /.row -->
                             </div>
@@ -445,7 +448,6 @@
                 <!-- /.search-result-container -->
 
             </div>
-            <!-- /.row -->
         </div>
         <!-- /.container -->
 

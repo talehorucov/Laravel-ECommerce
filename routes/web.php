@@ -3,7 +3,6 @@
 use Database\Factories\AdminFactory;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Backend\AddressController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Backend\AdminProfileController;
 use App\Http\Controllers\Backend\BrandController;
@@ -24,24 +23,22 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\WishListController;
 use App\Http\Controllers\Frontend\OrderDetailController;
-use App\Models\Order;
 
 Route::prefix('admin')->middleware(['auth:admin', 'verified'])->group(function () {
-Route::group(['as' => 'admin.'], function () {    
-    // Indexes
-    Route::get('/brands', [BrandController::class, 'index'])->name('brand.index');
-    Route::get('/categories', [CategoryController::class, 'index'])->name('category.index');
-    Route::get('/colors', [ColorController::class, 'index'])->name('color.index');
-    Route::get('/sizes', [SizeController::class, 'index'])->name('size.index');
-    Route::get('/tags', [TagController::class, 'index'])->name('tag.index');
-    Route::get('/products', [ProductController::class, 'index'])->name('product.index');
-    Route::get('/sliders', [SliderController::class, 'index'])->name('slider.index');
-    Route::get('/coupons', [CouponController::class, 'index'])->name('coupon.index');
-    Route::get('/cities', [CityController::class, 'index'])->name('city.index');
-    Route::get('/users', [AdminProfileController::class, 'users'])->name('user.index');
-    Route::get('/setting/site', [SiteSettingController::class, 'site_setting'])->name('setting.index');
-    // End Of Indexes
-});
+    Route::group(['as' => 'admin.'], function () {
+        //------------------------Indexes ------------------------
+        Route::get('/brands', [BrandController::class, 'index'])->name('brand.index');
+        Route::get('/categories', [CategoryController::class, 'index'])->name('category.index');
+        Route::get('/colors', [ColorController::class, 'index'])->name('color.index');
+        Route::get('/sizes', [SizeController::class, 'index'])->name('size.index');
+        Route::get('/tags', [TagController::class, 'index'])->name('tag.index');
+        Route::get('/products', [ProductController::class, 'index'])->name('product.index');
+        Route::get('/sliders', [SliderController::class, 'index'])->name('slider.index');
+        Route::get('/coupons', [CouponController::class, 'index'])->name('coupon.index');
+        Route::get('/cities', [CityController::class, 'index'])->name('city.index');
+        Route::get('/users', [AdminProfileController::class, 'users'])->name('user.index');
+        Route::get('/setting/site', [SiteSettingController::class, 'site_setting'])->name('setting.index');
+    });
 
 
     Route::get('/logout', [AdminController::class, 'destroy'])->name('admin.logout');
@@ -250,6 +247,7 @@ Route::middleware(['auth:sanctum,web', 'verified'])->group(function () {
 
 
 Route::get('/product/detail/{slug}', [HomeController::class, 'product_detail'])->name('user.product.detail');
+Route::get('/search', [HomeController::class, 'search'])->name('user.product.search');
 Route::get('/tags/{tag}', [HomeController::class, 'tags'])->name('user.tags');
 Route::get('/subcategory/{slug}/products', [HomeController::class, 'subcategory'])->name('user.subcategory');
 Route::get('/sub/subcategory/{slug}/products', [HomeController::class, 'subsubcategory'])->name('user.subsubcategory');

@@ -50,6 +50,10 @@ class OrderController extends Controller
             $orderDetail->quantity = $product->qty;
             $orderDetail->price = $product->price;
             $orderDetail->save();
+
+            $_product = Product::findOrFail($product->id);
+            $_product->quantity = $_product->quantity - $product->qty;
+            $_product->save();
         }
         session()->forget('coupon');
         Cart::destroy();

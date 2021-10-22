@@ -12,7 +12,7 @@ $site_setting = App\Models\SiteSetting::orderByDesc('id')->firstOrFail();
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <div class="module-heading">
-                        <h4 class="module-title">Contact Us</h4>
+                        <h4 class="module-title">Əlaqə Vasitələrimiz</h4>
                     </div>
                     <!-- /.module-heading -->
 
@@ -47,7 +47,7 @@ $site_setting = App\Models\SiteSetting::orderByDesc('id')->firstOrFail();
 
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <div class="module-heading">
-                        <h4 class="module-title">Customer Service</h4>
+                        <h4 class="module-title">Müştəri Xidmətlərimiz</h4>
                     </div>
                     <!-- /.module-heading -->
 
@@ -85,7 +85,7 @@ $site_setting = App\Models\SiteSetting::orderByDesc('id')->firstOrFail();
 
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <div class="module-heading">
-                        <h4 class="module-title">Why Choose Us</h4>
+                        <h4 class="module-title">Niyə Biz ?</h4>
                     </div>
                     <!-- /.module-heading -->
 
@@ -132,7 +132,6 @@ $site_setting = App\Models\SiteSetting::orderByDesc('id')->firstOrFail();
                         <li><img src="{{ asset('frontend/assets/images/payments/5.png') }}" alt=""></li>
                     </ul>
                 </div>
-                <!-- /.payment-methods -->
             </div>
         </div>
     </div>
