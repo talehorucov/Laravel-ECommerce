@@ -19,12 +19,12 @@
                     <div class="col-md-4">
                         <ul class="list-group">
                             <li class="list-group-item">Qiymət:
-                                <strong class="text-danger"><span id="selling_price"></span></strong>
-                                <del><span id="discount_price"></span></del>
+                                <strong style="float:right" class="text-danger"><span id="selling_price"></span></strong>
+                                <del style="float:right;margin-right:5px"><span id="discount_price"></span></del>
                             </li>
-                            <li class="list-group-item">Kod: <strong id="code"></strong></li>
-                            <li class="list-group-item">Kateqoriya: <strong id="category"></strong></li>
-                            <li class="list-group-item">Brend: <strong id="brand"></strong></li>
+                            <li class="list-group-item">Kod: <strong style="float:right" id="code"></strong></li>
+                            <li class="list-group-item">Kateqoriya: <strong style="float:right" id="category"></strong></li>
+                            <li class="list-group-item">Brend: <strong style="float:right" id="brand"></strong></li>
                             <li class="list-group-item">Qalan:
                                 <span class="badge badge-pill badge-success" id="quantity"
                                     style="background-color:green; color:white"></span>

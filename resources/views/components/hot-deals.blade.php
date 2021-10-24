@@ -18,14 +18,13 @@
                         <h3 class="name"><a
                                 href="{{ route('user.product.detail', $product->slug) }}">{{ $product->name }}</a>
                         </h3>
-                        <div class="rating rateit-small"></div>
                         @if ($product->discount_price == null or $product->discount_price == 0)
                             <div class="product-price">
-                                <span class="price">${{ $product->selling_price }}
+                                <span class="price">{{ $product->selling_price }} Azn
                             </div>
                         @else
                             <div class="product-price"> <span class="price">
-                                    ${{ $product->discount_price }} Azn</span> <span class="price-before-discount">$
+                                    {{ $product->discount_price }} Azn</span> <span class="price-before-discount">
                                     {{ $product->selling_price }} Azn</span> </div>
                         @endif
                         <!-- /.product-price -->

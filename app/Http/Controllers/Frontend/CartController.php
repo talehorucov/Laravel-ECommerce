@@ -46,7 +46,8 @@ class CartController extends Controller
                 'image' => $product->thumbnail,
                 'color' => $request->color,
                 'size' => $request->size
-            ]
+            ],
+            'slug' => $product->slug
         ]);
         return response()->json(['success' => 'Məhsul Səbətə Uğurla Əlavə Edildi']);
     }

@@ -33,7 +33,7 @@
                                                         style="width: 60px; height:50px"></td>
                                                 <td><span style="font-size: 15px">{{ $product->name }}</span></td>
                                                 <td><span style="font-size: 15px">{{ $product->quantity }}</span></td>
-                                                <td><span style="font-size: 15px">{{ $product->selling_price }}$</span>
+                                                <td><span style="font-size: 15px">{{ $product->selling_price }} Azn</span>
                                                 </td>
                                                 <td class="text-center" >
                                                     @if ($product->discount_price == null)

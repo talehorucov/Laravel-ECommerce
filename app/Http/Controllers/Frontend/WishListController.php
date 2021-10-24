@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Auth;
 
 class WishListController extends Controller
 {
-    public function Add($id)
+    public function add(Request $request)
     {
-        $exist = Wishlist::where('user_id', Auth()->user()->id)->where('product_id', $id)->firstOrFail();
+        $exist = Wishlist::where('user_id', auth()->user()->id)->where('product_id', $request->id)->first();
 
         if (!$exist) {
             $wishlist = new Wishlist();
             $wishlist->user_id = Auth()->user()->id;
-            $wishlist->product_id = $id;
+            $wishlist->product_id = $request->id;
             $wishlist->save();
             return response()->json(['success' => 'Məhsul İstək Siyahınıza Əlavə Edildi']);
         }

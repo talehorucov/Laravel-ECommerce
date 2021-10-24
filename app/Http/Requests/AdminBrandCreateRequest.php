@@ -22,8 +22,9 @@ class AdminBrandCreateRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Input Brand Name.',
-            'name.min' => 'Brand Name must be at least 6 characters.',
+            'name.required' => 'Brend adı mütləqdir.',
+            'name.min' => 'Brend adı ən az 2 karakter olmalıdır.',
+            'image.required' => 'Şəkil mütləqdir.'
         ];
     }
 }

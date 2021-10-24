@@ -11,9 +11,9 @@
                 <div class="col-md-6">
                     <div class="card">
                         <h3 class="text-center">
-                            <span class="text-center">Hi...</span>
-                            <strong>{{ Auth()->user()->name }}</strong>
-                            Welcome To SmartBuy.Az
+                            <span class="text-center">Salam </span>
+                            <strong>{{ Auth()->user()->name }}.</strong><br>
+                            SmartBuy.Az Saytına Xoş Gəlmisiz !
                         </h3>
                     </div>
                 </div>

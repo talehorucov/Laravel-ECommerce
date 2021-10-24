@@ -9,7 +9,7 @@
                 <div class="col-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Edit Category</h3>
+                            <h3 class="box-title">Kateqoriyanı Düzənlə</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -17,7 +17,7 @@
                                 <form method="POST" action="{{ route('admin.category.update',$category->id) }}">
                                     @csrf
                                     <div class="form-group">
-                                        <h5>Category Name<span class="text-danger">*</span></h5>
+                                        <h5>Kateqoriya Adı<span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" id="name" name="name" class="form-control" value="{{ $category->name }}">
                                             @error('name')
@@ -28,7 +28,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h5>Category Icon<span class="text-danger">*</span></h5>
+                                        <h5>İkon<span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" id="icon" name="icon" class="form-control" value="{{ $category->icon }}">
                                             @error('icon')
@@ -39,7 +39,7 @@
                                         </div>
                                     </div>                                    
                                     <div class="text-xs-right">
-                                        <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Update">
+                                        <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Düzənlə">
                                     </div>
                                 </form>
                             </div>

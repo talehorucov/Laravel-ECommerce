@@ -224,11 +224,11 @@ Route::middleware(['auth:sanctum,web', 'verified'])->group(function () {
         Route::get('/cancel/order/{order}', [OrderController::class, 'cancel_order'])->name('cancel.order');
     });
 
-
+    
     //------------------------User Wishlist ------------------------
     Route::prefix('wishlist')->group(function () {
         Route::get('/', [WishListController::class, 'index'])->name('user.wishlist');
-        Route::post('/product/add/{id}', [WishListController::class, 'Add'])->name('add.wishlist');
+        Route::post('/add/product', [WishListController::class, 'add'])->name('add.wishlist');
         Route::get('/remove/{id}', [WishListController::class, 'remove'])->name('user.wishlist.remove');
     });
 

@@ -71,4 +71,14 @@ class Product extends Model
             return round( 100 - $this->discount_price / $this->selling_price * 100) . '%';
         }
     }
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class,'order_details');
+    }
 }

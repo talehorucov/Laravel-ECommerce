@@ -9,7 +9,7 @@
                 <div class="col-8">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Brand List</h3>
+                            <h3 class="box-title">Brendlər</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -17,9 +17,9 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th width=50% class="text-center">Brand Name</th>
-                                            <th class="text-center">Image</th>
-                                            <th class="text-center">Action</th>
+                                            <th width=50% class="text-center">Brend Adı</th>
+                                            <th class="text-center">Şəkil</th>
+                                            <th class="text-center">Dəyişiklik</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -29,8 +29,8 @@
                                                 <td class="text-center"><img src="{{ asset($brand->image) }}" alt="image"
                                                         style="width: 80px; height:45px"></td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('admin.brand.edit',$brand->slug) }}" title="Edit Brand" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                                                    <a href="{{ route('admin.brand.delete',$brand->id) }}" title="Delete Brand" class="btn btn-danger delete"><i class="fa fa-trash"></i></a>
+                                                    <a href="{{ route('admin.brand.edit',$brand->slug) }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                                                    <a href="{{ route('admin.brand.delete',$brand->id) }}" class="btn btn-danger delete"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -44,8 +44,8 @@
 
                 <div class="col-4">
                     <div class="box">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Add Brand</h3>
+                        <div class="box-header with-border text-center">
+                            <h3 class="box-title">Yeni Brend</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -53,7 +53,7 @@
                                 <form method="POST" action="{{ route('admin.brand.create') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
-                                        <h5>Brand Name <span class="text-danger">*</span></h5>
+                                        <h5>Brend Adı <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" id="name" name="name" class="form-control">
                                             @error('name')
@@ -64,7 +64,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <h5>Image <span class="text-danger">*</span></h5>
+                                        <h5>Şəkil <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="file" name="image" class="form-control">
                                             @error('image')
@@ -75,7 +75,7 @@
                                         </div>
                                     </div>
                                     <div class="text-xs-right">
-                                        <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Add New">
+                                        <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Əlavə Et">
                                     </div>
                                 </form>
                             </div>

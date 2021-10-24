@@ -9,17 +9,17 @@
                 <div class="col-8">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">SubCategory List</h3>
+                            <h3 class="box-title">Alt Kateqoriyalar</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive">
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Category</th>
-                                            <th class="text-center">SubCategory Name</th>
-                                            <th class="text-center">Action</th>
+                                            <th class="text-center">Kateqoriya</th>
+                                            <th class="text-center">Alt Kateqoriya Adı</th>
+                                            <th class="text-center">Dəyişiklik</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -29,10 +29,10 @@
                                                 <td><span>{{ $subcategory->name }}</span></td>
                                                 <td class="text-center">
                                                     <a href="{{ route('admin.subcategory.edit', $subcategory->slug) }}"
-                                                        title="Edit SubCategory" class="btn btn-primary"><i
+                                                        class="btn btn-primary"><i
                                                             class="fa fa-pencil"></i></a>
                                                     <a href="{{ route('admin.subcategory.delete', $subcategory->id) }}"
-                                                        title="Delete SubCategory" class="btn btn-danger delete"><i
+                                                        class="btn btn-danger delete"><i
                                                             class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
@@ -48,7 +48,7 @@
                 <div class="col-4">
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Add SubCategory</h3>
+                            <h3 class="box-title">Alt Kateqoriya</h3>
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
@@ -56,10 +56,10 @@
                                 <form method="POST" action="{{ route('admin.subcategory.create') }}">
                                     @csrf
                                     <div class="form-group">
-                                        <h5>Category Select <span class="text-danger">*</span></h5>
+                                        <h5>Kateqoriya Seç <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <select name="category_id" class="form-control">
-                                                <option value="" disabled selected>Select Category</option>
+                                                <option disabled selected>Kateqoriya Seç</option>
                                                 @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->name }}
                                                     </option>
@@ -74,7 +74,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <h5>SubCategory Name<span class="text-danger">*</span></h5>
+                                        <h5>Alt Kateqoriya Adı<span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="text" id="name" name="name" class="form-control">
                                             @error('name')
@@ -86,7 +86,7 @@
                                     </div>
                                     
                                     <div class="text-xs-right">
-                                        <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Add New">
+                                        <input type="submit" class="btn btn-rounded btn-primary mb-5" value="Əlavə Et">
                                     </div>
                                 </form>
                             </div>

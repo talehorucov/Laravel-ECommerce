@@ -34,7 +34,7 @@
                                             <label>{{ $order->order_number }}</label>
                                         </td>
                                         <td class="col-md-2">
-                                            <label>{{ $order->discount_amount ?? $order->order->amount }} Azn
+                                            <label>{{ $order->discount_amount ?? $order->amount }} Azn
                                             </label>
                                         </td>
                                         <td class="col-md-2">

@@ -7,12 +7,12 @@
                 <div class="box overflow-hidden pull-up">
                     <div class="box-body">
                         <div class="icon bg-primary-light rounded w-60 h-60">
-                            <i class="text-primary mr-0 font-size-24 mdi mdi-account-multiple"></i>
+                            <i class="text-primary mr-0 font-size-30 fas fa-badge-dollar"></i>
                         </div>
                         <div>
                             <p class="text-mute mt-20 mb-0 font-size-16">Bugünkü Satış</p>
-                            <h3 class="text-white mb-0 font-weight-500">{{ $today_earn }} <small class="text-success"><i
-                                        class="fa fa-caret-up"></i> Azn</small></h3>
+                            <h3 class="text-white mb-0 font-weight-500">{{ $today_earn }} <small class="text-success">
+                                    Azn</small></h3>
                         </div>
                     </div>
                 </div>
@@ -21,12 +21,12 @@
                 <div class="box overflow-hidden pull-up">
                     <div class="box-body">
                         <div class="icon bg-warning-light rounded w-60 h-60">
-                            <i class="text-warning mr-0 font-size-24 mdi mdi-car"></i>
+                            <i class="text-primary mr-0 font-size-30 fas fa-badge-dollar"></i>
                         </div>
                         <div>
                             <p class="text-mute mt-20 mb-0 font-size-16">Bu Aykı Satış</p>
-                            <h3 class="text-white mb-0 font-weight-500">{{ $month_earn }} <small class="text-success"><i
-                                        class="fa fa-caret-up"></i> Azn</small></h3>
+                            <h3 class="text-white mb-0 font-weight-500">{{ $month_earn }} <small class="text-success">
+                                    Azn</small></h3>
                         </div>
                     </div>
                 </div>
@@ -35,12 +35,12 @@
                 <div class="box overflow-hidden pull-up">
                     <div class="box-body">
                         <div class="icon bg-info-light rounded w-60 h-60">
-                            <i class="text-info mr-0 font-size-24 mdi mdi-sale"></i>
+                            <i class="text-primary mr-0 font-size-30 fas fa-badge-dollar"></i>
                         </div>
                         <div>
                             <p class="text-mute mt-20 mb-0 font-size-16">Bu İlki Satış</p>
-                            <h3 class="text-white mb-0 font-weight-500">{{ $year_earn }}<small class="text-danger"><i
-                                        class="fa fa-caret-down"></i> Azn</small></h3>
+                            <h3 class="text-white mb-0 font-weight-500">{{ $year_earn }}<small class="text-danger">
+                                    Azn</small></h3>
                         </div>
                     </div>
                 </div>
@@ -49,12 +49,12 @@
                 <div class="box overflow-hidden pull-up">
                     <div class="box-body">
                         <div class="icon bg-danger-light rounded w-60 h-60">
-                            <i class="text-danger mr-0 font-size-24 mdi mdi-phone-incoming"></i>
+                            <i class="text-primary mr-0 font-size-30 fas fa-badge-check"></i>
                         </div>
                         <div>
                             <p class="text-mute mt-20 mb-0 font-size-16">Təsdiq Gözləyən Sifarişlər</p>
                             <h3 class="text-white mb-0 font-weight-500">{{ $pending_count }} <small
-                                    class="text-danger"><i class="fa fa-caret-up"></i> Sifariş</small></h3>
+                                    class="text-danger"> Sifariş</small></h3>
                         </div>
                     </div>
                 </div>
@@ -71,12 +71,18 @@
                             <table class="table no-border">
                                 <thead>
                                     <tr class="text-uppercase bg-lightest">
-                                        <th class="text-center" style="min-width: 250px"><span class="text-white">Tarix</span></th>
-                                        <th class="text-center" style="min-width: 100px"><span class="text-fade">Sifariş №</span></th>
-                                        <th class="text-center" style="min-width: 100px"><span class="text-fade">Kupon</span></th>
-                                        <th class="text-center" style="min-width: 150px"><span class="text-fade">Məbləğ</span></th>
-                                        <th class="text-center" style="min-width: 150px"><span class="text-fade">Status</span></th>
-                                        <th class="text-center" style="min-width: 120px"><span class="text-fade">Məlumat</span></th>
+                                        <th class="text-center" style="min-width: 250px"><span
+                                                class="text-white">Tarix</span></th>
+                                        <th class="text-center" style="min-width: 100px"><span
+                                                class="text-fade">Sifariş №</span></th>
+                                        <th class="text-center" style="min-width: 100px"><span
+                                                class="text-fade">Kupon</span></th>
+                                        <th class="text-center" style="min-width: 150px"><span
+                                                class="text-fade">Məbləğ</span></th>
+                                        <th class="text-center" style="min-width: 150px"><span
+                                                class="text-fade">Status</span></th>
+                                        <th class="text-center" style="min-width: 120px"><span
+                                                class="text-fade">Məlumat</span></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -108,16 +114,13 @@
                                                 </span>
                                             </td>
                                             <td class="text-right text-center">
-                                                <a href="#"
-                                                    class="waves-effect waves-light btn btn-info btn-circle mx-5"><span
-                                                        class="mdi mdi-bookmark-plus"></span></a>
-                                                <a href="#"
-                                                    class="waves-effect waves-light btn btn-info btn-circle mx-5"><span
-                                                        class="mdi mdi-arrow-right"></span></a>
+                                                <a href="{{ route('admin.order.detail',$order->order_number) }}" class="waves-effect waves-light btn btn-primary btn-circle mx-5">
+                                                    <span style="font-size: 20px" class="fas fa-info-circle"></span>
+                                                </a>
                                             </td>
                                         </tr>
                                     @empty
-                                        <span class="text-center text-danger">Sifariş Yoxdur</span> 
+                                        <span class="text-center text-danger">Sifariş Yoxdur</span>
                                     @endforelse
                                 </tbody>
                             </table>

@@ -19,4 +19,6 @@ class OrderDetail extends Model
     {
         return $this->belongsTo(Order::class)->where('user_id',auth()->user()->id);
     }
+
+    
 }

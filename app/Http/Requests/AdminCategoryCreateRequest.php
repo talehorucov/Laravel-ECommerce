@@ -19,11 +19,11 @@ class AdminCategoryCreateRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function attributes()
     {
-        return [
-            'name.required' => 'Input English Name of the Category.',
-            'name.min' => 'English Name of the Category must be at least 6 characters.'
-        ];
+        return[
+            'name' => 'Şəkil',
+            'icon' => 'İkon',
+        ];        
     }
 }

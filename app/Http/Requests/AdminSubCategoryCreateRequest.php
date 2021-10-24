@@ -14,17 +14,16 @@ class AdminSubCategoryCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => 'required',
+            'category_id' => 'exists:categories,id|required',
             'name' => 'required|min:2|max:35',
         ];
     }
 
-    public function messages()
+    public function attributes()
     {
-        return [
-            'category_id.required' => 'Select Select Any Option.',
-            'name.required' => 'Input English Name of the SubCategory.',
-            'name.min' => 'English Name of the SubCategory must be at least 6 characters.'
-        ];
+        return[
+            'category_id' => 'Kateqoriya',
+            'name' => 'Alt Kateqoriya Adı',
+        ];        
     }
 }

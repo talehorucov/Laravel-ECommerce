@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="az">
 
 <head>
     <!-- Meta -->
@@ -158,6 +158,7 @@
                 dataType: "json",
                 url: "{{ route('add.miniCart') }}",
                 success: function(response) {
+                    console.log(response)
                     $('span[id="cart_quantity"]').text(response.cart_count);
                     $('span[id="cart_subtotal"]').text(response.cart_total);
                     var mini_cart = '';
@@ -166,9 +167,10 @@
                         mini_cart += `<div class="cart-item product-summary">
                                     <div class="row">
                                         <div class="col-xs-4">
-                                            <div class="image"> <a href="detail.html">
-                                                    <img src="/${value.options.image}"
-                                                        alt=""></a> </div>
+                                            <div class="image"> 
+                                                <a href="/product/detail/${value.slug}">
+                                                    <img src="/${value.options.image}"></a> 
+                                            </div>
                                         </div>
                                         <div class="col-xs-7">
                                             <h3 class="name"><a href="index.php?page-detail">${value.name}</a></h3>
@@ -215,14 +217,13 @@
 
     <script>
         function addToWishList(id) {
-            var url = '{{ route('add.wishlist', ':id') }}';
-            url = url.replace(':id', id);
             var check = $('#auth_check').val();
-            if (check == true) {
+            if (check == 'true') {
                 $.ajax({
+                    url: 'http://127.0.0.1:8000/wishlist/add/product',
                     type: "POST",
                     dataType: "json",
-                    url: url,
+                    data: {id},
                     success: function(data) {
                         if (data.success) {
                             Swal.fire({
